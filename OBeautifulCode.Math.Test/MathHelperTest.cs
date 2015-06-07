@@ -1,17 +1,15 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="MathHelperTest.cs" company="OBeautifulCode">
-//   Copyright 2014 OBeautifulCode
+//   Copyright 2015 OBeautifulCode
 // </copyright>
-// <summary>
-//   Tests the <see cref="Math"/> class.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OBeautifulCode.Libs.Math.Test
+namespace OBeautifulCode.Math.Test
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
 
     using Xunit;
 
@@ -26,24 +24,7 @@ namespace OBeautifulCode.Libs.Math.Test
     /// </remarks>
     public static class MathHelperTest
     {
-        #region Fields (Private)
-
-        #endregion
-
-        #region Constructors
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
-        #region Public Methods
         // ReSharper disable InconsistentNaming
-
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void AlmostEqual_ParametersTargetOrCurrentIsNaN_ThrowsArgumentException()
         {
@@ -54,9 +35,6 @@ namespace OBeautifulCode.Libs.Math.Test
             Assert.Throws<ArgumentException>(() => MathHelper.AlmostEqual(1, double.NaN, 1e-3));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void AlmostEqual_ParameterToleranceIsLessThan0_ThrowsArgumentOutOfRangeException()
         {
@@ -65,9 +43,6 @@ namespace OBeautifulCode.Libs.Math.Test
             Assert.Throws<ArgumentOutOfRangeException>(() => MathHelper.AlmostEqual(4.5, -3.2, double.MinValue));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void AlmostEqual_ReturnsTrueWhenTwoNumbersAreAlmostEqualWithinTolerance()
         {
@@ -83,9 +58,6 @@ namespace OBeautifulCode.Libs.Math.Test
             Assert.True(MathHelper.AlmostEqual(500.00000000000001, 500.00000000000005));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void AlmostEqual_ReturnsFalseWhenTwoNumbersAreNotAlmostEqualWithinTolerance()
         {
@@ -99,9 +71,6 @@ namespace OBeautifulCode.Libs.Math.Test
             Assert.False(MathHelper.AlmostEqual(500.00000000000001, 500.00000000000005, 0));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void CovarianceTest()
         {
@@ -206,58 +175,65 @@ namespace OBeautifulCode.Libs.Math.Test
             Assert.Equal(-2.3125m, Math.Round(MathHelper.Covariance(decimals1, decimals2), 6));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
+        [Fact]
+        public static void Factors_NumberToFactorNotPositive_ThrowsArgumentOutOfRangeException()
+        {
+            // Arrange, Act
+            var ex1 = Record.Exception(() => MathHelper.Factors(0).ToList());
+            var ex2 = Record.Exception(() => MathHelper.Factors(-1).ToList());
+            var ex3 = Record.Exception(() => MathHelper.Factors(int.MinValue).ToList());
+
+            // Assert
+            Assert.IsType<ArgumentOutOfRangeException>(ex1);
+            Assert.IsType<ArgumentOutOfRangeException>(ex2);
+            Assert.IsType<ArgumentOutOfRangeException>(ex3);
+        }
+
         [Fact]
         public static void Factors_ReturnsAllFactorsOfGivenNumber()
         {
             // Arrange
-            const uint Value0 = 0;
-            const uint Value1 = 1;
-            const uint Value2 = 2;
-            const uint Value3 = 3;
-            const uint Value4 = 4;
-            const uint Value5 = 5;
-            const uint Value6 = 6;
-            const uint Value7 = 7;
-            const uint Value8 = 8;
-            const uint Value9 = 9;
-            const uint Value10 = 10;
-            const uint ValueLarge1 = 21;
-            const uint ValueLarge2 = 24;
+            const int Value1 = 1;
+            const int Value2 = 2;
+            const int Value3 = 3;
+            const int Value4 = 4;
+            const int Value5 = 5;
+            const int Value6 = 6;
+            const int Value7 = 7;
+            const int Value8 = 8;
+            const int Value9 = 9;
+            const int Value10 = 10;
+            const int ValueLarge1 = 21;
+            const int ValueLarge2 = 24;
 
-            IEnumerable<uint> factors0Expected = new uint[] { 0 };
-            IEnumerable<uint> factors1Expected = new uint[] { 1 };
-            IEnumerable<uint> factors2Expected = new uint[] { 1, 2 };
-            IEnumerable<uint> factors3Expected = new uint[] { 1, 3 };
-            IEnumerable<uint> factors4Expected = new uint[] { 1, 2, 4 };
-            IEnumerable<uint> factors5Expected = new uint[] { 1, 5 };
-            IEnumerable<uint> factors6Expected = new uint[] { 1, 2, 3, 6 };
-            IEnumerable<uint> factors7Expected = new uint[] { 1, 7 };
-            IEnumerable<uint> factors8Expected = new uint[] { 1, 2, 4, 8 };
-            IEnumerable<uint> factors9Expected = new uint[] { 1, 3, 9 };
-            IEnumerable<uint> factors10Expected = new uint[] { 1, 2, 5, 10 };
-            IEnumerable<uint> factorsLarge1Expected = new uint[] { 1, 3, 7, 21 };
-            IEnumerable<uint> factorsLarge2Expected = new uint[] { 1, 2, 3, 4, 6, 8, 12, 24 };
+            IEnumerable<int> factors1Expected = new[] { 1 };
+            IEnumerable<int> factors2Expected = new[] { 1, 2 };
+            IEnumerable<int> factors3Expected = new[] { 1, 3 };
+            IEnumerable<int> factors4Expected = new[] { 1, 2, 4 };
+            IEnumerable<int> factors5Expected = new[] { 1, 5 };
+            IEnumerable<int> factors6Expected = new[] { 1, 2, 3, 6 };
+            IEnumerable<int> factors7Expected = new[] { 1, 7 };
+            IEnumerable<int> factors8Expected = new[] { 1, 2, 4, 8 };
+            IEnumerable<int> factors9Expected = new[] { 1, 3, 9 };
+            IEnumerable<int> factors10Expected = new[] { 1, 2, 5, 10 };
+            IEnumerable<int> factorsLarge1Expected = new[] { 1, 3, 7, 21 };
+            IEnumerable<int> factorsLarge2Expected = new[] { 1, 2, 3, 4, 6, 8, 12, 24 };
 
             // Act
-            IEnumerable<uint> factors0 = MathHelper.Factors(Value0);
-            IEnumerable<uint> factors1 = MathHelper.Factors(Value1);
-            IEnumerable<uint> factors2 = MathHelper.Factors(Value2);
-            IEnumerable<uint> factors3 = MathHelper.Factors(Value3);
-            IEnumerable<uint> factors4 = MathHelper.Factors(Value4);
-            IEnumerable<uint> factors5 = MathHelper.Factors(Value5);
-            IEnumerable<uint> factors6 = MathHelper.Factors(Value6);
-            IEnumerable<uint> factors7 = MathHelper.Factors(Value7);
-            IEnumerable<uint> factors8 = MathHelper.Factors(Value8);
-            IEnumerable<uint> factors9 = MathHelper.Factors(Value9);
-            IEnumerable<uint> factors10 = MathHelper.Factors(Value10);
-            IEnumerable<uint> factorsLarge1 = MathHelper.Factors(ValueLarge1);
-            IEnumerable<uint> factorsLarge2 = MathHelper.Factors(ValueLarge2);
+            IEnumerable<int> factors1 = MathHelper.Factors(Value1);
+            IEnumerable<int> factors2 = MathHelper.Factors(Value2);
+            IEnumerable<int> factors3 = MathHelper.Factors(Value3);
+            IEnumerable<int> factors4 = MathHelper.Factors(Value4);
+            IEnumerable<int> factors5 = MathHelper.Factors(Value5);
+            IEnumerable<int> factors6 = MathHelper.Factors(Value6);
+            IEnumerable<int> factors7 = MathHelper.Factors(Value7);
+            IEnumerable<int> factors8 = MathHelper.Factors(Value8);
+            IEnumerable<int> factors9 = MathHelper.Factors(Value9);
+            IEnumerable<int> factors10 = MathHelper.Factors(Value10);
+            IEnumerable<int> factorsLarge1 = MathHelper.Factors(ValueLarge1);
+            IEnumerable<int> factorsLarge2 = MathHelper.Factors(ValueLarge2);
 
             // Assert
-            Assert.Equal(factors0Expected, factors0);
             Assert.Equal(factors1Expected, factors1);
             Assert.Equal(factors2Expected, factors2);
             Assert.Equal(factors3Expected, factors3);
@@ -272,9 +248,6 @@ namespace OBeautifulCode.Libs.Math.Test
             Assert.Equal(factorsLarge2Expected, factorsLarge2);
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void RandomNumberTest()
         {
@@ -355,13 +328,12 @@ namespace OBeautifulCode.Libs.Math.Test
             Assert.True(three);
 
             // no problems with Min/Max Values
-            Assert.DoesNotThrow(() => MathHelper.RandomNumber(int.MinValue, int.MinValue));
-            Assert.DoesNotThrow(() => MathHelper.RandomNumber(int.MaxValue, int.MaxValue));
+            var ex1 = Record.Exception(() => MathHelper.RandomNumber(int.MinValue, int.MinValue));
+            var ex2 = Record.Exception(() => MathHelper.RandomNumber(int.MaxValue, int.MaxValue));
+            Assert.Null(ex1);
+            Assert.Null(ex2);
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void StandardDeviationTest()
         {
@@ -414,9 +386,6 @@ namespace OBeautifulCode.Libs.Math.Test
             Assert.Equal(3.918819, Math.Round(MathHelper.StandardDeviation(doubles), 6));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void TruncateDoubleTests()
         {
@@ -461,9 +430,6 @@ namespace OBeautifulCode.Libs.Math.Test
             Assert.Throws<OverflowException>(() => MathHelper.Truncate(double.MinValue));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void TruncateDecimalTests()
         {
@@ -508,9 +474,6 @@ namespace OBeautifulCode.Libs.Math.Test
             Assert.Throws<OverflowException>(() => MathHelper.Truncate(decimal.MinValue));
         }
 
-        /// <summary>
-        /// Test method
-        /// </summary>
         [Fact]
         public static void TruncateSignificantDigitsTest()
         {
@@ -555,9 +518,6 @@ namespace OBeautifulCode.Libs.Math.Test
             Assert.Throws<OverflowException>(() => value = MathHelper.TruncateSignificantDigits(value, int.MaxValue));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void VarianceTest()
         {
@@ -609,12 +569,7 @@ namespace OBeautifulCode.Libs.Math.Test
             doubles.Add(6);
             Assert.Equal(13.4375, Math.Round(MathHelper.Variance(doubles), 6));
         }
-
-        // ReSharper restore InconsistentNaming
-        #endregion
-
-        #region Internal Methods
-
+        
         /// <summary>
         /// Determines if a set of numbers is random.
         /// </summary>
@@ -669,14 +624,6 @@ namespace OBeautifulCode.Libs.Math.Test
             return false;
         }
 
-        #endregion
-
-        #region Protected Methods
-
-        #endregion
-
-        #region Private Methods
-
         /// <summary>
         /// Gets the frequency of occurrence of a randomly generated array of integers
         /// </summary>
@@ -703,7 +650,7 @@ namespace OBeautifulCode.Libs.Math.Test
 
             return ht;
         }
-
-        #endregion
+        
+        // ReSharper restore InconsistentNaming
     }
 }

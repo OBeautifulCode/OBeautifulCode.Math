@@ -1,4 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/qwkhehgvt4clhax5?svg=true)](https://ci.appveyor.com/project/OBeautifulCode/obeautifulcode-libs-math)
+[![Build status](https://ci.appveyor.com/api/projects/status/cy79le6v05nmrph9?svg=true)](https://ci.appveyor.com/project/SurajGupta/obeautifulcode-math)
 
 Math and Numeric Helpers
 ========================

@@ -1,39 +1,22 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="MathHelper.cs" company="OBeautifulCode">
-//   Copyright 2014 OBeautifulCode
+//   Copyright 2015 OBeautifulCode
 // </copyright>
-// <summary>
-//   Supports various mathematical and numerical methods.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OBeautifulCode.Libs.Math
+namespace OBeautifulCode.Math
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    using CuttingEdge.Conditions;
+    using Conditions;
 
     /// <summary>
     /// Supports various mathematical and numerical methods.
     /// </summary>
     public class MathHelper
     {
-        #region Fields (Private)
-
-        #endregion
-
-        #region Constructors
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
-        #region Public Methods
-
         /// <summary>
         /// Determines if two doubles are almost equal (given some level of tolerance).
         /// </summary>
@@ -161,10 +144,12 @@ namespace OBeautifulCode.Libs.Math
         /// <returns>
         /// Returns the factors of a number.
         /// </returns>
-        public static IEnumerable<uint> Factors(uint x)
+        /// <exception cref="ArgumentOutOfRangeException">x must be &gt; 0</exception>
+        public static IEnumerable<int> Factors(int x)
         {
-            uint max = x / 2;
-            for (uint i = 1; i <= max; i++)
+            Condition.Requires(x, "x").IsGreaterThan(0);
+            int max = x / 2;
+            for (int i = 1; i <= max; i++)
             {
                 if (0 == (x % i))
                 {
@@ -360,20 +345,6 @@ namespace OBeautifulCode.Libs.Math
             Condition.Requires(values, "values").IsNotEmpty();
             return Convert.ToDecimal(Variance(values.Select(Convert.ToDouble)));
             // ReSharper restore PossibleMultipleEnumeration
-        }
-
-        #endregion
-
-        #region Internal Methods
-
-        #endregion
-
-        #region Protected Methods
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
+        }        
     }
 }

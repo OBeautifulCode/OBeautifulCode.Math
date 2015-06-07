@@ -1,17 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ThreadSafeRandom.cs" company="OBeautifulCode">
-//   Copyright 2014 OBeautifulCode
+//   Copyright 2015 OBeautifulCode
 // </copyright>
-// <summary>
-//   Represents a thread-safe pseudo-random number generator, a device that produces a sequence 
-//   of numbers that meet certain statistical requirements for randomness.
-//   Adapted from: 
-//   http://blogs.msdn.com/b/pfxteam/archive/2009/02/19/9434171.aspx
-//   http://codeblog.jonskeet.uk/2009/11/04/revisiting-randomness/
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OBeautifulCode.Libs.Math
+namespace OBeautifulCode.Math
 {
     using System;
 
@@ -21,12 +14,13 @@ namespace OBeautifulCode.Libs.Math
     /// certain statistical requirements for randomness.
     /// </summary>
     /// <remarks>
+    /// Adapted from: 
+    /// <a href="http://blogs.msdn.com/b/pfxteam/archive/2009/02/19/9434171.aspx"/>
+    /// <a href="http://codeblog.jonskeet.uk/2009/11/04/revisiting-randomness/"/>
     /// System.Random is not thread-safe, hence the need for this class.
     /// </remarks>
     public class ThreadSafeRandom
     {
-        #region Fields (Private)
-
         /// <summary>
         /// A single random number generator for the app domain,
         /// used to seed thread-specific random number generators
@@ -43,18 +37,6 @@ namespace OBeautifulCode.Libs.Math
         /// </summary>
         [ThreadStatic]
         private static Random local;
-
-        #endregion
-
-        #region Constructors
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
-        #region Public Methods
 
         /// <summary>
         /// Returns a nonnegative random integer.
@@ -138,18 +120,6 @@ namespace OBeautifulCode.Libs.Math
             return local.NextDouble();
         }
 
-        #endregion
-
-        #region Internal Methods
-
-        #endregion
-
-        #region Protected Methods
-
-        #endregion
-
-        #region Private Methods
-
         /// <summary>
         /// Instantiates thread-specific random number generator
         ///  if it hasn't been instantiated.
@@ -167,7 +137,5 @@ namespace OBeautifulCode.Libs.Math
                 local = new Random(seed);
             }
         }
-
-        #endregion
     }
 }

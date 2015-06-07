@@ -1,13 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ThreadSafeRandomTest.cs" company="OBeautifulCode">
-//   Copyright 2014 OBeautifulCode
+//   Copyright 2015 OBeautifulCode
 // </copyright>
-// <summary>
-//   Tests the <see cref="OBeautifulCode"/> class.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OBeautifulCode.Libs.Math.Test
+namespace OBeautifulCode.Math.Test
 {
     using System.Collections.Concurrent;
     using System.Threading.Tasks;
@@ -25,24 +22,7 @@ namespace OBeautifulCode.Libs.Math.Test
     /// </remarks>
     public class ThreadSafeRandomTest
     {
-        #region Fields (Private)
-
-        #endregion
-
-        #region Constructors
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
-        #region Public Methods
         // ReSharper disable InconsistentNaming
-
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void Next_MaxValueProvided_GeneratesRandomNumbers()
         {
@@ -109,12 +89,10 @@ namespace OBeautifulCode.Libs.Math.Test
             Assert.True(three);
 
             // no problems with Min/Max Values
-            Assert.DoesNotThrow(() => ThreadSafeRandom.Next(int.MinValue, int.MinValue));
+            var ex = Record.Exception(() => ThreadSafeRandom.Next(int.MinValue, int.MinValue));
+            Assert.Null(ex);
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void Next_MinAndMaxValueProvided_GeneratesRandomNumbers()
         {
@@ -182,22 +160,10 @@ namespace OBeautifulCode.Libs.Math.Test
             Assert.True(three);
 
             // no problems with Min/Max Values
-            Assert.DoesNotThrow(() => ThreadSafeRandom.Next(int.MinValue, int.MinValue));
+            var ex = Record.Exception(() => ThreadSafeRandom.Next(int.MinValue, int.MinValue));
+            Assert.Null(ex);
         }
 
-        // ReSharper restore InconsistentNaming
-        #endregion
-
-        #region Internal Methods
-
-        #endregion
-
-        #region Protected Methods
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
+        // ReSharper restore InconsistentNaming        
     }
 }
