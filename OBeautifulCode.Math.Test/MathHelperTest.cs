@@ -26,19 +26,6 @@ namespace OBeautifulCode.Math.Test
     /// </remarks>
     public static class MathHelperTest
     {
-        #region Fields (Private)
-
-        #endregion
-
-        #region Constructors
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
-        #region Public Methods
         // ReSharper disable InconsistentNaming
 
         /// <summary>
@@ -626,10 +613,7 @@ namespace OBeautifulCode.Math.Test
         }
 
         // ReSharper restore InconsistentNaming
-        #endregion
-
-        #region Internal Methods
-
+        
         /// <summary>
         /// Determines if a set of numbers is random.
         /// </summary>
@@ -684,14 +668,6 @@ namespace OBeautifulCode.Math.Test
             return false;
         }
 
-        #endregion
-
-        #region Protected Methods
-
-        #endregion
-
-        #region Private Methods
-
         /// <summary>
         /// Gets the frequency of occurrence of a randomly generated array of integers
         /// </summary>
@@ -718,7 +694,5 @@ namespace OBeautifulCode.Math.Test
 
             return ht;
         }
-
-        #endregion
     }
 }

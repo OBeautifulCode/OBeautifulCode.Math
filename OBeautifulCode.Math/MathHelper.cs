@@ -20,20 +20,6 @@ namespace OBeautifulCode.Math
     /// </summary>
     public class MathHelper
     {
-        #region Fields (Private)
-
-        #endregion
-
-        #region Constructors
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
-        #region Public Methods
-
         /// <summary>
         /// Determines if two doubles are almost equal (given some level of tolerance).
         /// </summary>
@@ -362,20 +348,6 @@ namespace OBeautifulCode.Math
             Condition.Requires(values, "values").IsNotEmpty();
             return Convert.ToDecimal(Variance(values.Select(Convert.ToDouble)));
             // ReSharper restore PossibleMultipleEnumeration
-        }
-
-        #endregion
-
-        #region Internal Methods
-
-        #endregion
-
-        #region Protected Methods
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
+        }        
     }
 }

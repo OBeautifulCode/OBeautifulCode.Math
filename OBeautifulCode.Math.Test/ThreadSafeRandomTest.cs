@@ -25,19 +25,6 @@ namespace OBeautifulCode.Math.Test
     /// </remarks>
     public class ThreadSafeRandomTest
     {
-        #region Fields (Private)
-
-        #endregion
-
-        #region Constructors
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
-        #region Public Methods
         // ReSharper disable InconsistentNaming
 
         /// <summary>
@@ -185,19 +172,6 @@ namespace OBeautifulCode.Math.Test
             Assert.DoesNotThrow(() => ThreadSafeRandom.Next(int.MinValue, int.MinValue));
         }
 
-        // ReSharper restore InconsistentNaming
-        #endregion
-
-        #region Internal Methods
-
-        #endregion
-
-        #region Protected Methods
-
-        #endregion
-
-        #region Private Methods
-
-        #endregion
+        // ReSharper restore InconsistentNaming        
     }
 }

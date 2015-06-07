@@ -25,8 +25,6 @@ namespace OBeautifulCode.Math
     /// </remarks>
     public class ThreadSafeRandom
     {
-        #region Fields (Private)
-
         /// <summary>
         /// A single random number generator for the app domain,
         /// used to seed thread-specific random number generators
@@ -43,18 +41,6 @@ namespace OBeautifulCode.Math
         /// </summary>
         [ThreadStatic]
         private static Random local;
-
-        #endregion
-
-        #region Constructors
-
-        #endregion
-
-        #region Properties
-
-        #endregion
-
-        #region Public Methods
 
         /// <summary>
         /// Returns a nonnegative random integer.
@@ -138,18 +124,6 @@ namespace OBeautifulCode.Math
             return local.NextDouble();
         }
 
-        #endregion
-
-        #region Internal Methods
-
-        #endregion
-
-        #region Protected Methods
-
-        #endregion
-
-        #region Private Methods
-
         /// <summary>
         /// Instantiates thread-specific random number generator
         ///  if it hasn't been instantiated.
@@ -167,7 +141,5 @@ namespace OBeautifulCode.Math
                 local = new Random(seed);
             }
         }
-
-        #endregion
     }
 }
