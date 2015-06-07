@@ -13,7 +13,7 @@ namespace OBeautifulCode.Math
     using System.Collections.Generic;
     using System.Linq;
 
-    using CuttingEdge.Conditions;
+    using Conditions;
 
     /// <summary>
     /// Supports various mathematical and numerical methods.
