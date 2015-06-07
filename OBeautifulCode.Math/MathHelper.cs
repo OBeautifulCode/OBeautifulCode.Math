@@ -161,10 +161,12 @@ namespace OBeautifulCode.Math
         /// <returns>
         /// Returns the factors of a number.
         /// </returns>
-        public static IEnumerable<uint> Factors(uint x)
+        /// <exception cref="ArgumentOutOfRangeException">x must be &gt;= 0</exception>
+        public static IEnumerable<int> Factors(int x)
         {
-            uint max = x / 2;
-            for (uint i = 1; i <= max; i++)
+            Condition.Requires(x, "x").IsGreaterOrEqual(0);
+            int max = x / 2;
+            for (int i = 1; i <= max; i++)
             {
                 if (0 == (x % i))
                 {
