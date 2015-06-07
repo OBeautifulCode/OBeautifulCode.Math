@@ -148,16 +148,17 @@ namespace OBeautifulCode.Math
         public static IEnumerable<int> Factors(int x)
         {
             Condition.Requires(x, "x").IsGreaterOrEqual(0);
+            var results = new List<int>();
             int max = x / 2;
             for (int i = 1; i <= max; i++)
             {
                 if (0 == (x % i))
                 {
-                    yield return i;
+                    results.Add(i);
                 }
             }
 
-            yield return x;
+            return results;
         }
 
         /// <summary>
