@@ -9,6 +9,7 @@ namespace OBeautifulCode.Math.Test
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
 
     using Xunit;
 
@@ -175,22 +176,23 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void Factors_NumberToFactorIsNegative_ThrowsArgumentOutOfRangeException()
+        public static void Factors_NumberToFactorNotPositive_ThrowsArgumentOutOfRangeException()
         {
             // Arrange, Act
-            var ex1 = Record.Exception(() => MathHelper.Factors(-1));
-            var ex2 = Record.Exception(() => MathHelper.Factors(int.MinValue));
+            var ex1 = Record.Exception(() => MathHelper.Factors(0).ToList());
+            var ex2 = Record.Exception(() => MathHelper.Factors(-1).ToList());
+            var ex3 = Record.Exception(() => MathHelper.Factors(int.MinValue).ToList());
 
             // Assert
             Assert.IsType<ArgumentOutOfRangeException>(ex1);
             Assert.IsType<ArgumentOutOfRangeException>(ex2);
+            Assert.IsType<ArgumentOutOfRangeException>(ex3);
         }
 
         [Fact]
         public static void Factors_ReturnsAllFactorsOfGivenNumber()
         {
             // Arrange
-            const int Value0 = 0;
             const int Value1 = 1;
             const int Value2 = 2;
             const int Value3 = 3;
@@ -204,7 +206,6 @@ namespace OBeautifulCode.Math.Test
             const int ValueLarge1 = 21;
             const int ValueLarge2 = 24;
 
-            IEnumerable<int> factors0Expected = new[] { 0 };
             IEnumerable<int> factors1Expected = new[] { 1 };
             IEnumerable<int> factors2Expected = new[] { 1, 2 };
             IEnumerable<int> factors3Expected = new[] { 1, 3 };
@@ -219,7 +220,6 @@ namespace OBeautifulCode.Math.Test
             IEnumerable<int> factorsLarge2Expected = new[] { 1, 2, 3, 4, 6, 8, 12, 24 };
 
             // Act
-            IEnumerable<int> factors0 = MathHelper.Factors(Value0);
             IEnumerable<int> factors1 = MathHelper.Factors(Value1);
             IEnumerable<int> factors2 = MathHelper.Factors(Value2);
             IEnumerable<int> factors3 = MathHelper.Factors(Value3);
@@ -234,7 +234,6 @@ namespace OBeautifulCode.Math.Test
             IEnumerable<int> factorsLarge2 = MathHelper.Factors(ValueLarge2);
 
             // Assert
-            Assert.Equal(factors0Expected, factors0);
             Assert.Equal(factors1Expected, factors1);
             Assert.Equal(factors2Expected, factors2);
             Assert.Equal(factors3Expected, factors3);

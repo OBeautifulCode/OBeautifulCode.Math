@@ -144,21 +144,20 @@ namespace OBeautifulCode.Math
         /// <returns>
         /// Returns the factors of a number.
         /// </returns>
-        /// <exception cref="ArgumentOutOfRangeException">x must be &gt;= 0</exception>
+        /// <exception cref="ArgumentOutOfRangeException">x must be &gt; 0</exception>
         public static IEnumerable<int> Factors(int x)
         {
-            Condition.Requires(x, "x").IsGreaterOrEqual(0);
-            var results = new List<int>();
+            Condition.Requires(x, "x").IsGreaterThan(0);
             int max = x / 2;
             for (int i = 1; i <= max; i++)
             {
                 if (0 == (x % i))
                 {
-                    results.Add(i);
+                    yield return i;
                 }
             }
 
-            return results;
+            yield return x;
         }
 
         /// <summary>
