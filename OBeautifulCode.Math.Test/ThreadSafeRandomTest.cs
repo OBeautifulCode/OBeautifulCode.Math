@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OBeautifulCode.Libs.Math.Test
+namespace OBeautifulCode.Math.Test
 {
     using System.Collections.Concurrent;
     using System.Threading.Tasks;

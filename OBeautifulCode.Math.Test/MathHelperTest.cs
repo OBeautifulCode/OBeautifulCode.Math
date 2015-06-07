@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OBeautifulCode.Libs.Math.Test
+namespace OBeautifulCode.Math.Test
 {
     using System;
     using System.Collections;

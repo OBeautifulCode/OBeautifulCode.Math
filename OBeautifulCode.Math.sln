@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBeautifulCode.Libs.Math", "OBeautifulCode.Libs.Math\OBeautifulCode.Libs.Math.csproj", "{4B9ADA2B-3A0E-438C-8916-26BD5DE09174}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBeautifulCode.Math", "OBeautifulCode.Math\OBeautifulCode.Math.csproj", "{4B9ADA2B-3A0E-438C-8916-26BD5DE09174}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBeautifulCode.Libs.Math.Test", "OBeautifulCode.Libs.Math.Test\OBeautifulCode.Libs.Math.Test.csproj", "{48ED9025-9A2C-4BA9-8112-C804E7A9A3F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBeautifulCode.Math.Test", "OBeautifulCode.Math.Test\OBeautifulCode.Math.Test.csproj", "{48ED9025-9A2C-4BA9-8112-C804E7A9A3F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

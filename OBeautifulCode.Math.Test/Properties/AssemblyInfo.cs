@@ -13,11 +13,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OBeautifulCode.Libs.Math")]
+[assembly: AssemblyTitle("OBeautifulCode.Math.Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("OBeautifulCode.Libs.Math")]
+[assembly: AssemblyProduct("OBeautifulCode.Math.Test")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -28,7 +28,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("bf0944d2-c503-4c21-8266-be793373b13c")]
+[assembly: Guid("d6aa95f1-ce26-46a7-a724-b4f3cecf979f")]
 
 // Version information for an assembly consists of the following four values:
 //

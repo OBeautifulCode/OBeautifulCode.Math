@@ -11,7 +11,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OBeautifulCode.Libs.Math
+namespace OBeautifulCode.Math
 {
     using System;
 
