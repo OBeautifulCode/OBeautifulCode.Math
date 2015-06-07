@@ -26,10 +26,6 @@ namespace OBeautifulCode.Math.Test
     public class ThreadSafeRandomTest
     {
         // ReSharper disable InconsistentNaming
-
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void Next_MaxValueProvided_GeneratesRandomNumbers()
         {
@@ -99,9 +95,6 @@ namespace OBeautifulCode.Math.Test
             Assert.DoesNotThrow(() => ThreadSafeRandom.Next(int.MinValue, int.MinValue));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void Next_MinAndMaxValueProvided_GeneratesRandomNumbers()
         {

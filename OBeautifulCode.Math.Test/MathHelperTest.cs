@@ -27,10 +27,6 @@ namespace OBeautifulCode.Math.Test
     public static class MathHelperTest
     {
         // ReSharper disable InconsistentNaming
-
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void AlmostEqual_ParametersTargetOrCurrentIsNaN_ThrowsArgumentException()
         {
@@ -41,9 +37,6 @@ namespace OBeautifulCode.Math.Test
             Assert.Throws<ArgumentException>(() => MathHelper.AlmostEqual(1, double.NaN, 1e-3));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void AlmostEqual_ParameterToleranceIsLessThan0_ThrowsArgumentOutOfRangeException()
         {
@@ -52,9 +45,6 @@ namespace OBeautifulCode.Math.Test
             Assert.Throws<ArgumentOutOfRangeException>(() => MathHelper.AlmostEqual(4.5, -3.2, double.MinValue));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void AlmostEqual_ReturnsTrueWhenTwoNumbersAreAlmostEqualWithinTolerance()
         {
@@ -70,9 +60,6 @@ namespace OBeautifulCode.Math.Test
             Assert.True(MathHelper.AlmostEqual(500.00000000000001, 500.00000000000005));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void AlmostEqual_ReturnsFalseWhenTwoNumbersAreNotAlmostEqualWithinTolerance()
         {
@@ -86,9 +73,6 @@ namespace OBeautifulCode.Math.Test
             Assert.False(MathHelper.AlmostEqual(500.00000000000001, 500.00000000000005, 0));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void CovarianceTest()
         {
@@ -193,9 +177,6 @@ namespace OBeautifulCode.Math.Test
             Assert.Equal(-2.3125m, Math.Round(MathHelper.Covariance(decimals1, decimals2), 6));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void Factors_NumberToFactorIsNegative_ThrowsArgumentOutOfRangeException()
         {
@@ -208,9 +189,6 @@ namespace OBeautifulCode.Math.Test
             Assert.IsType<ArgumentOutOfRangeException>(ex2);
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void Factors_ReturnsAllFactorsOfGivenNumber()
         {
@@ -274,9 +252,6 @@ namespace OBeautifulCode.Math.Test
             Assert.Equal(factorsLarge2Expected, factorsLarge2);
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void RandomNumberTest()
         {
@@ -361,9 +336,6 @@ namespace OBeautifulCode.Math.Test
             Assert.DoesNotThrow(() => MathHelper.RandomNumber(int.MaxValue, int.MaxValue));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void StandardDeviationTest()
         {
@@ -416,9 +388,6 @@ namespace OBeautifulCode.Math.Test
             Assert.Equal(3.918819, Math.Round(MathHelper.StandardDeviation(doubles), 6));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void TruncateDoubleTests()
         {
@@ -463,9 +432,6 @@ namespace OBeautifulCode.Math.Test
             Assert.Throws<OverflowException>(() => MathHelper.Truncate(double.MinValue));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void TruncateDecimalTests()
         {
@@ -510,9 +476,6 @@ namespace OBeautifulCode.Math.Test
             Assert.Throws<OverflowException>(() => MathHelper.Truncate(decimal.MinValue));
         }
 
-        /// <summary>
-        /// Test method
-        /// </summary>
         [Fact]
         public static void TruncateSignificantDigitsTest()
         {
@@ -557,9 +520,6 @@ namespace OBeautifulCode.Math.Test
             Assert.Throws<OverflowException>(() => value = MathHelper.TruncateSignificantDigits(value, int.MaxValue));
         }
 
-        /// <summary>
-        /// Test method.
-        /// </summary>
         [Fact]
         public static void VarianceTest()
         {
@@ -611,8 +571,6 @@ namespace OBeautifulCode.Math.Test
             doubles.Add(6);
             Assert.Equal(13.4375, Math.Round(MathHelper.Variance(doubles), 6));
         }
-
-        // ReSharper restore InconsistentNaming
         
         /// <summary>
         /// Determines if a set of numbers is random.
@@ -694,5 +652,7 @@ namespace OBeautifulCode.Math.Test
 
             return ht;
         }
+        
+        // ReSharper restore InconsistentNaming
     }
 }
