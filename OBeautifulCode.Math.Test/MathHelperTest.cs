@@ -329,8 +329,10 @@ namespace OBeautifulCode.Math.Test
             Assert.True(three);
 
             // no problems with Min/Max Values
-            Assert.DoesNotThrow(() => MathHelper.RandomNumber(int.MinValue, int.MinValue));
-            Assert.DoesNotThrow(() => MathHelper.RandomNumber(int.MaxValue, int.MaxValue));
+            var ex1 = Record.Exception(() => MathHelper.RandomNumber(int.MinValue, int.MinValue));
+            var ex2 = Record.Exception(() => MathHelper.RandomNumber(int.MaxValue, int.MaxValue));
+            Assert.Null(ex1);
+            Assert.Null(ex2);
         }
 
         [Fact]

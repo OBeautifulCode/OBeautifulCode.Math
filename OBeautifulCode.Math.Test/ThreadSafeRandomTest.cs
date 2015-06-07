@@ -89,7 +89,8 @@ namespace OBeautifulCode.Math.Test
             Assert.True(three);
 
             // no problems with Min/Max Values
-            Assert.DoesNotThrow(() => ThreadSafeRandom.Next(int.MinValue, int.MinValue));
+            var ex = Record.Exception(() => ThreadSafeRandom.Next(int.MinValue, int.MinValue));
+            Assert.Null(ex);
         }
 
         [Fact]
@@ -159,7 +160,8 @@ namespace OBeautifulCode.Math.Test
             Assert.True(three);
 
             // no problems with Min/Max Values
-            Assert.DoesNotThrow(() => ThreadSafeRandom.Next(int.MinValue, int.MinValue));
+            var ex = Record.Exception(() => ThreadSafeRandom.Next(int.MinValue, int.MinValue));
+            Assert.Null(ex);
         }
 
         // ReSharper restore InconsistentNaming        
