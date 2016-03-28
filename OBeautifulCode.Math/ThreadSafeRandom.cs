@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ThreadSafeRandom.cs" company="OBeautifulCode">
-//   Copyright 2015 OBeautifulCode
+//   Copyright (c) OBeautifulCode. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -9,17 +9,17 @@ namespace OBeautifulCode.Math
     using System;
 
     /// <summary>
-    /// Represents a thread-safe pseudo-random number generator, 
-    /// a device that produces a sequence of numbers that meet 
+    /// Represents a thread-safe pseudo-random number generator,
+    /// a device that produces a sequence of numbers that meet
     /// certain statistical requirements for randomness.
     /// </summary>
     /// <remarks>
-    /// Adapted from: 
+    /// Adapted from:
     /// <a href="http://blogs.msdn.com/b/pfxteam/archive/2009/02/19/9434171.aspx"/>
     /// <a href="http://codeblog.jonskeet.uk/2009/11/04/revisiting-randomness/"/>
     /// System.Random is not thread-safe, hence the need for this class.
     /// </remarks>
-    public class ThreadSafeRandom
+    public static class ThreadSafeRandom
     {
         /// <summary>
         /// A single random number generator for the app domain,
@@ -42,8 +42,8 @@ namespace OBeautifulCode.Math
         /// Returns a nonnegative random integer.
         /// </summary>
         /// <remarks>
-        /// Random.Next generates a random number whose value ranges from zero to less than <see cref="Int32.MaxValue"/>. 
-        /// To generate a random number whose value ranges from zero to some other positive number, use the <see cref="Next(int)"/> method overload. 
+        /// Random.Next generates a random number whose value ranges from zero to less than <see cref="int.MaxValue"/>.
+        /// To generate a random number whose value ranges from zero to some other positive number, use the <see cref="Next(int)"/> method overload.
         /// To generate a random number within a different range, use the <see cref="Next(int,int)"/> method overload
         /// </remarks>
         /// <returns>
@@ -60,7 +60,7 @@ namespace OBeautifulCode.Math
         /// </summary>
         /// <param name="maxValue">The exclusive upper bound of the random number to be generated. maxValue must be greater than or equal to zero.</param>
         /// <returns>
-        /// A 32-bit signed integer greater than or equal to zero, and less than maxValue; that is, the range of return values 
+        /// A 32-bit signed integer greater than or equal to zero, and less than maxValue; that is, the range of return values
         /// ordinarily includes zero but not maxValue. However, if maxValue equals zero, maxValue is returned.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">maxValue is less than zero.</exception>
@@ -79,7 +79,7 @@ namespace OBeautifulCode.Math
         /// Unlike the other overloads of the Next method, which return only non-negative values, this method can return a negative random integer.
         /// </remarks>
         /// <returns>
-        /// A 32-bit signed integer greater than or equal to minValue and less than maxValue; that is, the range of 
+        /// A 32-bit signed integer greater than or equal to minValue and less than maxValue; that is, the range of
         /// return values includes minValue but not maxValue. If minValue equals maxValue, minValue is returned.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">minValue is greater than maxValue.</exception>
@@ -94,8 +94,8 @@ namespace OBeautifulCode.Math
         /// </summary>
         /// <param name="buffer">An array of bytes to contain random numbers.</param>
         /// <remarks>
-        /// Each element of the array of bytes is set to a random number greater than or equal to zero, and less than or equal to MaxValue.  
-        /// To generate a cryptographically secured random number suitable for creating a random password, 
+        /// Each element of the array of bytes is set to a random number greater than or equal to zero, and less than or equal to MaxValue.
+        /// To generate a cryptographically secured random number suitable for creating a random password,
         /// for example, use a method such as RNGCryptoServiceProvider.GetBytes.
         /// </remarks>
         /// <exception cref="ArgumentNullException">buffer is null.</exception>

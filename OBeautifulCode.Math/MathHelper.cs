@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="MathHelper.cs" company="OBeautifulCode">
-//   Copyright 2015 OBeautifulCode
+//   Copyright (c) OBeautifulCode. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -15,7 +15,7 @@ namespace OBeautifulCode.Math
     /// <summary>
     /// Supports various mathematical and numerical methods.
     /// </summary>
-    public class MathHelper
+    public static class MathHelper
     {
         /// <summary>
         /// Determines if two doubles are almost equal (given some level of tolerance).
@@ -66,6 +66,7 @@ namespace OBeautifulCode.Math
             var values1List = values1 as IList<double> ?? values1.ToArray();
             var values2List = values2 as IList<double> ?? values2.ToArray();
             // ReSharper restore PossibleMultipleEnumeration
+
             int valuesCount = values1List.Count;
             if (valuesCount != values2List.Count)
             {
@@ -111,6 +112,7 @@ namespace OBeautifulCode.Math
             var values1List = values1 as IList<decimal> ?? values1.ToArray();
             var values2List = values2 as IList<decimal> ?? values2.ToArray();
             // ReSharper restore PossibleMultipleEnumeration
+
             int valuesCount = values1List.Count;
             if (valuesCount != values2List.Count)
             {
@@ -139,24 +141,28 @@ namespace OBeautifulCode.Math
         /// <summary>
         /// Determines the factors of a number.
         /// </summary>
-        /// <param name="x">The number whose factors are to be returned</param>
+        /// <param name="toFactor">The number whose factors are to be returned</param>
         /// <returns>
         /// Returns the factors of a number.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">x must be &gt; 0</exception>
-        public static IEnumerable<int> Factors(int x)
+        public static IEnumerable<int> Factors(int toFactor)
         {
-            Condition.Requires(x, nameof(x)).IsGreaterThan(0);
-            int max = x / 2;
+            Condition.Requires(toFactor, nameof(toFactor)).IsGreaterThan(0);
+            int max = toFactor / 2;
             for (int i = 1; i <= max; i++)
             {
-                if (0 == (x % i))
+                // ReSharper disable ArrangeRedundantParentheses
+
+                if ((toFactor % i) == 0)
                 {
                     yield return i;
                 }
+
+                // ReSharper restore ArrangeRedundantParentheses
             }
 
-            yield return x;
+            yield return toFactor;
         }
 
         /// <summary>
@@ -176,7 +182,7 @@ namespace OBeautifulCode.Math
         /// Gets a random number from a random number generator.
         /// </summary>
         /// <param name="minimum">the minimum number to return</param>
-        /// <param name="maximum">the maximum number to return (if <see cref="Int32.MaxValue"/>, then maximum is automatically converted to <see cref="Int32.MaxValue"/> - 1)</param> 
+        /// <param name="maximum">the maximum number to return (if <see cref="int"/>, then maximum is automatically converted to <see cref="int"/> - 1)</param>
         /// <returns>the random number.</returns>
         /// <remarks>
         /// This method is uses <see cref="ThreadSafeRandom"/> to guarantee thread safety.
@@ -249,7 +255,7 @@ namespace OBeautifulCode.Math
         /// <param name="value">The decimal to truncate into an integer.</param>
         /// <returns>Integer with the truncated double.</returns>
         /// <remarks>1.49 will return 1, 1.51 will return 1, 1.99 will return 1</remarks>
-        /// <exception cref="OverflowException">value overflows the bounds of an <see cref="Int32"/>.</exception>
+        /// <exception cref="OverflowException">value overflows the bounds of an <see cref="int"/>.</exception>
         public static int Truncate(decimal value)
         {
             if ((value > int.MaxValue) || (value < int.MinValue))
@@ -267,7 +273,7 @@ namespace OBeautifulCode.Math
         /// <param name="value">The double to truncate.</param>
         /// <returns>Integer with the truncated double.</returns>
         /// <remarks>1.49 will return 1, 1.51 will return 1, 1.99 will return 1</remarks>
-        /// <exception cref="OverflowException">value overflows the bounds of an <see cref="Int32"/>.</exception>
+        /// <exception cref="OverflowException">value overflows the bounds of an <see cref="int"/>.</exception>
         public static int Truncate(double value)
         {
             if ((value > int.MaxValue) || (value < int.MinValue))
@@ -317,6 +323,7 @@ namespace OBeautifulCode.Math
             Condition.Requires(values, nameof(values)).IsNotEmpty();
             var valuesList = values as IList<double> ?? values.ToArray();
             // ReSharper restore PossibleMultipleEnumeration
+
             if (valuesList.Count == 1)
             {
                 throw new ArgumentException("Two values are required");
@@ -344,6 +351,6 @@ namespace OBeautifulCode.Math
             Condition.Requires(values, nameof(values)).IsNotEmpty();
             return Convert.ToDecimal(Variance(values.Select(Convert.ToDouble)));
             // ReSharper restore PossibleMultipleEnumeration
-        }        
+        }
     }
 }
