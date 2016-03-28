@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="MathHelper.cs" company="OBeautifulCode">
-//   Copyright 2015 OBeautifulCode
+//   Copyright (c) OBeautifulCode. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -15,7 +15,7 @@ namespace OBeautifulCode.Math
     /// <summary>
     /// Supports various mathematical and numerical methods.
     /// </summary>
-    public class MathHelper
+    public static class MathHelper
     {
         /// <summary>
         /// Determines if two doubles are almost equal (given some level of tolerance).
@@ -30,18 +30,17 @@ namespace OBeautifulCode.Math
         /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
         public static bool AlmostEqual(double target, double current, double tolerance = 1e-8)
         {
-            if (double.IsNaN(target) || double.IsNaN(current))
-            {
-                throw new ArgumentException("target or current is NaN");
-            }
-
-            Condition.Requires(tolerance, "tolerance").IsGreaterOrEqual(0);
+            Condition.Requires(double.IsNaN(target)).IsFalse("target is NaN");
+            Condition.Requires(double.IsNaN(current)).IsFalse("current is NaN");
+            Condition.Requires(tolerance, nameof(tolerance)).IsGreaterOrEqual(0);
 
             double diff = Math.Abs(target - current);
             double mag = Math.Max(Math.Abs(target), Math.Abs(current));
             if (mag > tolerance)
             {
+                // ReSharper disable ArrangeRedundantParentheses
                 return (diff / mag) <= tolerance;
+                // ReSharper restore ArrangeRedundantParentheses
             }
 
             return diff <= tolerance;
@@ -62,13 +61,14 @@ namespace OBeautifulCode.Math
         {
             // check parameters
             // ReSharper disable PossibleMultipleEnumeration
-            Condition.Requires(values1, "values1").IsNotEmpty();
-            Condition.Requires(values2, "values2").IsNotEmpty();
+            Condition.Requires(values1, nameof(values1)).IsNotEmpty();
+            Condition.Requires(values2, nameof(values2)).IsNotEmpty();
             var values1List = values1 as IList<double> ?? values1.ToArray();
             var values2List = values2 as IList<double> ?? values2.ToArray();
             // ReSharper restore PossibleMultipleEnumeration
-            int valuesCount = values1List.Count();
-            if (valuesCount != values2List.Count())
+
+            int valuesCount = values1List.Count;
+            if (valuesCount != values2List.Count)
             {
                 throw new ArgumentException("Length of sources is different.");
             }
@@ -107,13 +107,14 @@ namespace OBeautifulCode.Math
         {
             // check parameters
             // ReSharper disable PossibleMultipleEnumeration
-            Condition.Requires(values1, "values1").IsNotEmpty();
-            Condition.Requires(values2, "values2").IsNotEmpty();
+            Condition.Requires(values1, nameof(values1)).IsNotEmpty();
+            Condition.Requires(values2, nameof(values2)).IsNotEmpty();
             var values1List = values1 as IList<decimal> ?? values1.ToArray();
             var values2List = values2 as IList<decimal> ?? values2.ToArray();
             // ReSharper restore PossibleMultipleEnumeration
-            int valuesCount = values1List.Count();
-            if (valuesCount != values2List.Count())
+
+            int valuesCount = values1List.Count;
+            if (valuesCount != values2List.Count)
             {
                 throw new ArgumentException("Length of sources is different.");
             }
@@ -140,24 +141,28 @@ namespace OBeautifulCode.Math
         /// <summary>
         /// Determines the factors of a number.
         /// </summary>
-        /// <param name="x">The number whose factors are to be returned</param>
+        /// <param name="toFactor">The number whose factors are to be returned</param>
         /// <returns>
         /// Returns the factors of a number.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">x must be &gt; 0</exception>
-        public static IEnumerable<int> Factors(int x)
+        public static IEnumerable<int> Factors(int toFactor)
         {
-            Condition.Requires(x, "x").IsGreaterThan(0);
-            int max = x / 2;
+            Condition.Requires(toFactor, nameof(toFactor)).IsGreaterThan(0);
+            int max = toFactor / 2;
             for (int i = 1; i <= max; i++)
             {
-                if (0 == (x % i))
+                // ReSharper disable ArrangeRedundantParentheses
+
+                if ((toFactor % i) == 0)
                 {
                     yield return i;
                 }
+
+                // ReSharper restore ArrangeRedundantParentheses
             }
 
-            yield return x;
+            yield return toFactor;
         }
 
         /// <summary>
@@ -177,7 +182,7 @@ namespace OBeautifulCode.Math
         /// Gets a random number from a random number generator.
         /// </summary>
         /// <param name="minimum">the minimum number to return</param>
-        /// <param name="maximum">the maximum number to return (if <see cref="Int32.MaxValue"/>, then maximum is automatically converted to <see cref="Int32.MaxValue"/> - 1)</param> 
+        /// <param name="maximum">the maximum number to return (if <see cref="int"/>, then maximum is automatically converted to <see cref="int"/> - 1)</param>
         /// <returns>the random number.</returns>
         /// <remarks>
         /// This method is uses <see cref="ThreadSafeRandom"/> to guarantee thread safety.
@@ -216,14 +221,14 @@ namespace OBeautifulCode.Math
         {
             // check parameters
             // ReSharper disable PossibleMultipleEnumeration
-            Condition.Requires(values, "values").IsLongerThan(1);
+            Condition.Requires(values, nameof(values)).IsLongerThan(1);
             var valuesList = values as IList<double> ?? values.ToArray();
             // ReSharper restore PossibleMultipleEnumeration
 
             // do the math
             double avg = valuesList.Average();
             double sumOfSqrs = valuesList.Sum(value => Math.Pow(value - avg, 2));
-            return Math.Sqrt(sumOfSqrs / Convert.ToDouble(valuesList.Count() - 1));
+            return Math.Sqrt(sumOfSqrs / Convert.ToDouble(valuesList.Count - 1));
         }
 
         /// <summary>
@@ -239,7 +244,7 @@ namespace OBeautifulCode.Math
         public static decimal StandardDeviation(IEnumerable<decimal> values)
         {
             // ReSharper disable PossibleMultipleEnumeration
-            Condition.Requires(values, "values").IsNotEmpty();
+            Condition.Requires(values, nameof(values)).IsNotEmpty();
             return Convert.ToDecimal(StandardDeviation(values.Select(Convert.ToDouble)));
             // ReSharper restore PossibleMultipleEnumeration
         }
@@ -250,7 +255,7 @@ namespace OBeautifulCode.Math
         /// <param name="value">The decimal to truncate into an integer.</param>
         /// <returns>Integer with the truncated double.</returns>
         /// <remarks>1.49 will return 1, 1.51 will return 1, 1.99 will return 1</remarks>
-        /// <exception cref="OverflowException">value overflows the bounds of an <see cref="Int32"/>.</exception>
+        /// <exception cref="OverflowException">value overflows the bounds of an <see cref="int"/>.</exception>
         public static int Truncate(decimal value)
         {
             if ((value > int.MaxValue) || (value < int.MinValue))
@@ -268,7 +273,7 @@ namespace OBeautifulCode.Math
         /// <param name="value">The double to truncate.</param>
         /// <returns>Integer with the truncated double.</returns>
         /// <remarks>1.49 will return 1, 1.51 will return 1, 1.99 will return 1</remarks>
-        /// <exception cref="OverflowException">value overflows the bounds of an <see cref="Int32"/>.</exception>
+        /// <exception cref="OverflowException">value overflows the bounds of an <see cref="int"/>.</exception>
         public static int Truncate(double value)
         {
             if ((value > int.MaxValue) || (value < int.MinValue))
@@ -292,7 +297,7 @@ namespace OBeautifulCode.Math
         /// <exception cref="OverflowException">digits is too high.</exception>
         public static decimal TruncateSignificantDigits(decimal value, int digits)
         {
-            Condition.Requires(digits, "digits").IsGreaterOrEqual(0);
+            Condition.Requires(digits, nameof(digits)).IsGreaterOrEqual(0);
             if (digits == 0)
             {
                 return decimal.Truncate(value);
@@ -315,10 +320,11 @@ namespace OBeautifulCode.Math
         {
             // check parameters
             // ReSharper disable PossibleMultipleEnumeration
-            Condition.Requires(values, "values").IsNotEmpty();
+            Condition.Requires(values, nameof(values)).IsNotEmpty();
             var valuesList = values as IList<double> ?? values.ToArray();
             // ReSharper restore PossibleMultipleEnumeration
-            if (valuesList.Count() == 1)
+
+            if (valuesList.Count == 1)
             {
                 throw new ArgumentException("Two values are required");
             }
@@ -326,7 +332,7 @@ namespace OBeautifulCode.Math
             // Get average
             double avg = valuesList.Average();
             double sum = valuesList.Sum(value => Math.Pow(value - avg, 2));
-            return sum / valuesList.Count();
+            return sum / valuesList.Count;
         }
 
         /// <summary>
@@ -342,9 +348,9 @@ namespace OBeautifulCode.Math
         public static decimal Variance(IEnumerable<decimal> values)
         {
             // ReSharper disable PossibleMultipleEnumeration
-            Condition.Requires(values, "values").IsNotEmpty();
+            Condition.Requires(values, nameof(values)).IsNotEmpty();
             return Convert.ToDecimal(Variance(values.Select(Convert.ToDouble)));
             // ReSharper restore PossibleMultipleEnumeration
-        }        
+        }
     }
 }

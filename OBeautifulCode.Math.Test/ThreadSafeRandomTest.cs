@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ThreadSafeRandomTest.cs" company="OBeautifulCode">
-//   Copyright 2015 OBeautifulCode
+//   Copyright (c) OBeautifulCode. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ namespace OBeautifulCode.Math.Test
     /// Because of the volume of test code, I was only able to break-up a few of these monolithic tests.
     /// The rest remain as-is.
     /// </remarks>
-    public class ThreadSafeRandomTest
+    public static class ThreadSafeRandomTest
     {
         // ReSharper disable InconsistentNaming
         [Fact]
@@ -164,6 +164,6 @@ namespace OBeautifulCode.Math.Test
             Assert.Null(ex);
         }
 
-        // ReSharper restore InconsistentNaming        
+        // ReSharper restore InconsistentNaming
     }
 }

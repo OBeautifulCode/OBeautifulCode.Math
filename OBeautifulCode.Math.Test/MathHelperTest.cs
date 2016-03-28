@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="MathHelperTest.cs" company="OBeautifulCode">
-//   Copyright 2015 OBeautifulCode
+//   Copyright (c) OBeautifulCode. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -77,6 +77,8 @@ namespace OBeautifulCode.Math.Test
             // null or empty source
             List<double> doubles1 = null;
             var doubles2 = new List<double> { 4.5 };
+
+            // ReSharper disable AccessToModifiedClosure
             Assert.Throws<ArgumentNullException>(() => Console.Write(MathHelper.Covariance(doubles1, doubles2)));
             Assert.Throws<ArgumentNullException>(() => Console.Write(MathHelper.Covariance(doubles2, doubles1)));
             doubles1 = new List<double>();
@@ -111,6 +113,7 @@ namespace OBeautifulCode.Math.Test
             decimals2.Add(9.3m);
             Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(decimals1, decimals2)));
             Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(decimals2, decimals1)));
+            // ReSharper restore AccessToModifiedClosure
 
             // validate that formula works
             doubles1 = new List<double>();
@@ -253,7 +256,6 @@ namespace OBeautifulCode.Math.Test
         {
             int min = 1;
             int max = 3000;
-            
             var numbers = new List<int>();
 
             // generate a bunch of random numbers
@@ -341,8 +343,11 @@ namespace OBeautifulCode.Math.Test
             List<double> doubles = null;
 
             // null or empty
+            // ReSharper disable AccessToModifiedClosure
             Assert.Throws<ArgumentNullException>(() => Console.Write(MathHelper.StandardDeviation(doubles)));
             Assert.Throws<ArgumentNullException>(() => Console.Write(MathHelper.StandardDeviation(decimals)));
+            // ReSharper restore AccessToModifiedClosure
+
             decimals = new List<decimal>();
             doubles = new List<double>();
             Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.StandardDeviation(doubles)));
@@ -479,9 +484,11 @@ namespace OBeautifulCode.Math.Test
         {
             // negative digits
             decimal value = 1;
+            // ReSharper disable AccessToModifiedClosure
             Assert.Throws<ArgumentOutOfRangeException>(() => MathHelper.TruncateSignificantDigits(value, -1));
             Assert.Throws<ArgumentOutOfRangeException>(() => MathHelper.TruncateSignificantDigits(value, -2));
             Assert.Throws<ArgumentOutOfRangeException>(() => MathHelper.TruncateSignificantDigits(value, int.MinValue));
+            // ReSharper restore AccessToModifiedClosure
 
             // zero digits
             Assert.Equal(1, MathHelper.TruncateSignificantDigits(value, 0));
@@ -525,12 +532,14 @@ namespace OBeautifulCode.Math.Test
             List<double> doubles = null;
 
             // null or empty
+            // ReSharper disable AccessToModifiedClosure
             Assert.Throws<ArgumentNullException>(() => Console.Write(MathHelper.Variance(doubles)));
             Assert.Throws<ArgumentNullException>(() => Console.Write(MathHelper.Variance(decimals)));
             decimals = new List<decimal>();
             doubles = new List<double>();
             Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Variance(doubles)));
             Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Variance(decimals)));
+            // ReSharper restore AccessToModifiedClosure
 
             // one value
             decimals.Add(2);
@@ -569,7 +578,7 @@ namespace OBeautifulCode.Math.Test
             doubles.Add(6);
             Assert.Equal(13.4375, Math.Round(MathHelper.Variance(doubles), 6));
         }
-        
+
         /// <summary>
         /// Determines if a set of numbers is random.
         /// </summary>
@@ -598,8 +607,11 @@ namespace OBeautifulCode.Math.Test
             }
 
             // ReSharper disable PossibleLossOfFraction
+#pragma warning disable SA1305 // Field names must not use Hungarian notation
             double nR = n / r;
+#pragma warning restore SA1305 // Field names must not use Hungarian notation
             // ReSharper restore PossibleLossOfFraction
+
             double chiSquare = 0;
 
             // PART A: Get frequency of randoms
@@ -607,13 +619,15 @@ namespace OBeautifulCode.Math.Test
 
             // PART B: Calculate chi-square - this approach is in Sedgewick
             // ReSharper disable LoopCanBeConvertedToQuery
+
             foreach (DictionaryEntry item in ht)
-            // ReSharper restore LoopCanBeConvertedToQuery
             {
                 double f = (int)item.Value - nR;
                 chiSquare += Math.Pow(f, 2) / nR;
             }
-            
+
+            // ReSharper restore LoopCanBeConvertedToQuery
+
             // PART C: According to Swdgewick: "The statistic should be within 2(r)^1/2 of r
             // This is valid if N is greater than about 10r"
             if ((r - (2 * Math.Sqrt(r)) <= chiSquare) & (r + (2 * Math.Sqrt(r)) >= chiSquare))
@@ -650,7 +664,7 @@ namespace OBeautifulCode.Math.Test
 
             return ht;
         }
-        
+
         // ReSharper restore InconsistentNaming
     }
 }
