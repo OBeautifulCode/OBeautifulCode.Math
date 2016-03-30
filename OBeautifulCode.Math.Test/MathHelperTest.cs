@@ -7,7 +7,6 @@
 namespace OBeautifulCode.Math.Test
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -252,91 +251,6 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void RandomNumberTest()
-        {
-            int min = 1;
-            int max = 3000;
-            var numbers = new List<int>();
-
-            // generate a bunch of random numbers
-            for (int x = 0; x <= 2000000; x++)
-            {
-                int randomNumber = MathHelper.RandomNumber(min, max);
-                Assert.InRange(randomNumber, min, max);
-                numbers.Add(randomNumber);
-            }
-
-            // now swap max and min
-            min = 3000;
-            max = 1;
-
-            // should still work fine
-            for (int x = 0; x <= 2000000; x++)
-            {
-                int randomNumber = MathHelper.RandomNumber(max, min);
-                Assert.InRange(randomNumber, max, min);
-                numbers.Add(randomNumber);
-            }
-
-            // swap back and test that returned numbers are random
-            min = 1;
-            max = 3000;
-
-            // causes the build to fail from time to time
-            Assert.True(IsRandom(numbers.ToArray(), max - min + 1));
-
-            // now check IsRandom itself
-            var notRandom = new List<int>();
-            for (int x = 0; x < 200000; x++)
-            {
-                notRandom.Add((x & 1) == 0 ? 4 : 2000);
-            }
-
-            Assert.False(IsRandom(notRandom.ToArray(), max - min + 1));
-
-            // ensure all numbers are including boundaries are returned
-            bool zero = false;
-            bool one = false;
-            bool two = false;
-            bool three = false;
-            for (int x = 0; x <= 200; x++)
-            {
-                int randomNumber = MathHelper.RandomNumber(0, 3);
-                Assert.InRange(randomNumber, 0, 3);
-                if (randomNumber == 0)
-                {
-                    zero = true;
-                }
-
-                if (randomNumber == 1)
-                {
-                    one = true;
-                }
-
-                if (randomNumber == 2)
-                {
-                    two = true;
-                }
-
-                if (randomNumber == 3)
-                {
-                    three = true;
-                }
-            }
-
-            Assert.True(zero);
-            Assert.True(one);
-            Assert.True(two);
-            Assert.True(three);
-
-            // no problems with Min/Max Values
-            var ex1 = Record.Exception(() => MathHelper.RandomNumber(int.MinValue, int.MinValue));
-            var ex2 = Record.Exception(() => MathHelper.RandomNumber(int.MaxValue, int.MaxValue));
-            Assert.Null(ex1);
-            Assert.Null(ex2);
-        }
-
-        [Fact]
         public static void StandardDeviationTest()
         {
             List<decimal> decimals = null;
@@ -577,92 +491,6 @@ namespace OBeautifulCode.Math.Test
             Assert.Equal(13.061224, Math.Round(MathHelper.Variance(doubles), 6));
             doubles.Add(6);
             Assert.Equal(13.4375, Math.Round(MathHelper.Variance(doubles), 6));
-        }
-
-        /// <summary>
-        /// Determines if a set of numbers is random.
-        /// </summary>
-        /// <param name="toEvaluate">The random numbers to test.</param>
-        /// <param name="r">The the size of the range of numbers.</param>
-        /// <remarks>
-        /// See here for algorithm: <a href="https://en.wikibooks.org/wiki/Algorithm_Implementation/Pseudorandom_Numbers/Chi-Square_Test"/>.
-        /// </remarks>
-        /// <returns>
-        /// Returns true if the set of numbers is random, false if not.
-        /// </returns>
-        internal static bool IsRandom(int[] toEvaluate, int r)
-        {
-            // Calculates the chi-square value for N positive integers less than r
-            // Source: "Algorithms in C" - Robert Sedgewick - pp. 517
-            // NB: Sedgewick recommends: "...to be sure, the test should be tried a few times,
-            // since it could be wrong in about one out of ten times."
-
-            // Calculate the number of samples - N
-            int n = toEvaluate.Length;
-
-            // According to Sedgewick: "This is valid if N is greater than about 10r"
-            if (n <= 10 * r)
-            {
-                return false;
-            }
-
-            // ReSharper disable PossibleLossOfFraction
-#pragma warning disable SA1305 // Field names must not use Hungarian notation
-            double nR = n / r;
-#pragma warning restore SA1305 // Field names must not use Hungarian notation
-            // ReSharper restore PossibleLossOfFraction
-
-            double chiSquare = 0;
-
-            // PART A: Get frequency of randoms
-            Hashtable ht = RandomFrequency(toEvaluate);
-
-            // PART B: Calculate chi-square - this approach is in Sedgewick
-            // ReSharper disable LoopCanBeConvertedToQuery
-
-            foreach (DictionaryEntry item in ht)
-            {
-                double f = (int)item.Value - nR;
-                chiSquare += Math.Pow(f, 2) / nR;
-            }
-
-            // ReSharper restore LoopCanBeConvertedToQuery
-
-            // PART C: According to Swdgewick: "The statistic should be within 2(r)^1/2 of r
-            // This is valid if N is greater than about 10r"
-            if ((r - (2 * Math.Sqrt(r)) <= chiSquare) & (r + (2 * Math.Sqrt(r)) >= chiSquare))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Gets the frequency of occurrence of a randomly generated array of integers
-        /// </summary>
-        /// <param name="randomNums">The random numbers to test.</param>
-        /// <returns>
-        /// A hash table, key being the random number and value its frequency.
-        /// </returns>
-        private static Hashtable RandomFrequency(int[] randomNums)
-        {
-            var ht = new Hashtable();
-            int n = randomNums.Length;
-
-            for (int i = 0; i <= n - 1; i++)
-            {
-                if (ht.ContainsKey(randomNums[i]))
-                {
-                    ht[randomNums[i]] = (int)ht[randomNums[i]] + 1;
-                }
-                else
-                {
-                    ht[randomNums[i]] = 1;
-                }
-            }
-
-            return ht;
         }
 
         // ReSharper restore InconsistentNaming

@@ -166,48 +166,6 @@ namespace OBeautifulCode.Math
         }
 
         /// <summary>
-        /// Gets a random number from a random number generator with minimum value returned being 0.
-        /// </summary>
-        /// <remarks>
-        /// This method is uses <see cref="ThreadSafeRandom"/> to guarantee thread safety.
-        /// </remarks>
-        /// <param name="maximum">the maximum number to return</param>
-        /// <returns>the random number.</returns>
-        public static int RandomNumber(int maximum)
-        {
-            return RandomNumber(0, maximum);
-        }
-
-        /// <summary>
-        /// Gets a random number from a random number generator.
-        /// </summary>
-        /// <param name="minimum">the minimum number to return</param>
-        /// <param name="maximum">the maximum number to return (if <see cref="int"/>, then maximum is automatically converted to <see cref="int"/> - 1)</param>
-        /// <returns>the random number.</returns>
-        /// <remarks>
-        /// This method is uses <see cref="ThreadSafeRandom"/> to guarantee thread safety.
-        /// Will swap maximum and minimum if minimum &gt; maximum
-        /// </remarks>
-        public static int RandomNumber(int minimum, int maximum)
-        {
-            // if passed incorrect arguments, swap them
-            if (minimum > maximum)
-            {
-                int t = minimum;
-                minimum = maximum;
-                maximum = t;
-            }
-
-            // maxValue parameter to Next is exclusive - so we have to add 1 to include maximum
-            if (maximum != int.MaxValue)
-            {
-                maximum++;
-            }
-
-            return ThreadSafeRandom.Next(minimum, maximum);
-        }
-
-        /// <summary>
         /// Calculates the standard deviation of a set of doubles.
         /// </summary>
         /// <param name="values">The double values to use in the calculation.</param>
