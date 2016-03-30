@@ -25,18 +25,12 @@ namespace OBeautifulCode.Math
         /// A single random number generator for the app domain,
         /// used to seed thread-specific random number generators
         /// </summary>
-        private static readonly Random Global = new Random();
+        private static readonly Random Random = new Random();
 
         /// <summary>
         /// Lock object for access to global random number generator.
         /// </summary>
-        private static readonly object GlobalLock = new object();
-
-        /// <summary>
-        /// A per-thread random number generator.
-        /// </summary>
-        [ThreadStatic]
-        private static Random local;
+        private static readonly object Lock = new object();
 
         /// <summary>
         /// Returns a nonnegative random integer.
@@ -51,8 +45,10 @@ namespace OBeautifulCode.Math
         /// </returns>
         public static int Next()
         {
-            EstablishLocal();
-            return local.Next();
+            lock (Lock)
+            {
+                return Random.Next();
+            }
         }
 
         /// <summary>
@@ -66,8 +62,10 @@ namespace OBeautifulCode.Math
         /// <exception cref="ArgumentOutOfRangeException">maxValue is less than zero.</exception>
         public static int Next(int maxValue)
         {
-            EstablishLocal();
-            return local.Next(maxValue);
+            lock (Lock)
+            {
+                return Random.Next(maxValue);
+            }
         }
 
         /// <summary>
@@ -85,8 +83,10 @@ namespace OBeautifulCode.Math
         /// <exception cref="ArgumentOutOfRangeException">minValue is greater than maxValue.</exception>
         public static int Next(int minValue, int maxValue)
         {
-            EstablishLocal();
-            return local.Next(minValue, maxValue);
+            lock (Lock)
+            {
+                return Random.Next(minValue, maxValue);
+            }
         }
 
         /// <summary>
@@ -101,8 +101,10 @@ namespace OBeautifulCode.Math
         /// <exception cref="ArgumentNullException">buffer is null.</exception>
         public static void NextBytes(byte[] buffer)
         {
-            EstablishLocal();
-            local.NextBytes(buffer);
+            lock (Lock)
+            {
+                Random.NextBytes(buffer);
+            }
         }
 
         /// <summary>
@@ -116,25 +118,9 @@ namespace OBeautifulCode.Math
         /// </returns>
         public static double NextDouble()
         {
-            EstablishLocal();
-            return local.NextDouble();
-        }
-
-        /// <summary>
-        /// Instantiates thread-specific random number generator
-        ///  if it hasn't been instantiated.
-        /// </summary>
-        private static void EstablishLocal()
-        {
-            if (local == null)
+            lock (Lock)
             {
-                int seed;
-                lock (GlobalLock)
-                {
-                    seed = Global.Next();
-                }
-
-                local = new Random(seed);
+                return Random.NextDouble();
             }
         }
     }
