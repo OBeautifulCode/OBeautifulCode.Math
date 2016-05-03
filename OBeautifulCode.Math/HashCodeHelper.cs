@@ -6,6 +6,8 @@
 
 namespace OBeautifulCode.Math
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// Provides method to help with generating hash codes for structures and classes. This handles
     /// value types, nullable type, and objects.
@@ -66,6 +68,32 @@ namespace OBeautifulCode.Math
                 var result = new HashCodeHelper(hashCode);
                 return result;
             }
+        }
+
+        /// <summary>
+        /// Adds the hash value for all elements of the specified <see cref="IEnumerable{T}"/> to the current hash and returns the new value.
+        /// </summary>
+        /// <typeparam name="T">The type of objects to enumerate and hash.</typeparam>
+        /// <param name="values">The values to hash.</param>
+        /// <returns>The new hash code.</returns>
+        public HashCodeHelper HashElements<T>(IEnumerable<T> values)
+        {
+            // ReSharper disable LoopCanBeConvertedToQuery
+            HashCodeHelper helper = this;
+            if (values == null)
+            {
+                helper = helper.Hash((IEnumerable<T>)null);
+            }
+            else
+            {
+                foreach (var value in values)
+                {
+                    helper = helper.Hash(value);
+                }
+            }
+
+            return helper;
+            // ReSharper restore LoopCanBeConvertedToQuery
         }
     }
 }
