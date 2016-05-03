@@ -62,7 +62,7 @@ namespace OBeautifulCode.Math
         {
             unchecked
             {
-                var hashCode = (this.Value * HashCodeMultiplier) + value?.GetHashCode() ?? 0;
+                var hashCode = (this.Value * HashCodeMultiplier) + (value?.GetHashCode() ?? 0);
                 var result = new HashCodeHelper(hashCode);
                 return result;
             }
