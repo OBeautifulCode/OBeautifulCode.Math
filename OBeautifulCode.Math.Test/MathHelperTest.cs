@@ -61,6 +61,8 @@ namespace OBeautifulCode.Math.Test
         public static void AlmostEqual_ReturnsFalseWhenTwoNumbersAreNotAlmostEqualWithinTolerance()
         {
             // Act, Assert
+            Assert.False(MathHelper.AlmostEqual(5, -5));
+            Assert.False(MathHelper.AlmostEqual(.00000001, -.00000001));
             Assert.False(MathHelper.AlmostEqual(3.2, 3.4, .01));
             Assert.False(MathHelper.AlmostEqual(1.001, 1.002, .0001));
             Assert.False(MathHelper.AlmostEqual(2.002, 2.003, .0001));
