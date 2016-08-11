@@ -22,15 +22,30 @@ namespace OBeautifulCode.Math
     public static class ThreadSafeRandom
     {
         /// <summary>
-        /// A single random number generator for the app domain,
-        /// used to seed thread-specific random number generators
-        /// </summary>
-        private static readonly Random Random = new Random();
-
-        /// <summary>
         /// Lock object for access to global random number generator.
         /// </summary>
         private static readonly object Lock = new object();
+
+        /// <summary>
+        /// A single random number generator for the app domain,
+        /// used to seed thread-specific random number generators
+        /// </summary>
+        private static Random random = new Random();
+
+        /// <summary>
+        /// Reseeds the random number generator.
+        /// </summary>
+        /// <param name="seed">
+        /// A number used to calculate a starting value for the pseudo-random number sequence.
+        /// If a negative number is specified, the absolute value of the number is used.
+        /// </param>
+        public static void Reseed(int seed)
+        {
+            lock (Lock)
+            {
+                random = new Random(seed);
+            }
+        }
 
         /// <summary>
         /// Returns a nonnegative random integer.
@@ -47,7 +62,7 @@ namespace OBeautifulCode.Math
         {
             lock (Lock)
             {
-                return Random.Next();
+                return random.Next();
             }
         }
 
@@ -64,7 +79,7 @@ namespace OBeautifulCode.Math
         {
             lock (Lock)
             {
-                return Random.Next(maxValue);
+                return random.Next(maxValue);
             }
         }
 
@@ -85,7 +100,7 @@ namespace OBeautifulCode.Math
         {
             lock (Lock)
             {
-                return Random.Next(minValue, maxValue);
+                return random.Next(minValue, maxValue);
             }
         }
 
@@ -103,7 +118,7 @@ namespace OBeautifulCode.Math
         {
             lock (Lock)
             {
-                Random.NextBytes(buffer);
+                random.NextBytes(buffer);
             }
         }
 
@@ -120,7 +135,7 @@ namespace OBeautifulCode.Math
         {
             lock (Lock)
             {
-                return Random.NextDouble();
+                return random.NextDouble();
             }
         }
     }
