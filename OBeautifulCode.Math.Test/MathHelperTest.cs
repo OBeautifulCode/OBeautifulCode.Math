@@ -25,7 +25,7 @@ namespace OBeautifulCode.Math.Test
     {
         // ReSharper disable InconsistentNaming
         [Fact]
-        public static void AlmostEqual_ParametersTargetOrCurrentIsNaN_ThrowsArgumentException()
+        public static void AlmostEqual___Should_throw_ArgumentException___When_parameters_target_or_current_is_NaN()
         {
             // Act, Assert
             Assert.Throws<ArgumentException>(() => MathHelper.AlmostEqual(double.NaN, 1));
@@ -35,7 +35,7 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void AlmostEqual_ParameterToleranceIsLessThan0_ThrowsArgumentOutOfRangeException()
+        public static void AlmostEqual___Should_throw_ArgumentOutOfRangeException___When_parameter_tolerance_is_less_than_0()
         {
             // Act, Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => MathHelper.AlmostEqual(4.5, -3.2, -.0000001));
@@ -43,7 +43,7 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void AlmostEqual_ReturnsTrueWhenTwoNumbersAreAlmostEqualWithinTolerance()
+        public static void AlmostEqual___Should_return_true___When_two_numbers_are_almost_equal_within_tolerance()
         {
             // Act, Assert
             Assert.True(MathHelper.AlmostEqual(5, 5));
@@ -58,7 +58,7 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void AlmostEqual_ReturnsFalseWhenTwoNumbersAreNotAlmostEqualWithinTolerance()
+        public static void AlmostEqual___Should_return_false___When_two_numbers_are_not_almost_equal_within_tolerance()
         {
             // Act, Assert
             Assert.False(MathHelper.AlmostEqual(5, -5));
