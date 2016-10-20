@@ -10,6 +10,8 @@ namespace OBeautifulCode.Math.Test
     using System.Collections.Generic;
     using System.Linq;
 
+    using FluentAssertions;
+
     using Xunit;
 
     /// <summary>
@@ -27,49 +29,85 @@ namespace OBeautifulCode.Math.Test
         [Fact]
         public static void AlmostEqual___Should_throw_ArgumentException___When_parameters_target_or_current_is_NaN()
         {
-            // Act, Assert
-            Assert.Throws<ArgumentException>(() => MathHelper.AlmostEqual(double.NaN, 1));
-            Assert.Throws<ArgumentException>(() => MathHelper.AlmostEqual(double.NaN, 1, 1e-3));
-            Assert.Throws<ArgumentException>(() => MathHelper.AlmostEqual(1, double.NaN, 1e-3));
-            Assert.Throws<ArgumentException>(() => MathHelper.AlmostEqual(1, double.NaN, 1e-3));
+            // Arrange, Act
+            var ex1 = Record.Exception(() => MathHelper.AlmostEqual(double.NaN, 1));
+            var ex2 = Record.Exception(() => MathHelper.AlmostEqual(double.NaN, 1, 1e-3));
+            var ex3 = Record.Exception(() => MathHelper.AlmostEqual(1, double.NaN));
+            var ex4 = Record.Exception(() => MathHelper.AlmostEqual(1, double.NaN, 1e-3));
+            var ex5 = Record.Exception(() => MathHelper.AlmostEqual(double.NaN, double.NaN));
+            var ex6 = Record.Exception(() => MathHelper.AlmostEqual(double.NaN, double.NaN, 1e-3));
+
+            // Assert
+            ex1.Should().BeOfType<ArgumentException>();
+            ex2.Should().BeOfType<ArgumentException>();
+            ex3.Should().BeOfType<ArgumentException>();
+            ex4.Should().BeOfType<ArgumentException>();
+            ex5.Should().BeOfType<ArgumentException>();
+            ex6.Should().BeOfType<ArgumentException>();
         }
 
         [Fact]
         public static void AlmostEqual___Should_throw_ArgumentOutOfRangeException___When_parameter_tolerance_is_less_than_0()
         {
-            // Act, Assert
-            Assert.Throws<ArgumentOutOfRangeException>(() => MathHelper.AlmostEqual(4.5, -3.2, -.0000001));
-            Assert.Throws<ArgumentOutOfRangeException>(() => MathHelper.AlmostEqual(4.5, -3.2, double.MinValue));
+            // Arrange, Act
+            var ex1 = Record.Exception(() => MathHelper.AlmostEqual(4.5, -3.2, -.0000001));
+            var ex2 = Record.Exception(() => MathHelper.AlmostEqual(4.5, -3.2, double.MinValue));
+
+            // Assert
+            ex1.Should().BeOfType<ArgumentOutOfRangeException>();
+            ex2.Should().BeOfType<ArgumentOutOfRangeException>();
         }
 
         [Fact]
         public static void AlmostEqual___Should_return_true___When_two_numbers_are_almost_equal_within_tolerance()
         {
-            // Act, Assert
-            Assert.True(MathHelper.AlmostEqual(5, 5));
-            Assert.True(MathHelper.AlmostEqual(5, 5, 0));
-            Assert.True(MathHelper.AlmostEqual(2.2, 2.2));
-            Assert.True(MathHelper.AlmostEqual(2.2, 2.2, 0));
-            Assert.True(MathHelper.AlmostEqual(1.001, 1.002, .001));
-            Assert.True(MathHelper.AlmostEqual(2.002, 2.003, .001));
-            Assert.True(MathHelper.AlmostEqual(4.004, 4.003, .001));
-            Assert.True(MathHelper.AlmostEqual(0.00000000000001, 0.00000000000005));
-            Assert.True(MathHelper.AlmostEqual(500.00000000000001, 500.00000000000005));
+            // Arrange, Act
+            var result1 = MathHelper.AlmostEqual(5, 5);
+            var result2 = MathHelper.AlmostEqual(5, 5, 0);
+            var result3 = MathHelper.AlmostEqual(2.2, 2.2);
+            var result4 = MathHelper.AlmostEqual(2.2, 2.2, 0);
+            var result5 = MathHelper.AlmostEqual(1.001, 1.002, .001);
+            var result6 = MathHelper.AlmostEqual(2.002, 2.003, .001);
+            var result7 = MathHelper.AlmostEqual(4.004, 4.003, .001);
+            var result8 = MathHelper.AlmostEqual(0.00000000000001, 0.00000000000005);
+            var result9 = MathHelper.AlmostEqual(500.00000000000001, 500.00000000000005);
+
+            // Assert
+            result1.Should().BeTrue();
+            result2.Should().BeTrue();
+            result3.Should().BeTrue();
+            result4.Should().BeTrue();
+            result5.Should().BeTrue();
+            result6.Should().BeTrue();
+            result7.Should().BeTrue();
+            result8.Should().BeTrue();
+            result9.Should().BeTrue();
         }
 
         [Fact]
         public static void AlmostEqual___Should_return_false___When_two_numbers_are_not_almost_equal_within_tolerance()
         {
-            // Act, Assert
-            Assert.False(MathHelper.AlmostEqual(5, -5));
-            Assert.False(MathHelper.AlmostEqual(.00000001, -.00000001));
-            Assert.False(MathHelper.AlmostEqual(3.2, 3.4, .01));
-            Assert.False(MathHelper.AlmostEqual(1.001, 1.002, .0001));
-            Assert.False(MathHelper.AlmostEqual(2.002, 2.003, .0001));
-            Assert.False(MathHelper.AlmostEqual(4.004, 4.003, .0001));
-            Assert.False(MathHelper.AlmostEqual(5, 5.00000000000001, 0));
-            Assert.False(MathHelper.AlmostEqual(0.000001, 0.000002, 1e-7));
-            Assert.False(MathHelper.AlmostEqual(500.00000000000001, 500.00000000000005, 0));
+            // Arrange, Act
+            var result1 = MathHelper.AlmostEqual(5, -5);
+            var result2 = MathHelper.AlmostEqual(.00000001, -.00000001);
+            var result3 = MathHelper.AlmostEqual(3.2, 3.4, .01);
+            var result4 = MathHelper.AlmostEqual(1.001, 1.002, .0001);
+            var result5 = MathHelper.AlmostEqual(2.002, 2.003, .0001);
+            var result6 = MathHelper.AlmostEqual(4.004, 4.003, .0001);
+            var result7 = MathHelper.AlmostEqual(5, 5.00000000000001, 0);
+            var result8 = MathHelper.AlmostEqual(0.000001, 0.000002, 1e-7);
+            var result9 = MathHelper.AlmostEqual(500.00000000000001, 500.00000000000005, 0);
+
+            // Assert
+            result1.Should().BeFalse();
+            result2.Should().BeFalse();
+            result3.Should().BeFalse();
+            result4.Should().BeFalse();
+            result5.Should().BeFalse();
+            result6.Should().BeFalse();
+            result7.Should().BeFalse();
+            result8.Should().BeFalse();
+            result9.Should().BeFalse();
         }
 
         [Fact]
