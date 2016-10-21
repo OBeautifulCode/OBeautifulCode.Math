@@ -18,32 +18,148 @@ namespace OBeautifulCode.Math
     public static class MathHelper
     {
         /// <summary>
-        /// Determines if two doubles are almost equal (given some level of tolerance).
+        /// Determines if two values are almost equal (given some level of tolerance).
         /// </summary>
-        /// <param name="target">A target.</param>
-        /// <param name="current">The number to be compared to the target.</param>
-        /// <param name="tolerance">Differences smaller than tolerance are not considered. Defaults to 1e-8.</param>
+        /// <param name="value1">The first value.</param>
+        /// <param name="value2">The the second value.</param>
+        /// <param name="tolerance">
+        /// The tolerance for differences between the specified values.  If the
+        /// absolute value of the difference between the two values is less than or equal to
+        /// this tolerance, then the two values are considered to be almost equal.
+        /// </param>
         /// <returns>
-        /// true if target and current are almost equal, false if not.
+        /// true if the two values are almost equal, false if not.
         /// </returns>
-        /// <exception cref="ArgumentException">target or current is double.NaN</exception>
+        /// <exception cref="ArgumentException">value1 or value2 is double.NaN</exception>
         /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
-        public static bool AlmostEqual(double target, double current, double tolerance = 1e-8)
+        public static bool IsAlmostEqualTo(this double value1, double value2, double tolerance = 1e-8)
         {
-            Condition.Requires(double.IsNaN(target)).IsFalse("target is NaN");
-            Condition.Requires(double.IsNaN(current)).IsFalse("current is NaN");
-            Condition.Requires(tolerance, nameof(tolerance)).IsGreaterOrEqual(0);
+            double.IsNaN(value1).Requires().IsFalse("value1 is NaN");
+            double.IsNaN(value2).Requires().IsFalse("value2 is NaN");
+            tolerance.Requires(nameof(tolerance)).IsGreaterOrEqual(0);
 
-            double diff = Math.Abs(target - current);
-            double mag = Math.Max(Math.Abs(target), Math.Abs(current));
-            if (mag > tolerance)
-            {
-                // ReSharper disable ArrangeRedundantParentheses
-                return (diff / mag) <= tolerance;
-                // ReSharper restore ArrangeRedundantParentheses
-            }
+            var diff = Math.Abs(value1 - value2);
+            var almostEqual = diff <= tolerance;
+            return almostEqual;
+        }
 
-            return diff <= tolerance;
+        /// <summary>
+        /// Determines if two values are almost equal (given some level of tolerance).
+        /// </summary>
+        /// <param name="value1">The first value.</param>
+        /// <param name="value2">The the second value.</param>
+        /// <param name="tolerance">
+        /// The tolerance for differences between the specified values.  If the
+        /// absolute value of the difference between the two values is less than or equal to
+        /// this tolerance, then the two values are considered to be almost equal.
+        /// </param>
+        /// <returns>
+        /// true if the two values are almost equal, false if not.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
+        public static bool IsAlmostEqualTo(this decimal value1, decimal value2, decimal tolerance = 1e-8m)
+        {
+            tolerance.Requires(nameof(tolerance)).IsGreaterOrEqual(0);
+
+            var diff = Math.Abs(value1 - value2);
+            var almostEqual = diff <= tolerance;
+            return almostEqual;
+        }
+
+        /// <summary>
+        /// Determines if one value is greater than or almost equal (given some level of tolerance) to a second value.
+        /// </summary>
+        /// <param name="value1">The first value.</param>
+        /// <param name="value2">The the second value.</param>
+        /// <param name="tolerance">
+        /// The tolerance for differences between the specified values.  If the
+        /// absolute value of the difference between the two values is less than or equal to
+        /// this tolerance, then the two values are considered to be almost equal.
+        /// </param>
+        /// <returns>
+        /// true if the first value is greater than or almost equal to the second value, false if not.
+        /// </returns>
+        /// <exception cref="ArgumentException">value1 or value2 is double.NaN</exception>
+        /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
+        public static bool IsGreaterThanOrAlmostEqualTo(this double value1, double value2, double tolerance = 1e-8)
+        {
+            double.IsNaN(value1).Requires().IsFalse("value1 is NaN");
+            double.IsNaN(value2).Requires().IsFalse("value2 is NaN");
+            tolerance.Requires(nameof(tolerance)).IsGreaterOrEqual(0);
+
+            var result = (value1 > value2) || value1.IsAlmostEqualTo(value2, tolerance);
+            return result;
+        }
+
+        /// <summary>
+        /// Determines if one value is greater than or almost equal to a second value (given some level of tolerance).
+        /// </summary>
+        /// <param name="value1">The first value.</param>
+        /// <param name="value2">The the second value.</param>
+        /// <param name="tolerance">
+        /// The tolerance for differences between the specified values.  If the
+        /// absolute value of the difference between the two values is less than or equal to
+        /// this tolerance, then the two values are considered to be almost equal.
+        /// </param>
+        /// <returns>
+        /// true if the first value is greater than or almost equal to the second value, false if not.
+        /// </returns>
+        /// <exception cref="ArgumentException">value1 or value2 is double.NaN</exception>
+        /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
+        public static bool IsGreaterThanOrAlmostEqualTo(this decimal value1, decimal value2, decimal tolerance = 1e-8m)
+        {
+            tolerance.Requires(nameof(tolerance)).IsGreaterOrEqual(0);
+
+            var result = (value1 > value2) || value1.IsAlmostEqualTo(value2, tolerance);
+            return result;
+        }
+
+        /// <summary>
+        /// Determines if one value is less than or almost equal (given some level of tolerance) to a second value.
+        /// </summary>
+        /// <param name="value1">The first value.</param>
+        /// <param name="value2">The the second value.</param>
+        /// <param name="tolerance">
+        /// The tolerance for differences between the specified values.  If the
+        /// absolute value of the difference between the two values is less than or equal to
+        /// this tolerance, then the two values are considered to be almost equal.
+        /// </param>
+        /// <returns>
+        /// true if the first value is less than or almost equal to the second value, false if not.
+        /// </returns>
+        /// <exception cref="ArgumentException">value1 or value2 is double.NaN</exception>
+        /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
+        public static bool IsLessThanOrAlmostEqualTo(this double value1, double value2, double tolerance = 1e-8)
+        {
+            double.IsNaN(value1).Requires().IsFalse("value1 is NaN");
+            double.IsNaN(value2).Requires().IsFalse("value2 is NaN");
+            tolerance.Requires(nameof(tolerance)).IsGreaterOrEqual(0);
+
+            var result = (value1 < value2) || value1.IsAlmostEqualTo(value2, tolerance);
+            return result;
+        }
+
+        /// <summary>
+        /// Determines if one value is less than or almost equal to a second value (given some level of tolerance).
+        /// </summary>
+        /// <param name="value1">The first value.</param>
+        /// <param name="value2">The the second value.</param>
+        /// <param name="tolerance">
+        /// The tolerance for differences between the specified values.  If the
+        /// absolute value of the difference between the two values is less than or equal to
+        /// this tolerance, then the two values are considered to be almost equal.
+        /// </param>
+        /// <returns>
+        /// true if the first value is less than or almost equal to the second value, false if not.
+        /// </returns>
+        /// <exception cref="ArgumentException">value1 or value2 is double.NaN</exception>
+        /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
+        public static bool IsLessThanOrAlmostEqualTo(this decimal value1, decimal value2, decimal tolerance = 1e-8m)
+        {
+            tolerance.Requires(nameof(tolerance)).IsGreaterOrEqual(0);
+
+            var result = (value1 < value2) || value1.IsAlmostEqualTo(value2, tolerance);
+            return result;
         }
 
         /// <summary>
@@ -57,18 +173,14 @@ namespace OBeautifulCode.Math
         /// <exception cref="ArgumentNullException">values1 or values2 is null.</exception>
         /// <exception cref="ArgumentException">values1 or values2 is empty.</exception>
         /// <exception cref="ArgumentException">Length of sources (values1, values2) is different.</exception>
-        public static double Covariance(IEnumerable<double> values1, IEnumerable<double> values2)
+        public static double Covariance(IList<double> values1, IList<double> values2)
         {
             // check parameters
-            // ReSharper disable PossibleMultipleEnumeration
-            Condition.Requires(values1, nameof(values1)).IsNotEmpty();
-            Condition.Requires(values2, nameof(values2)).IsNotEmpty();
-            var values1List = values1 as IList<double> ?? values1.ToArray();
-            var values2List = values2 as IList<double> ?? values2.ToArray();
-            // ReSharper restore PossibleMultipleEnumeration
+            values1.Requires(nameof(values1)).IsNotEmpty();
+            values2.Requires(nameof(values2)).IsNotEmpty();
 
-            int valuesCount = values1List.Count;
-            if (valuesCount != values2List.Count)
+            int valuesCount = values1.Count;
+            if (valuesCount != values2.Count)
             {
                 throw new ArgumentException("Length of sources is different.");
             }
@@ -80,12 +192,12 @@ namespace OBeautifulCode.Math
             }
 
             // do the math
-            double avg1 = values1List.Average();
-            double avg2 = values2List.Average();
+            double avg1 = values1.Average();
+            double avg2 = values2.Average();
             double cov = 0;
             for (int i = 0; i < valuesCount; i++)
             {
-                cov += (values1List[i] - avg1) * (values2List[i] - avg2);
+                cov += (values1[i] - avg1) * (values2[i] - avg2);
             }
 
             cov /= valuesCount;
@@ -103,18 +215,14 @@ namespace OBeautifulCode.Math
         /// <exception cref="ArgumentNullException">values1 or values2 is null.</exception>
         /// <exception cref="ArgumentException">values1 or values2 is empty.</exception>
         /// <exception cref="ArgumentException">Length of sources (values1, values2) is different.</exception>
-        public static decimal Covariance(IEnumerable<decimal> values1, IEnumerable<decimal> values2)
+        public static decimal Covariance(IList<decimal> values1, IList<decimal> values2)
         {
             // check parameters
-            // ReSharper disable PossibleMultipleEnumeration
-            Condition.Requires(values1, nameof(values1)).IsNotEmpty();
-            Condition.Requires(values2, nameof(values2)).IsNotEmpty();
-            var values1List = values1 as IList<decimal> ?? values1.ToArray();
-            var values2List = values2 as IList<decimal> ?? values2.ToArray();
-            // ReSharper restore PossibleMultipleEnumeration
+            values1.Requires(nameof(values1)).IsNotEmpty();
+            values2.Requires(nameof(values2)).IsNotEmpty();
 
-            int valuesCount = values1List.Count;
-            if (valuesCount != values2List.Count)
+            int valuesCount = values1.Count;
+            if (valuesCount != values2.Count)
             {
                 throw new ArgumentException("Length of sources is different.");
             }
@@ -126,12 +234,12 @@ namespace OBeautifulCode.Math
             }
 
             // do the math
-            decimal avg1 = values1List.Average();
-            decimal avg2 = values2List.Average();
+            decimal avg1 = values1.Average();
+            decimal avg2 = values2.Average();
             decimal cov = 0;
             for (int i = 0; i < valuesCount; i++)
             {
-                cov += (values1List[i] - avg1) * (values2List[i] - avg2);
+                cov += (values1[i] - avg1) * (values2[i] - avg2);
             }
 
             cov /= valuesCount;
@@ -148,7 +256,8 @@ namespace OBeautifulCode.Math
         /// <exception cref="ArgumentOutOfRangeException">x must be &gt; 0</exception>
         public static IEnumerable<int> Factors(int toFactor)
         {
-            Condition.Requires(toFactor, nameof(toFactor)).IsGreaterThan(0);
+            toFactor.Requires(nameof(toFactor)).IsGreaterThan(0);
+
             int max = toFactor / 2;
             for (int i = 1; i <= max; i++)
             {
@@ -179,7 +288,7 @@ namespace OBeautifulCode.Math
         {
             // check parameters
             // ReSharper disable PossibleMultipleEnumeration
-            Condition.Requires(values, nameof(values)).IsLongerThan(1);
+            values.Requires(nameof(values)).IsLongerThan(1);
             var valuesList = values as IList<double> ?? values.ToArray();
             // ReSharper restore PossibleMultipleEnumeration
 
@@ -202,7 +311,7 @@ namespace OBeautifulCode.Math
         public static decimal StandardDeviation(IEnumerable<decimal> values)
         {
             // ReSharper disable PossibleMultipleEnumeration
-            Condition.Requires(values, nameof(values)).IsNotEmpty();
+            values.Requires(nameof(values)).IsNotEmpty();
             return Convert.ToDecimal(StandardDeviation(values.Select(Convert.ToDouble)));
             // ReSharper restore PossibleMultipleEnumeration
         }
@@ -255,7 +364,8 @@ namespace OBeautifulCode.Math
         /// <exception cref="OverflowException">digits is too high.</exception>
         public static decimal TruncateSignificantDigits(decimal value, int digits)
         {
-            Condition.Requires(digits, nameof(digits)).IsGreaterOrEqual(0);
+            digits.Requires(nameof(digits)).IsGreaterOrEqual(0);
+
             if (digits == 0)
             {
                 return decimal.Truncate(value);
@@ -278,7 +388,7 @@ namespace OBeautifulCode.Math
         {
             // check parameters
             // ReSharper disable PossibleMultipleEnumeration
-            Condition.Requires(values, nameof(values)).IsNotEmpty();
+            values.Requires(nameof(values)).IsNotEmpty();
             var valuesList = values as IList<double> ?? values.ToArray();
             // ReSharper restore PossibleMultipleEnumeration
 
@@ -306,7 +416,7 @@ namespace OBeautifulCode.Math
         public static decimal Variance(IEnumerable<decimal> values)
         {
             // ReSharper disable PossibleMultipleEnumeration
-            Condition.Requires(values, nameof(values)).IsNotEmpty();
+            values.Requires(nameof(values)).IsNotEmpty();
             return Convert.ToDecimal(Variance(values.Select(Convert.ToDouble)));
             // ReSharper restore PossibleMultipleEnumeration
         }
