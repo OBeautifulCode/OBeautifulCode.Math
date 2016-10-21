@@ -20,30 +20,50 @@ namespace OBeautifulCode.Math
         /// <summary>
         /// Determines if two doubles are almost equal (given some level of tolerance).
         /// </summary>
-        /// <param name="target">A target.</param>
-        /// <param name="current">The number to be compared to the target.</param>
-        /// <param name="tolerance">Differences smaller than tolerance are not considered. Defaults to 1e-8.</param>
+        /// <param name="value1">The first value.</param>
+        /// <param name="value2">The the second value.</param>
+        /// <param name="tolerance">
+        /// The tolerance for differences between the specified values.  If the
+        /// absolute value of the difference between the two values is less than or equal to
+        /// this tolerance, then the two values are considered to be almost equal.
+        /// </param>
         /// <returns>
-        /// true if target and current are almost equal, false if not.
+        /// true if the two values are almost equal, false if not.
         /// </returns>
-        /// <exception cref="ArgumentException">target or current is double.NaN</exception>
+        /// <exception cref="ArgumentException">value1 or value2 is double.NaN</exception>
         /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
-        public static bool AlmostEqual(double target, double current, double tolerance = 1e-8)
+        public static bool AlmostEqual(double value1, double value2, double tolerance = 1e-8)
         {
-            double.IsNaN(target).Requires().IsFalse("target is NaN");
-            double.IsNaN(current).Requires().IsFalse("current is NaN");
+            double.IsNaN(value1).Requires().IsFalse("value1 is NaN");
+            double.IsNaN(value2).Requires().IsFalse("value2 is NaN");
             tolerance.Requires(nameof(tolerance)).IsGreaterOrEqual(0);
 
-            double diff = Math.Abs(target - current);
-            double mag = Math.Max(Math.Abs(target), Math.Abs(current));
-            if (mag > tolerance)
-            {
-                // ReSharper disable ArrangeRedundantParentheses
-                return (diff / mag) <= tolerance;
-                // ReSharper restore ArrangeRedundantParentheses
-            }
+            var diff = Math.Abs(value1 - value2);
+            var almostEqual = diff <= tolerance;
+            return almostEqual;
+        }
 
-            return diff <= tolerance;
+        /// <summary>
+        /// Determines if two decimals are almost equal (given some level of tolerance).
+        /// </summary>
+        /// <param name="value1">The first value.</param>
+        /// <param name="value2">The the second value.</param>
+        /// <param name="tolerance">
+        /// The tolerance for differences between the specified values.  If the
+        /// absolute value of the difference between the two values is less than or equal to
+        /// this tolerance, then the two values are considered to be almost equal.
+        /// </param>
+        /// <returns>
+        /// true if the two values are almost equal, false if not.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
+        public static bool AlmostEqual(decimal value1, decimal value2, decimal tolerance = 1e-8m)
+        {
+            tolerance.Requires(nameof(tolerance)).IsGreaterOrEqual(0);
+
+            var diff = Math.Abs(value1 - value2);
+            var almostEqual = diff <= tolerance;
+            return almostEqual;
         }
 
         /// <summary>
