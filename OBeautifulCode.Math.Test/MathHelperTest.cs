@@ -63,7 +63,7 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void IsAlmostEqualTo_with_doubles___Should_return_true___When_two_numbers_are_almost_equal_within_tolerance()
+        public static void IsAlmostEqualTo_with_doubles___Should_return_true___When_two_values_are_almost_equal_within_tolerance()
         {
             // Arrange, Act
             // ReSharper disable InvokeAsExtensionMethod
@@ -115,7 +115,7 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void IsAlmostEqualTo_with_doubles___Should_return_false___When_two_numbers_are_not_almost_equal_within_tolerance()
+        public static void IsAlmostEqualTo_with_doubles___Should_return_false___When_two_values_are_not_almost_equal_within_tolerance()
         {
             // Arrange, Act
             // ReSharper disable InvokeAsExtensionMethod
@@ -181,7 +181,7 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void IsAlmostEqualTo_with_decimals___Should_return_true___When_two_numbers_are_almost_equal_within_tolerance()
+        public static void IsAlmostEqualTo_with_decimals___Should_return_true___When_two_values_are_almost_equal_within_tolerance()
         {
             // Arrange, Act
             // ReSharper disable InvokeAsExtensionMethod
@@ -233,7 +233,7 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void IsAlmostEqualTo_with_decimals___Should_return_false___When_two_numbers_are_not_almost_equal_within_tolerance()
+        public static void IsAlmostEqualTo_with_decimals___Should_return_false___When_two_values_are_not_almost_equal_within_tolerance()
         {
             // Arrange, Act
             // ReSharper disable InvokeAsExtensionMethod
@@ -282,6 +282,554 @@ namespace OBeautifulCode.Math.Test
             result18.Should().BeFalse();
             result19.Should().BeFalse();
             result20.Should().BeFalse();
+        }
+
+        [Fact]
+        public static void IsGreaterThanOrAlmostEqualTo_with_doubles___Should_throw_ArgumentException___When_parameters_value1_or_value2_is_NaN()
+        {
+            // Arrange, Act
+            // ReSharper disable InvokeAsExtensionMethod
+            var ex1 = Record.Exception(() => MathHelper.IsGreaterThanOrAlmostEqualTo(double.NaN, 1));
+            var ex2 = Record.Exception(() => MathHelper.IsGreaterThanOrAlmostEqualTo(double.NaN, 1, 1e-3));
+            var ex3 = Record.Exception(() => MathHelper.IsGreaterThanOrAlmostEqualTo(1, double.NaN));
+            var ex4 = Record.Exception(() => MathHelper.IsGreaterThanOrAlmostEqualTo(1, double.NaN, 1e-3));
+            var ex5 = Record.Exception(() => MathHelper.IsGreaterThanOrAlmostEqualTo(double.NaN, double.NaN));
+            var ex6 = Record.Exception(() => MathHelper.IsGreaterThanOrAlmostEqualTo(double.NaN, double.NaN, 1e-3));
+            // ReSharper restore InvokeAsExtensionMethod
+
+            // Assert
+            ex1.Should().BeOfType<ArgumentException>();
+            ex2.Should().BeOfType<ArgumentException>();
+            ex3.Should().BeOfType<ArgumentException>();
+            ex4.Should().BeOfType<ArgumentException>();
+            ex5.Should().BeOfType<ArgumentException>();
+            ex6.Should().BeOfType<ArgumentException>();
+        }
+
+        [Fact]
+        public static void IsGreaterThanOrAlmostEqualTo_with_doubles___Should_throw_ArgumentOutOfRangeException___When_parameter_tolerance_is_less_than_0()
+        {
+            // Arrange, Act
+            // ReSharper disable InvokeAsExtensionMethod
+            var ex1 = Record.Exception(() => MathHelper.IsGreaterThanOrAlmostEqualTo(4.5, -3.2, -.0000001));
+            var ex2 = Record.Exception(() => MathHelper.IsGreaterThanOrAlmostEqualTo(4.5, -3.2, double.MinValue));
+            // ReSharper restore InvokeAsExtensionMethod
+
+            // Assert
+            ex1.Should().BeOfType<ArgumentOutOfRangeException>();
+            ex2.Should().BeOfType<ArgumentOutOfRangeException>();
+        }
+
+        [Fact]
+        public static void IsGreaterThanOrAlmostEqualTo_with_doubles___Should_return_true___When_two_values_are_almost_equal_within_tolerance()
+        {
+            // Arrange, Act
+            // ReSharper disable InvokeAsExtensionMethod
+            var result1 = MathHelper.IsGreaterThanOrAlmostEqualTo(5d, 5d);
+            var result2 = MathHelper.IsGreaterThanOrAlmostEqualTo(5d, 5d, 0d);
+            var result3 = MathHelper.IsGreaterThanOrAlmostEqualTo(2.2d, 2.2d);
+            var result4 = MathHelper.IsGreaterThanOrAlmostEqualTo(2.23d, 2.29d, 0.060000001d);
+            var result5 = MathHelper.IsGreaterThanOrAlmostEqualTo(1.001d, 1.002d, .001000001d);
+            var result6 = MathHelper.IsGreaterThanOrAlmostEqualTo(2.012d, 2.013d, .001d);
+            var result7 = MathHelper.IsGreaterThanOrAlmostEqualTo(0.000000001d, 0.000000005d);
+            var result8 = MathHelper.IsGreaterThanOrAlmostEqualTo(5000000.000000001d, 5000000.000000005d);
+            var result9 = MathHelper.IsGreaterThanOrAlmostEqualTo(35.123418d, 35.123417d, 5e-3d);
+            var result10 = MathHelper.IsGreaterThanOrAlmostEqualTo(-.0001, .0001, .0002);
+
+            var result11 = MathHelper.IsGreaterThanOrAlmostEqualTo(-5d, -5d);
+            var result12 = MathHelper.IsGreaterThanOrAlmostEqualTo(-5d, -5d, 0d);
+            var result13 = MathHelper.IsGreaterThanOrAlmostEqualTo(-2.2d, -2.2d);
+            var result14 = MathHelper.IsGreaterThanOrAlmostEqualTo(-2.23d, -2.29d, 0.060000001d);
+            var result15 = MathHelper.IsGreaterThanOrAlmostEqualTo(-1.001d, -1.002d, .001000001d);
+            var result16 = MathHelper.IsGreaterThanOrAlmostEqualTo(-2.012d, -2.013d, .001d);
+            var result17 = MathHelper.IsGreaterThanOrAlmostEqualTo(-0.000000001d, -0.000000005d);
+            var result18 = MathHelper.IsGreaterThanOrAlmostEqualTo(-5000000.000000001d, -5000000.000000005d);
+            var result19 = MathHelper.IsGreaterThanOrAlmostEqualTo(-35.123418d, -35.123417d, 5e-3d);
+            var result20 = MathHelper.IsGreaterThanOrAlmostEqualTo(.0001d, -.0001d, .0002d);
+            // ReSharper restore InvokeAsExtensionMethod
+
+            // Assert
+            result1.Should().BeTrue();
+            result2.Should().BeTrue();
+            result3.Should().BeTrue();
+            result4.Should().BeTrue();
+            result5.Should().BeTrue();
+            result6.Should().BeTrue();
+            result7.Should().BeTrue();
+            result8.Should().BeTrue();
+            result9.Should().BeTrue();
+            result10.Should().BeTrue();
+
+            result11.Should().BeTrue();
+            result12.Should().BeTrue();
+            result13.Should().BeTrue();
+            result14.Should().BeTrue();
+            result15.Should().BeTrue();
+            result16.Should().BeTrue();
+            result17.Should().BeTrue();
+            result18.Should().BeTrue();
+            result19.Should().BeTrue();
+            result20.Should().BeTrue();
+        }
+
+        [Fact]
+        public static void IsGreaterThanOrAlmostEqualTo_with_doubles___Should_return_true___When_first_value_is_greater_than_second_value()
+        {
+            // Arrange, Act
+            // ReSharper disable InvokeAsExtensionMethod
+            var result1 = MathHelper.IsGreaterThanOrAlmostEqualTo(5d, -5d);
+            var result2 = MathHelper.IsGreaterThanOrAlmostEqualTo(.00000001d, -.00000001d);
+            var result3 = MathHelper.IsGreaterThanOrAlmostEqualTo(3.5d, 3.2d, .02d);
+            var result4 = MathHelper.IsGreaterThanOrAlmostEqualTo(1.002d, 1.001d, .0001d);
+            var result5 = MathHelper.IsGreaterThanOrAlmostEqualTo(2.022d, 2.013d, .008d);
+            var result6 = MathHelper.IsGreaterThanOrAlmostEqualTo(0.00000005d, 0.00000001d);
+            var result7 = MathHelper.IsGreaterThanOrAlmostEqualTo(5000000.0000012d, 5000000.0000011d);
+            var result8 = MathHelper.IsGreaterThanOrAlmostEqualTo(0.000016d, 0.000015d, 1e-7d);
+            var result9 = MathHelper.IsGreaterThanOrAlmostEqualTo(35.123418d, 35.123417d, 1e-7d);
+            var result10 = MathHelper.IsGreaterThanOrAlmostEqualTo(0.025d, -0.025d, .049999999d);
+            // ReSharper restore InvokeAsExtensionMethod
+
+            // Assert
+            result1.Should().BeTrue();
+            result2.Should().BeTrue();
+            result3.Should().BeTrue();
+            result4.Should().BeTrue();
+            result5.Should().BeTrue();
+            result6.Should().BeTrue();
+            result7.Should().BeTrue();
+            result8.Should().BeTrue();
+            result9.Should().BeTrue();
+            result10.Should().BeTrue();
+        }
+
+        [Fact]
+        public static void IsGreaterThanOrAlmostEqualTo_with_doubles___Should_return_false___When_first_value_is_less_than_but_not_almost_equal_to_the_second_value_within_tolerance()
+        {
+            // Arrange, Act
+            // ReSharper disable InvokeAsExtensionMethod
+            var result1 = MathHelper.IsGreaterThanOrAlmostEqualTo(-5d, 5d);
+            var result2 = MathHelper.IsGreaterThanOrAlmostEqualTo(-.00000001d, .00000001d);
+            var result3 = MathHelper.IsGreaterThanOrAlmostEqualTo(3.2d, 3.5d, .02d);
+            var result4 = MathHelper.IsGreaterThanOrAlmostEqualTo(1.001d, 1.002d, .0001d);
+            var result5 = MathHelper.IsGreaterThanOrAlmostEqualTo(2.013d, 2.022d, .008d);
+            var result6 = MathHelper.IsGreaterThanOrAlmostEqualTo(0.00000001d, 0.00000005d);
+            var result7 = MathHelper.IsGreaterThanOrAlmostEqualTo(5000000.0000011d, 5000000.0000012d);
+            var result8 = MathHelper.IsGreaterThanOrAlmostEqualTo(0.000015d, 0.000016d, 1e-7d);
+            var result9 = MathHelper.IsGreaterThanOrAlmostEqualTo(35.123417d, 35.123418d, 1e-7d);
+            var result10 = MathHelper.IsGreaterThanOrAlmostEqualTo(-0.025d, 0.025d, .049999999d);
+            // ReSharper restore InvokeAsExtensionMethod
+
+            // Assert
+            result1.Should().BeFalse();
+            result2.Should().BeFalse();
+            result3.Should().BeFalse();
+            result4.Should().BeFalse();
+            result5.Should().BeFalse();
+            result6.Should().BeFalse();
+            result7.Should().BeFalse();
+            result8.Should().BeFalse();
+            result9.Should().BeFalse();
+            result10.Should().BeFalse();
+        }
+
+        [Fact]
+        public static void IsGreaterThanOrAlmostEqualTo_with_decimals___Should_throw_ArgumentOutOfRangeException___When_parameter_tolerance_is_less_than_0()
+        {
+            // Arrange, Act
+            // ReSharper disable InvokeAsExtensionMethod
+            var ex1 = Record.Exception(() => MathHelper.IsGreaterThanOrAlmostEqualTo(4.5m, -3.2m, -.0000001m));
+            var ex2 = Record.Exception(() => MathHelper.IsGreaterThanOrAlmostEqualTo(4.5m, -3.2m, decimal.MinValue));
+            // ReSharper restore InvokeAsExtensionMethod
+
+            // Assert
+            ex1.Should().BeOfType<ArgumentOutOfRangeException>();
+            ex2.Should().BeOfType<ArgumentOutOfRangeException>();
+        }
+
+        [Fact]
+        public static void IsGreaterThanOrAlmostEqualTo_with_decimals___Should_return_true___When_two_values_are_almost_equal_within_tolerance()
+        {
+            // Arrange, Act
+            // ReSharper disable InvokeAsExtensionMethod
+            var result1 = MathHelper.IsGreaterThanOrAlmostEqualTo(5m, 5m);
+            var result2 = MathHelper.IsGreaterThanOrAlmostEqualTo(5m, 5m, 0m);
+            var result3 = MathHelper.IsGreaterThanOrAlmostEqualTo(2.2m, 2.2m);
+            var result4 = MathHelper.IsGreaterThanOrAlmostEqualTo(2.23m, 2.29m, 0.06m);
+            var result5 = MathHelper.IsGreaterThanOrAlmostEqualTo(1.001m, 1.002m, .001m);
+            var result6 = MathHelper.IsGreaterThanOrAlmostEqualTo(2.012m, 2.013m, .001m);
+            var result7 = MathHelper.IsGreaterThanOrAlmostEqualTo(0.000000001m, 0.000000005m);
+            var result8 = MathHelper.IsGreaterThanOrAlmostEqualTo(5000000.000000001m, 5000000.000000005m);
+            var result9 = MathHelper.IsGreaterThanOrAlmostEqualTo(35.123418m, 35.123417m, 5e-3m);
+            var result10 = MathHelper.IsGreaterThanOrAlmostEqualTo(-.0001m, .0001m, .0002m);
+
+            var result11 = MathHelper.IsGreaterThanOrAlmostEqualTo(-5m, -5m);
+            var result12 = MathHelper.IsGreaterThanOrAlmostEqualTo(-5m, -5m, 0m);
+            var result13 = MathHelper.IsGreaterThanOrAlmostEqualTo(-2.2m, -2.2m);
+            var result14 = MathHelper.IsGreaterThanOrAlmostEqualTo(-2.23m, -2.29m, 0.06m);
+            var result15 = MathHelper.IsGreaterThanOrAlmostEqualTo(-1.001m, -1.002m, .001m);
+            var result16 = MathHelper.IsGreaterThanOrAlmostEqualTo(-2.012m, -2.013m, .001m);
+            var result17 = MathHelper.IsGreaterThanOrAlmostEqualTo(-0.000000001m, -0.000000005m);
+            var result18 = MathHelper.IsGreaterThanOrAlmostEqualTo(-5000000.000000001m, -5000000.000000005m);
+            var result19 = MathHelper.IsGreaterThanOrAlmostEqualTo(-35.123418m, -35.123417m, 5e-3m);
+            var result20 = MathHelper.IsGreaterThanOrAlmostEqualTo(.0001m, -.0001m, .0002m);
+            // ReSharper restore InvokeAsExtensionMethod
+
+            // Assert
+            result1.Should().BeTrue();
+            result2.Should().BeTrue();
+            result3.Should().BeTrue();
+            result4.Should().BeTrue();
+            result5.Should().BeTrue();
+            result6.Should().BeTrue();
+            result7.Should().BeTrue();
+            result8.Should().BeTrue();
+            result9.Should().BeTrue();
+            result10.Should().BeTrue();
+
+            result11.Should().BeTrue();
+            result12.Should().BeTrue();
+            result13.Should().BeTrue();
+            result14.Should().BeTrue();
+            result15.Should().BeTrue();
+            result16.Should().BeTrue();
+            result17.Should().BeTrue();
+            result18.Should().BeTrue();
+            result19.Should().BeTrue();
+            result20.Should().BeTrue();
+        }
+
+        [Fact]
+        public static void IsGreaterThanOrAlmostEqualTo_with_decimals___Should_return_true___When_first_value_is_greater_than_second_value()
+        {
+            // Arrange, Act
+            // ReSharper disable InvokeAsExtensionMethod
+            var result1 = MathHelper.IsGreaterThanOrAlmostEqualTo(5m, -5m);
+            var result2 = MathHelper.IsGreaterThanOrAlmostEqualTo(.00000001m, -.00000001m);
+            var result3 = MathHelper.IsGreaterThanOrAlmostEqualTo(3.5m, 3.2m, .02m);
+            var result4 = MathHelper.IsGreaterThanOrAlmostEqualTo(1.002m, 1.001m, .0001m);
+            var result5 = MathHelper.IsGreaterThanOrAlmostEqualTo(2.022m, 2.013m, .008m);
+            var result6 = MathHelper.IsGreaterThanOrAlmostEqualTo(0.00000005m, 0.00000001m);
+            var result7 = MathHelper.IsGreaterThanOrAlmostEqualTo(5000000.0000012m, 5000000.0000011m);
+            var result8 = MathHelper.IsGreaterThanOrAlmostEqualTo(0.000016m, 0.000015m, 1e-7m);
+            var result9 = MathHelper.IsGreaterThanOrAlmostEqualTo(35.123418m, 35.123417m, 1e-7m);
+            var result10 = MathHelper.IsGreaterThanOrAlmostEqualTo(0.025m, -0.025m, .049999999m);
+            // ReSharper restore InvokeAsExtensionMethod
+
+            // Assert
+            result1.Should().BeTrue();
+            result2.Should().BeTrue();
+            result3.Should().BeTrue();
+            result4.Should().BeTrue();
+            result5.Should().BeTrue();
+            result6.Should().BeTrue();
+            result7.Should().BeTrue();
+            result8.Should().BeTrue();
+            result9.Should().BeTrue();
+            result10.Should().BeTrue();
+        }
+
+        [Fact]
+        public static void IsGreaterThanOrAlmostEqualTo_with_decimals___Should_return_false___When_first_value_is_less_than_but_not_almost_equal_to_second_value_within_tolerance()
+        {
+            // Arrange, Act
+            // ReSharper disable InvokeAsExtensionMethod
+            var result1 = MathHelper.IsGreaterThanOrAlmostEqualTo(-5m, 5m);
+            var result2 = MathHelper.IsGreaterThanOrAlmostEqualTo(-.00000001m, .00000001m);
+            var result3 = MathHelper.IsGreaterThanOrAlmostEqualTo(3.2m, 3.5m, .02m);
+            var result4 = MathHelper.IsGreaterThanOrAlmostEqualTo(1.001m, 1.002m, .0001m);
+            var result5 = MathHelper.IsGreaterThanOrAlmostEqualTo(2.013m, 2.022m, .008m);
+            var result6 = MathHelper.IsGreaterThanOrAlmostEqualTo(0.00000001m, 0.00000005m);
+            var result7 = MathHelper.IsGreaterThanOrAlmostEqualTo(5000000.0000011m, 5000000.0000012m);
+            var result8 = MathHelper.IsGreaterThanOrAlmostEqualTo(0.000015m, 0.000016m, 1e-7m);
+            var result9 = MathHelper.IsGreaterThanOrAlmostEqualTo(35.123417m, 35.123418m, 1e-7m);
+            var result10 = MathHelper.IsGreaterThanOrAlmostEqualTo(-0.025m, 0.025m, .049999999m);
+            // ReSharper restore InvokeAsExtensionMethod
+
+            // Assert
+            result1.Should().BeFalse();
+            result2.Should().BeFalse();
+            result3.Should().BeFalse();
+            result4.Should().BeFalse();
+            result5.Should().BeFalse();
+            result6.Should().BeFalse();
+            result7.Should().BeFalse();
+            result8.Should().BeFalse();
+            result9.Should().BeFalse();
+            result10.Should().BeFalse();
+        }
+
+        [Fact]
+        public static void IsLessThanOrAlmostEqualTo_with_doubles___Should_throw_ArgumentException___When_parameters_value1_or_value2_is_NaN()
+        {
+            // Arrange, Act
+            // ReSharper disable InvokeAsExtensionMethod
+            var ex1 = Record.Exception(() => MathHelper.IsLessThanOrAlmostEqualTo(double.NaN, 1));
+            var ex2 = Record.Exception(() => MathHelper.IsLessThanOrAlmostEqualTo(double.NaN, 1, 1e-3));
+            var ex3 = Record.Exception(() => MathHelper.IsLessThanOrAlmostEqualTo(1, double.NaN));
+            var ex4 = Record.Exception(() => MathHelper.IsLessThanOrAlmostEqualTo(1, double.NaN, 1e-3));
+            var ex5 = Record.Exception(() => MathHelper.IsLessThanOrAlmostEqualTo(double.NaN, double.NaN));
+            var ex6 = Record.Exception(() => MathHelper.IsLessThanOrAlmostEqualTo(double.NaN, double.NaN, 1e-3));
+            // ReSharper restore InvokeAsExtensionMethod
+
+            // Assert
+            ex1.Should().BeOfType<ArgumentException>();
+            ex2.Should().BeOfType<ArgumentException>();
+            ex3.Should().BeOfType<ArgumentException>();
+            ex4.Should().BeOfType<ArgumentException>();
+            ex5.Should().BeOfType<ArgumentException>();
+            ex6.Should().BeOfType<ArgumentException>();
+        }
+
+        [Fact]
+        public static void IsLessThanOrAlmostEqualTo_with_doubles___Should_throw_ArgumentOutOfRangeException___When_parameter_tolerance_is_less_than_0()
+        {
+            // Arrange, Act
+            // ReSharper disable InvokeAsExtensionMethod
+            var ex1 = Record.Exception(() => MathHelper.IsLessThanOrAlmostEqualTo(4.5, -3.2, -.0000001));
+            var ex2 = Record.Exception(() => MathHelper.IsLessThanOrAlmostEqualTo(4.5, -3.2, double.MinValue));
+            // ReSharper restore InvokeAsExtensionMethod
+
+            // Assert
+            ex1.Should().BeOfType<ArgumentOutOfRangeException>();
+            ex2.Should().BeOfType<ArgumentOutOfRangeException>();
+        }
+
+        [Fact]
+        public static void IsLessThanOrAlmostEqualTo_with_doubles___Should_return_true___When_two_values_are_almost_equal_within_tolerance()
+        {
+            // Arrange, Act
+            // ReSharper disable InvokeAsExtensionMethod
+            var result1 = MathHelper.IsLessThanOrAlmostEqualTo(5d, 5d);
+            var result2 = MathHelper.IsLessThanOrAlmostEqualTo(5d, 5d, 0d);
+            var result3 = MathHelper.IsLessThanOrAlmostEqualTo(2.2d, 2.2d);
+            var result4 = MathHelper.IsLessThanOrAlmostEqualTo(2.23d, 2.29d, 0.060000001d);
+            var result5 = MathHelper.IsLessThanOrAlmostEqualTo(1.001d, 1.002d, .001000001d);
+            var result6 = MathHelper.IsLessThanOrAlmostEqualTo(2.012d, 2.013d, .001d);
+            var result7 = MathHelper.IsLessThanOrAlmostEqualTo(0.000000001d, 0.000000005d);
+            var result8 = MathHelper.IsLessThanOrAlmostEqualTo(5000000.000000001d, 5000000.000000005d);
+            var result9 = MathHelper.IsLessThanOrAlmostEqualTo(35.123418d, 35.123417d, 5e-3d);
+            var result10 = MathHelper.IsLessThanOrAlmostEqualTo(-.0001, .0001, .0002);
+
+            var result11 = MathHelper.IsLessThanOrAlmostEqualTo(-5d, -5d);
+            var result12 = MathHelper.IsLessThanOrAlmostEqualTo(-5d, -5d, 0d);
+            var result13 = MathHelper.IsLessThanOrAlmostEqualTo(-2.2d, -2.2d);
+            var result14 = MathHelper.IsLessThanOrAlmostEqualTo(-2.23d, -2.29d, 0.060000001d);
+            var result15 = MathHelper.IsLessThanOrAlmostEqualTo(-1.001d, -1.002d, .001000001d);
+            var result16 = MathHelper.IsLessThanOrAlmostEqualTo(-2.012d, -2.013d, .001d);
+            var result17 = MathHelper.IsLessThanOrAlmostEqualTo(-0.000000001d, -0.000000005d);
+            var result18 = MathHelper.IsLessThanOrAlmostEqualTo(-5000000.000000001d, -5000000.000000005d);
+            var result19 = MathHelper.IsLessThanOrAlmostEqualTo(-35.123418d, -35.123417d, 5e-3d);
+            var result20 = MathHelper.IsLessThanOrAlmostEqualTo(.0001d, -.0001d, .0002d);
+            // ReSharper restore InvokeAsExtensionMethod
+
+            // Assert
+            result1.Should().BeTrue();
+            result2.Should().BeTrue();
+            result3.Should().BeTrue();
+            result4.Should().BeTrue();
+            result5.Should().BeTrue();
+            result6.Should().BeTrue();
+            result7.Should().BeTrue();
+            result8.Should().BeTrue();
+            result9.Should().BeTrue();
+            result10.Should().BeTrue();
+
+            result11.Should().BeTrue();
+            result12.Should().BeTrue();
+            result13.Should().BeTrue();
+            result14.Should().BeTrue();
+            result15.Should().BeTrue();
+            result16.Should().BeTrue();
+            result17.Should().BeTrue();
+            result18.Should().BeTrue();
+            result19.Should().BeTrue();
+            result20.Should().BeTrue();
+        }
+
+        [Fact]
+        public static void IsLessThanOrAlmostEqualTo_with_doubles___Should_return_true___When_first_value_is_less_than_second_value()
+        {
+            // Arrange, Act
+            // ReSharper disable InvokeAsExtensionMethod
+            var result1 = MathHelper.IsLessThanOrAlmostEqualTo(-5d, 5d);
+            var result2 = MathHelper.IsLessThanOrAlmostEqualTo(-.00000001d, .00000001d);
+            var result3 = MathHelper.IsLessThanOrAlmostEqualTo(3.2d, 3.5d, .02d);
+            var result4 = MathHelper.IsLessThanOrAlmostEqualTo(1.001d, 1.002d, .0001d);
+            var result5 = MathHelper.IsLessThanOrAlmostEqualTo(2.013d, 2.022d, .008d);
+            var result6 = MathHelper.IsLessThanOrAlmostEqualTo(0.00000001d, 0.00000005d);
+            var result7 = MathHelper.IsLessThanOrAlmostEqualTo(5000000.0000011d, 5000000.0000012d);
+            var result8 = MathHelper.IsLessThanOrAlmostEqualTo(0.000015d, 0.000016d, 1e-7d);
+            var result9 = MathHelper.IsLessThanOrAlmostEqualTo(35.123417d, 35.123418d, 1e-7d);
+            var result10 = MathHelper.IsLessThanOrAlmostEqualTo(-0.025d, 0.025d, .049999999d);
+            // ReSharper restore InvokeAsExtensionMethod
+
+            // Assert
+            result1.Should().BeTrue();
+            result2.Should().BeTrue();
+            result3.Should().BeTrue();
+            result4.Should().BeTrue();
+            result5.Should().BeTrue();
+            result6.Should().BeTrue();
+            result7.Should().BeTrue();
+            result8.Should().BeTrue();
+            result9.Should().BeTrue();
+            result10.Should().BeTrue();
+        }
+
+        [Fact]
+        public static void IsLessThanOrAlmostEqualTo_with_doubles___Should_return_false___When_first_value_is_greater_than_but_not_almost_equal_to_the_second_value_within_tolerance()
+        {
+            // Arrange, Act
+            // ReSharper disable InvokeAsExtensionMethod
+            var result1 = MathHelper.IsLessThanOrAlmostEqualTo(5d, -5d);
+            var result2 = MathHelper.IsLessThanOrAlmostEqualTo(.00000001d, -.00000001d);
+            var result3 = MathHelper.IsLessThanOrAlmostEqualTo(3.5d, 3.2d, .02d);
+            var result4 = MathHelper.IsLessThanOrAlmostEqualTo(1.002d, 1.001d, .0001d);
+            var result5 = MathHelper.IsLessThanOrAlmostEqualTo(2.022d, 2.013d, .008d);
+            var result6 = MathHelper.IsLessThanOrAlmostEqualTo(0.00000005d, 0.00000001d);
+            var result7 = MathHelper.IsLessThanOrAlmostEqualTo(5000000.0000012d, 5000000.0000011d);
+            var result8 = MathHelper.IsLessThanOrAlmostEqualTo(0.000016d, 0.000015d, 1e-7d);
+            var result9 = MathHelper.IsLessThanOrAlmostEqualTo(35.123418d, 35.123417d, 1e-7d);
+            var result10 = MathHelper.IsLessThanOrAlmostEqualTo(0.025d, -0.025d, .049999999d);
+            // ReSharper restore InvokeAsExtensionMethod
+
+            // Assert
+            result1.Should().BeFalse();
+            result2.Should().BeFalse();
+            result3.Should().BeFalse();
+            result4.Should().BeFalse();
+            result5.Should().BeFalse();
+            result6.Should().BeFalse();
+            result7.Should().BeFalse();
+            result8.Should().BeFalse();
+            result9.Should().BeFalse();
+            result10.Should().BeFalse();
+        }
+
+        [Fact]
+        public static void IsLessThanOrAlmostEqualTo_with_decimals___Should_throw_ArgumentOutOfRangeException___When_parameter_tolerance_is_less_than_0()
+        {
+            // Arrange, Act
+            // ReSharper disable InvokeAsExtensionMethod
+            var ex1 = Record.Exception(() => MathHelper.IsLessThanOrAlmostEqualTo(4.5m, -3.2m, -.0000001m));
+            var ex2 = Record.Exception(() => MathHelper.IsLessThanOrAlmostEqualTo(4.5m, -3.2m, decimal.MinValue));
+            // ReSharper restore InvokeAsExtensionMethod
+
+            // Assert
+            ex1.Should().BeOfType<ArgumentOutOfRangeException>();
+            ex2.Should().BeOfType<ArgumentOutOfRangeException>();
+        }
+
+        [Fact]
+        public static void IsLessThanOrAlmostEqualTo_with_decimals___Should_return_true___When_two_values_are_almost_equal_within_tolerance()
+        {
+            // Arrange, Act
+            // ReSharper disable InvokeAsExtensionMethod
+            var result1 = MathHelper.IsLessThanOrAlmostEqualTo(5m, 5m);
+            var result2 = MathHelper.IsLessThanOrAlmostEqualTo(5m, 5m, 0m);
+            var result3 = MathHelper.IsLessThanOrAlmostEqualTo(2.2m, 2.2m);
+            var result4 = MathHelper.IsLessThanOrAlmostEqualTo(2.23m, 2.29m, 0.06m);
+            var result5 = MathHelper.IsLessThanOrAlmostEqualTo(1.001m, 1.002m, .001m);
+            var result6 = MathHelper.IsLessThanOrAlmostEqualTo(2.012m, 2.013m, .001m);
+            var result7 = MathHelper.IsLessThanOrAlmostEqualTo(0.000000001m, 0.000000005m);
+            var result8 = MathHelper.IsLessThanOrAlmostEqualTo(5000000.000000001m, 5000000.000000005m);
+            var result9 = MathHelper.IsLessThanOrAlmostEqualTo(35.123418m, 35.123417m, 5e-3m);
+            var result10 = MathHelper.IsLessThanOrAlmostEqualTo(-.0001m, .0001m, .0002m);
+
+            var result11 = MathHelper.IsLessThanOrAlmostEqualTo(-5m, -5m);
+            var result12 = MathHelper.IsLessThanOrAlmostEqualTo(-5m, -5m, 0m);
+            var result13 = MathHelper.IsLessThanOrAlmostEqualTo(-2.2m, -2.2m);
+            var result14 = MathHelper.IsLessThanOrAlmostEqualTo(-2.23m, -2.29m, 0.06m);
+            var result15 = MathHelper.IsLessThanOrAlmostEqualTo(-1.001m, -1.002m, .001m);
+            var result16 = MathHelper.IsLessThanOrAlmostEqualTo(-2.012m, -2.013m, .001m);
+            var result17 = MathHelper.IsLessThanOrAlmostEqualTo(-0.000000001m, -0.000000005m);
+            var result18 = MathHelper.IsLessThanOrAlmostEqualTo(-5000000.000000001m, -5000000.000000005m);
+            var result19 = MathHelper.IsLessThanOrAlmostEqualTo(-35.123418m, -35.123417m, 5e-3m);
+            var result20 = MathHelper.IsLessThanOrAlmostEqualTo(.0001m, -.0001m, .0002m);
+            // ReSharper restore InvokeAsExtensionMethod
+
+            // Assert
+            result1.Should().BeTrue();
+            result2.Should().BeTrue();
+            result3.Should().BeTrue();
+            result4.Should().BeTrue();
+            result5.Should().BeTrue();
+            result6.Should().BeTrue();
+            result7.Should().BeTrue();
+            result8.Should().BeTrue();
+            result9.Should().BeTrue();
+            result10.Should().BeTrue();
+
+            result11.Should().BeTrue();
+            result12.Should().BeTrue();
+            result13.Should().BeTrue();
+            result14.Should().BeTrue();
+            result15.Should().BeTrue();
+            result16.Should().BeTrue();
+            result17.Should().BeTrue();
+            result18.Should().BeTrue();
+            result19.Should().BeTrue();
+            result20.Should().BeTrue();
+        }
+
+        [Fact]
+        public static void IsLessThanOrAlmostEqualTo_with_decimals___Should_return_true___When_first_value_is_less_than_second_value()
+        {
+            // Arrange, Act
+            // ReSharper disable InvokeAsExtensionMethod
+            var result1 = MathHelper.IsLessThanOrAlmostEqualTo(-5m, 5m);
+            var result2 = MathHelper.IsLessThanOrAlmostEqualTo(-.00000001m, .00000001m);
+            var result3 = MathHelper.IsLessThanOrAlmostEqualTo(3.2m, 3.3m, .02m);
+            var result4 = MathHelper.IsLessThanOrAlmostEqualTo(1.001m, 1.002m, .0001m);
+            var result5 = MathHelper.IsLessThanOrAlmostEqualTo(2.013m, 2.022m, .008m);
+            var result6 = MathHelper.IsLessThanOrAlmostEqualTo(0.00000001m, 0.00000005m);
+            var result7 = MathHelper.IsLessThanOrAlmostEqualTo(5000000.0000011m, 5000000.0000012m);
+            var result8 = MathHelper.IsLessThanOrAlmostEqualTo(0.000015m, 0.000016m, 1e-7m);
+            var result9 = MathHelper.IsLessThanOrAlmostEqualTo(35.123417m, 35.123418m, 1e-7m);
+            var result10 = MathHelper.IsLessThanOrAlmostEqualTo(-0.025m, 0.025m, .049999999m);
+            // ReSharper restore InvokeAsExtensionMethod
+
+            // Assert
+            result1.Should().BeTrue();
+            result2.Should().BeTrue();
+            result3.Should().BeTrue();
+            result4.Should().BeTrue();
+            result5.Should().BeTrue();
+            result6.Should().BeTrue();
+            result7.Should().BeTrue();
+            result8.Should().BeTrue();
+            result9.Should().BeTrue();
+            result10.Should().BeTrue();
+        }
+
+        [Fact]
+        public static void IsLessThanOrAlmostEqualTo_with_decimals___Should_return_false___When_first_value_is_greater_than_but_not_almost_equal_to_second_value_within_tolerance()
+        {
+            // Arrange, Act
+            // ReSharper disable InvokeAsExtensionMethod
+            var result1 = MathHelper.IsLessThanOrAlmostEqualTo(5m, -5m);
+            var result2 = MathHelper.IsLessThanOrAlmostEqualTo(.00000001m, -.00000001m);
+            var result3 = MathHelper.IsLessThanOrAlmostEqualTo(3.5m, 3.2m, .02m);
+            var result4 = MathHelper.IsLessThanOrAlmostEqualTo(1.002m, 1.001m, .0001m);
+            var result5 = MathHelper.IsLessThanOrAlmostEqualTo(2.022m, 2.013m, .008m);
+            var result6 = MathHelper.IsLessThanOrAlmostEqualTo(0.00000005m, 0.00000001m);
+            var result7 = MathHelper.IsLessThanOrAlmostEqualTo(5000000.0000012m, 5000000.0000011m);
+            var result8 = MathHelper.IsLessThanOrAlmostEqualTo(0.000016m, 0.000015m, 1e-7m);
+            var result9 = MathHelper.IsLessThanOrAlmostEqualTo(35.123418m, 35.123417m, 1e-7m);
+            var result10 = MathHelper.IsLessThanOrAlmostEqualTo(0.025m, -0.025m, .049999999m);
+            // ReSharper restore InvokeAsExtensionMethod
+
+            // Assert
+            result1.Should().BeFalse();
+            result2.Should().BeFalse();
+            result3.Should().BeFalse();
+            result4.Should().BeFalse();
+            result5.Should().BeFalse();
+            result6.Should().BeFalse();
+            result7.Should().BeFalse();
+            result8.Should().BeFalse();
+            result9.Should().BeFalse();
+            result10.Should().BeFalse();
         }
 
         [Fact]

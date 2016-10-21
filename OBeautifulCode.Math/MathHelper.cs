@@ -67,6 +67,102 @@ namespace OBeautifulCode.Math
         }
 
         /// <summary>
+        /// Determines if one value is greater than or almost equal (given some level of tolerance) to a second value.
+        /// </summary>
+        /// <param name="value1">The first value.</param>
+        /// <param name="value2">The the second value.</param>
+        /// <param name="tolerance">
+        /// The tolerance for differences between the specified values.  If the
+        /// absolute value of the difference between the two values is less than or equal to
+        /// this tolerance, then the two values are considered to be almost equal.
+        /// </param>
+        /// <returns>
+        /// true if the first value is greater than or almost equal to the second value, false if not.
+        /// </returns>
+        /// <exception cref="ArgumentException">value1 or value2 is double.NaN</exception>
+        /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
+        public static bool IsGreaterThanOrAlmostEqualTo(this double value1, double value2, double tolerance = 1e-8)
+        {
+            double.IsNaN(value1).Requires().IsFalse("value1 is NaN");
+            double.IsNaN(value2).Requires().IsFalse("value2 is NaN");
+            tolerance.Requires(nameof(tolerance)).IsGreaterOrEqual(0);
+
+            var result = (value1 > value2) || value1.IsAlmostEqualTo(value2, tolerance);
+            return result;
+        }
+
+        /// <summary>
+        /// Determines if one value is greater than or almost equal to a second value (given some level of tolerance).
+        /// </summary>
+        /// <param name="value1">The first value.</param>
+        /// <param name="value2">The the second value.</param>
+        /// <param name="tolerance">
+        /// The tolerance for differences between the specified values.  If the
+        /// absolute value of the difference between the two values is less than or equal to
+        /// this tolerance, then the two values are considered to be almost equal.
+        /// </param>
+        /// <returns>
+        /// true if the first value is greater than or almost equal to the second value, false if not.
+        /// </returns>
+        /// <exception cref="ArgumentException">value1 or value2 is double.NaN</exception>
+        /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
+        public static bool IsGreaterThanOrAlmostEqualTo(this decimal value1, decimal value2, decimal tolerance = 1e-8m)
+        {
+            tolerance.Requires(nameof(tolerance)).IsGreaterOrEqual(0);
+
+            var result = (value1 > value2) || value1.IsAlmostEqualTo(value2, tolerance);
+            return result;
+        }
+
+        /// <summary>
+        /// Determines if one value is less than or almost equal (given some level of tolerance) to a second value.
+        /// </summary>
+        /// <param name="value1">The first value.</param>
+        /// <param name="value2">The the second value.</param>
+        /// <param name="tolerance">
+        /// The tolerance for differences between the specified values.  If the
+        /// absolute value of the difference between the two values is less than or equal to
+        /// this tolerance, then the two values are considered to be almost equal.
+        /// </param>
+        /// <returns>
+        /// true if the first value is less than or almost equal to the second value, false if not.
+        /// </returns>
+        /// <exception cref="ArgumentException">value1 or value2 is double.NaN</exception>
+        /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
+        public static bool IsLessThanOrAlmostEqualTo(this double value1, double value2, double tolerance = 1e-8)
+        {
+            double.IsNaN(value1).Requires().IsFalse("value1 is NaN");
+            double.IsNaN(value2).Requires().IsFalse("value2 is NaN");
+            tolerance.Requires(nameof(tolerance)).IsGreaterOrEqual(0);
+
+            var result = (value1 < value2) || value1.IsAlmostEqualTo(value2, tolerance);
+            return result;
+        }
+
+        /// <summary>
+        /// Determines if one value is less than or almost equal to a second value (given some level of tolerance).
+        /// </summary>
+        /// <param name="value1">The first value.</param>
+        /// <param name="value2">The the second value.</param>
+        /// <param name="tolerance">
+        /// The tolerance for differences between the specified values.  If the
+        /// absolute value of the difference between the two values is less than or equal to
+        /// this tolerance, then the two values are considered to be almost equal.
+        /// </param>
+        /// <returns>
+        /// true if the first value is less than or almost equal to the second value, false if not.
+        /// </returns>
+        /// <exception cref="ArgumentException">value1 or value2 is double.NaN</exception>
+        /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
+        public static bool IsLessThanOrAlmostEqualTo(this decimal value1, decimal value2, decimal tolerance = 1e-8m)
+        {
+            tolerance.Requires(nameof(tolerance)).IsGreaterOrEqual(0);
+
+            var result = (value1 < value2) || value1.IsAlmostEqualTo(value2, tolerance);
+            return result;
+        }
+
+        /// <summary>
         /// Calculates the covariance of two sets of doubles.
         /// </summary>
         /// <param name="values1">The first set of doubles.</param>
