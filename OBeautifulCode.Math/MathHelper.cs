@@ -18,7 +18,7 @@ namespace OBeautifulCode.Math
     public static class MathHelper
     {
         /// <summary>
-        /// Determines if two doubles are almost equal (given some level of tolerance).
+        /// Determines if two values are almost equal (given some level of tolerance).
         /// </summary>
         /// <param name="value1">The first value.</param>
         /// <param name="value2">The the second value.</param>
@@ -32,7 +32,7 @@ namespace OBeautifulCode.Math
         /// </returns>
         /// <exception cref="ArgumentException">value1 or value2 is double.NaN</exception>
         /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
-        public static bool AlmostEqual(this double value1, double value2, double tolerance = 1e-8)
+        public static bool IsAlmostEqualTo(this double value1, double value2, double tolerance = 1e-8)
         {
             double.IsNaN(value1).Requires().IsFalse("value1 is NaN");
             double.IsNaN(value2).Requires().IsFalse("value2 is NaN");
@@ -44,7 +44,7 @@ namespace OBeautifulCode.Math
         }
 
         /// <summary>
-        /// Determines if two decimals are almost equal (given some level of tolerance).
+        /// Determines if two values are almost equal (given some level of tolerance).
         /// </summary>
         /// <param name="value1">The first value.</param>
         /// <param name="value2">The the second value.</param>
@@ -57,7 +57,7 @@ namespace OBeautifulCode.Math
         /// true if the two values are almost equal, false if not.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
-        public static bool AlmostEqual(this decimal value1, decimal value2, decimal tolerance = 1e-8m)
+        public static bool IsAlmostEqualTo(this decimal value1, decimal value2, decimal tolerance = 1e-8m)
         {
             tolerance.Requires(nameof(tolerance)).IsGreaterOrEqual(0);
 

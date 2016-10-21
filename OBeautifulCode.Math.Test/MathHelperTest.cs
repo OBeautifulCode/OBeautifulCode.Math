@@ -27,15 +27,17 @@ namespace OBeautifulCode.Math.Test
     {
         // ReSharper disable InconsistentNaming
         [Fact]
-        public static void AlmostEqual_with_doubles___Should_throw_ArgumentException___When_parameters_value1_or_value2_is_NaN()
+        public static void IsAlmostEqualTo_with_doubles___Should_throw_ArgumentException___When_parameters_value1_or_value2_is_NaN()
         {
             // Arrange, Act
-            var ex1 = Record.Exception(() => MathHelper.AlmostEqual(double.NaN, 1));
-            var ex2 = Record.Exception(() => MathHelper.AlmostEqual(double.NaN, 1, 1e-3));
-            var ex3 = Record.Exception(() => MathHelper.AlmostEqual(1, double.NaN));
-            var ex4 = Record.Exception(() => MathHelper.AlmostEqual(1, double.NaN, 1e-3));
-            var ex5 = Record.Exception(() => MathHelper.AlmostEqual(double.NaN, double.NaN));
-            var ex6 = Record.Exception(() => MathHelper.AlmostEqual(double.NaN, double.NaN, 1e-3));
+            // ReSharper disable InvokeAsExtensionMethod
+            var ex1 = Record.Exception(() => MathHelper.IsAlmostEqualTo(double.NaN, 1));
+            var ex2 = Record.Exception(() => MathHelper.IsAlmostEqualTo(double.NaN, 1, 1e-3));
+            var ex3 = Record.Exception(() => MathHelper.IsAlmostEqualTo(1, double.NaN));
+            var ex4 = Record.Exception(() => MathHelper.IsAlmostEqualTo(1, double.NaN, 1e-3));
+            var ex5 = Record.Exception(() => MathHelper.IsAlmostEqualTo(double.NaN, double.NaN));
+            var ex6 = Record.Exception(() => MathHelper.IsAlmostEqualTo(double.NaN, double.NaN, 1e-3));
+            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             ex1.Should().BeOfType<ArgumentException>();
@@ -47,11 +49,13 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void AlmostEqual_with_doubles___Should_throw_ArgumentOutOfRangeException___When_parameter_tolerance_is_less_than_0()
+        public static void IsAlmostEqualTo_with_doubles___Should_throw_ArgumentOutOfRangeException___When_parameter_tolerance_is_less_than_0()
         {
             // Arrange, Act
-            var ex1 = Record.Exception(() => MathHelper.AlmostEqual(4.5, -3.2, -.0000001));
-            var ex2 = Record.Exception(() => MathHelper.AlmostEqual(4.5, -3.2, double.MinValue));
+            // ReSharper disable InvokeAsExtensionMethod
+            var ex1 = Record.Exception(() => MathHelper.IsAlmostEqualTo(4.5, -3.2, -.0000001));
+            var ex2 = Record.Exception(() => MathHelper.IsAlmostEqualTo(4.5, -3.2, double.MinValue));
+            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             ex1.Should().BeOfType<ArgumentOutOfRangeException>();
@@ -59,30 +63,32 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void AlmostEqual_with_doubles___Should_return_true___When_two_numbers_are_almost_equal_within_tolerance()
+        public static void IsAlmostEqualTo_with_doubles___Should_return_true___When_two_numbers_are_almost_equal_within_tolerance()
         {
             // Arrange, Act
-            var result1 = MathHelper.AlmostEqual(5d, 5d);
-            var result2 = MathHelper.AlmostEqual(5d, 5d, 0d);
-            var result3 = MathHelper.AlmostEqual(2.2d, 2.2d);
-            var result4 = MathHelper.AlmostEqual(2.23d, 2.29d, 0.060000001d);
-            var result5 = MathHelper.AlmostEqual(1.001d, 1.002d, .001000001d);
-            var result6 = MathHelper.AlmostEqual(2.012d, 2.013d, .001d);
-            var result7 = MathHelper.AlmostEqual(0.000000001d, 0.000000005d);
-            var result8 = MathHelper.AlmostEqual(5000000.000000001d, 5000000.000000005d);
-            var result9 = MathHelper.AlmostEqual(35.123418d, 35.123417d, 5e-3d);
-            var result10 = MathHelper.AlmostEqual(-.0001, .0001, .0002);
+            // ReSharper disable InvokeAsExtensionMethod
+            var result1 = MathHelper.IsAlmostEqualTo(5d, 5d);
+            var result2 = MathHelper.IsAlmostEqualTo(5d, 5d, 0d);
+            var result3 = MathHelper.IsAlmostEqualTo(2.2d, 2.2d);
+            var result4 = MathHelper.IsAlmostEqualTo(2.23d, 2.29d, 0.060000001d);
+            var result5 = MathHelper.IsAlmostEqualTo(1.001d, 1.002d, .001000001d);
+            var result6 = MathHelper.IsAlmostEqualTo(2.012d, 2.013d, .001d);
+            var result7 = MathHelper.IsAlmostEqualTo(0.000000001d, 0.000000005d);
+            var result8 = MathHelper.IsAlmostEqualTo(5000000.000000001d, 5000000.000000005d);
+            var result9 = MathHelper.IsAlmostEqualTo(35.123418d, 35.123417d, 5e-3d);
+            var result10 = MathHelper.IsAlmostEqualTo(-.0001, .0001, .0002);
 
-            var result11 = MathHelper.AlmostEqual(-5d, -5d);
-            var result12 = MathHelper.AlmostEqual(-5d, -5d, 0d);
-            var result13 = MathHelper.AlmostEqual(-2.2d, -2.2d);
-            var result14 = MathHelper.AlmostEqual(-2.23d, -2.29d, 0.060000001d);
-            var result15 = MathHelper.AlmostEqual(-1.001d, -1.002d, .001000001d);
-            var result16 = MathHelper.AlmostEqual(-2.012d, -2.013d, .001d);
-            var result17 = MathHelper.AlmostEqual(-0.000000001d, -0.000000005d);
-            var result18 = MathHelper.AlmostEqual(-5000000.000000001d, -5000000.000000005d);
-            var result19 = MathHelper.AlmostEqual(-35.123418d, -35.123417d, 5e-3d);
-            var result20 = MathHelper.AlmostEqual(.0001d, -.0001d, .0002d);
+            var result11 = MathHelper.IsAlmostEqualTo(-5d, -5d);
+            var result12 = MathHelper.IsAlmostEqualTo(-5d, -5d, 0d);
+            var result13 = MathHelper.IsAlmostEqualTo(-2.2d, -2.2d);
+            var result14 = MathHelper.IsAlmostEqualTo(-2.23d, -2.29d, 0.060000001d);
+            var result15 = MathHelper.IsAlmostEqualTo(-1.001d, -1.002d, .001000001d);
+            var result16 = MathHelper.IsAlmostEqualTo(-2.012d, -2.013d, .001d);
+            var result17 = MathHelper.IsAlmostEqualTo(-0.000000001d, -0.000000005d);
+            var result18 = MathHelper.IsAlmostEqualTo(-5000000.000000001d, -5000000.000000005d);
+            var result19 = MathHelper.IsAlmostEqualTo(-35.123418d, -35.123417d, 5e-3d);
+            var result20 = MathHelper.IsAlmostEqualTo(.0001d, -.0001d, .0002d);
+            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             result1.Should().BeTrue();
@@ -109,30 +115,32 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void AlmostEqual_with_doubles___Should_return_false___When_two_numbers_are_not_almost_equal_within_tolerance()
+        public static void IsAlmostEqualTo_with_doubles___Should_return_false___When_two_numbers_are_not_almost_equal_within_tolerance()
         {
             // Arrange, Act
-            var result1 = MathHelper.AlmostEqual(5d, -5d);
-            var result2 = MathHelper.AlmostEqual(.00000001d, -.00000001d);
-            var result3 = MathHelper.AlmostEqual(3.2d, 3.5d, .02d);
-            var result4 = MathHelper.AlmostEqual(1.001d, 1.002d, .0001d);
-            var result5 = MathHelper.AlmostEqual(2.022d, 2.013d, .008d);
-            var result6 = MathHelper.AlmostEqual(0.00000001d, 0.00000005d);
-            var result7 = MathHelper.AlmostEqual(5000000.0000011d, 5000000.0000012d);
-            var result8 = MathHelper.AlmostEqual(0.000016d, 0.000015d, 1e-7d);
-            var result9 = MathHelper.AlmostEqual(35.123418d, 35.123417d, 1e-7d);
-            var result10 = MathHelper.AlmostEqual(-0.025d, 0.025d, .049999999d);
+            // ReSharper disable InvokeAsExtensionMethod
+            var result1 = MathHelper.IsAlmostEqualTo(5d, -5d);
+            var result2 = MathHelper.IsAlmostEqualTo(.00000001d, -.00000001d);
+            var result3 = MathHelper.IsAlmostEqualTo(3.2d, 3.5d, .02d);
+            var result4 = MathHelper.IsAlmostEqualTo(1.001d, 1.002d, .0001d);
+            var result5 = MathHelper.IsAlmostEqualTo(2.022d, 2.013d, .008d);
+            var result6 = MathHelper.IsAlmostEqualTo(0.00000001d, 0.00000005d);
+            var result7 = MathHelper.IsAlmostEqualTo(5000000.0000011d, 5000000.0000012d);
+            var result8 = MathHelper.IsAlmostEqualTo(0.000016d, 0.000015d, 1e-7d);
+            var result9 = MathHelper.IsAlmostEqualTo(35.123418d, 35.123417d, 1e-7d);
+            var result10 = MathHelper.IsAlmostEqualTo(-0.025d, 0.025d, .049999999d);
 
-            var result11 = MathHelper.AlmostEqual(-5d, 5d);
-            var result12 = MathHelper.AlmostEqual(-.00000001d, .00000001d);
-            var result13 = MathHelper.AlmostEqual(-3.2d, -3.5d, .02d);
-            var result14 = MathHelper.AlmostEqual(-1.001d, -1.002d, .0001d);
-            var result15 = MathHelper.AlmostEqual(-2.022d, -2.013d, .008d);
-            var result16 = MathHelper.AlmostEqual(-0.00000001d, -0.00000005d);
-            var result17 = MathHelper.AlmostEqual(-5000000.0000011d, -5000000.0000012d);
-            var result18 = MathHelper.AlmostEqual(-0.000016d, -0.000015d, 1e-7d);
-            var result19 = MathHelper.AlmostEqual(-35.123418d, -35.123417d, 1e-7d);
-            var result20 = MathHelper.AlmostEqual(0.025d, -0.025d, .049999999d);
+            var result11 = MathHelper.IsAlmostEqualTo(-5d, 5d);
+            var result12 = MathHelper.IsAlmostEqualTo(-.00000001d, .00000001d);
+            var result13 = MathHelper.IsAlmostEqualTo(-3.2d, -3.5d, .02d);
+            var result14 = MathHelper.IsAlmostEqualTo(-1.001d, -1.002d, .0001d);
+            var result15 = MathHelper.IsAlmostEqualTo(-2.022d, -2.013d, .008d);
+            var result16 = MathHelper.IsAlmostEqualTo(-0.00000001d, -0.00000005d);
+            var result17 = MathHelper.IsAlmostEqualTo(-5000000.0000011d, -5000000.0000012d);
+            var result18 = MathHelper.IsAlmostEqualTo(-0.000016d, -0.000015d, 1e-7d);
+            var result19 = MathHelper.IsAlmostEqualTo(-35.123418d, -35.123417d, 1e-7d);
+            var result20 = MathHelper.IsAlmostEqualTo(0.025d, -0.025d, .049999999d);
+            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             result1.Should().BeFalse();
@@ -159,11 +167,13 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void AlmostEqual_with_decimals___Should_throw_ArgumentOutOfRangeException___When_parameter_tolerance_is_less_than_0()
+        public static void IsAlmostEqualTo_with_decimals___Should_throw_ArgumentOutOfRangeException___When_parameter_tolerance_is_less_than_0()
         {
             // Arrange, Act
-            var ex1 = Record.Exception(() => MathHelper.AlmostEqual(4.5m, -3.2m, -.0000001m));
-            var ex2 = Record.Exception(() => MathHelper.AlmostEqual(4.5m, -3.2m, decimal.MinValue));
+            // ReSharper disable InvokeAsExtensionMethod
+            var ex1 = Record.Exception(() => MathHelper.IsAlmostEqualTo(4.5m, -3.2m, -.0000001m));
+            var ex2 = Record.Exception(() => MathHelper.IsAlmostEqualTo(4.5m, -3.2m, decimal.MinValue));
+            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             ex1.Should().BeOfType<ArgumentOutOfRangeException>();
@@ -171,30 +181,32 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void AlmostEqual_with_decimals___Should_return_true___When_two_numbers_are_almost_equal_within_tolerance()
+        public static void IsAlmostEqualTo_with_decimals___Should_return_true___When_two_numbers_are_almost_equal_within_tolerance()
         {
             // Arrange, Act
-            var result1 = MathHelper.AlmostEqual(5m, 5m);
-            var result2 = MathHelper.AlmostEqual(5m, 5m, 0m);
-            var result3 = MathHelper.AlmostEqual(2.2m, 2.2m);
-            var result4 = MathHelper.AlmostEqual(2.23m, 2.29m, 0.06m);
-            var result5 = MathHelper.AlmostEqual(1.001m, 1.002m, .001m);
-            var result6 = MathHelper.AlmostEqual(2.012m, 2.013m, .001m);
-            var result7 = MathHelper.AlmostEqual(0.000000001m, 0.000000005m);
-            var result8 = MathHelper.AlmostEqual(5000000.000000001m, 5000000.000000005m);
-            var result9 = MathHelper.AlmostEqual(35.123418m, 35.123417m, 5e-3m);
-            var result10 = MathHelper.AlmostEqual(-.0001m, .0001m, .0002m);
+            // ReSharper disable InvokeAsExtensionMethod
+            var result1 = MathHelper.IsAlmostEqualTo(5m, 5m);
+            var result2 = MathHelper.IsAlmostEqualTo(5m, 5m, 0m);
+            var result3 = MathHelper.IsAlmostEqualTo(2.2m, 2.2m);
+            var result4 = MathHelper.IsAlmostEqualTo(2.23m, 2.29m, 0.06m);
+            var result5 = MathHelper.IsAlmostEqualTo(1.001m, 1.002m, .001m);
+            var result6 = MathHelper.IsAlmostEqualTo(2.012m, 2.013m, .001m);
+            var result7 = MathHelper.IsAlmostEqualTo(0.000000001m, 0.000000005m);
+            var result8 = MathHelper.IsAlmostEqualTo(5000000.000000001m, 5000000.000000005m);
+            var result9 = MathHelper.IsAlmostEqualTo(35.123418m, 35.123417m, 5e-3m);
+            var result10 = MathHelper.IsAlmostEqualTo(-.0001m, .0001m, .0002m);
 
-            var result11 = MathHelper.AlmostEqual(-5m, -5m);
-            var result12 = MathHelper.AlmostEqual(-5m, -5m, 0m);
-            var result13 = MathHelper.AlmostEqual(-2.2m, -2.2m);
-            var result14 = MathHelper.AlmostEqual(-2.23m, -2.29m, 0.06m);
-            var result15 = MathHelper.AlmostEqual(-1.001m, -1.002m, .001m);
-            var result16 = MathHelper.AlmostEqual(-2.012m, -2.013m, .001m);
-            var result17 = MathHelper.AlmostEqual(-0.000000001m, -0.000000005m);
-            var result18 = MathHelper.AlmostEqual(-5000000.000000001m, -5000000.000000005m);
-            var result19 = MathHelper.AlmostEqual(-35.123418m, -35.123417m, 5e-3m);
-            var result20 = MathHelper.AlmostEqual(.0001m, -.0001m, .0002m);
+            var result11 = MathHelper.IsAlmostEqualTo(-5m, -5m);
+            var result12 = MathHelper.IsAlmostEqualTo(-5m, -5m, 0m);
+            var result13 = MathHelper.IsAlmostEqualTo(-2.2m, -2.2m);
+            var result14 = MathHelper.IsAlmostEqualTo(-2.23m, -2.29m, 0.06m);
+            var result15 = MathHelper.IsAlmostEqualTo(-1.001m, -1.002m, .001m);
+            var result16 = MathHelper.IsAlmostEqualTo(-2.012m, -2.013m, .001m);
+            var result17 = MathHelper.IsAlmostEqualTo(-0.000000001m, -0.000000005m);
+            var result18 = MathHelper.IsAlmostEqualTo(-5000000.000000001m, -5000000.000000005m);
+            var result19 = MathHelper.IsAlmostEqualTo(-35.123418m, -35.123417m, 5e-3m);
+            var result20 = MathHelper.IsAlmostEqualTo(.0001m, -.0001m, .0002m);
+            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             result1.Should().BeTrue();
@@ -221,30 +233,32 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void AlmostEqual_with_decimals___Should_return_false___When_two_numbers_are_not_almost_equal_within_tolerance()
+        public static void IsAlmostEqualTo_with_decimals___Should_return_false___When_two_numbers_are_not_almost_equal_within_tolerance()
         {
             // Arrange, Act
-            var result1 = MathHelper.AlmostEqual(5m, -5m);
-            var result2 = MathHelper.AlmostEqual(.00000001m, -.00000001m);
-            var result3 = MathHelper.AlmostEqual(3.2m, 3.5m, .02m);
-            var result4 = MathHelper.AlmostEqual(1.001m, 1.002m, .0001m);
-            var result5 = MathHelper.AlmostEqual(2.022m, 2.013m, .008m);
-            var result6 = MathHelper.AlmostEqual(0.00000001m, 0.00000005m);
-            var result7 = MathHelper.AlmostEqual(5000000.0000011m, 5000000.0000012m);
-            var result8 = MathHelper.AlmostEqual(0.000016m, 0.000015m, 1e-7m);
-            var result9 = MathHelper.AlmostEqual(35.123418m, 35.123417m, 1e-7m);
-            var result10 = MathHelper.AlmostEqual(-0.025m, 0.025m, .049999999m);
+            // ReSharper disable InvokeAsExtensionMethod
+            var result1 = MathHelper.IsAlmostEqualTo(5m, -5m);
+            var result2 = MathHelper.IsAlmostEqualTo(.00000001m, -.00000001m);
+            var result3 = MathHelper.IsAlmostEqualTo(3.2m, 3.5m, .02m);
+            var result4 = MathHelper.IsAlmostEqualTo(1.001m, 1.002m, .0001m);
+            var result5 = MathHelper.IsAlmostEqualTo(2.022m, 2.013m, .008m);
+            var result6 = MathHelper.IsAlmostEqualTo(0.00000001m, 0.00000005m);
+            var result7 = MathHelper.IsAlmostEqualTo(5000000.0000011m, 5000000.0000012m);
+            var result8 = MathHelper.IsAlmostEqualTo(0.000016m, 0.000015m, 1e-7m);
+            var result9 = MathHelper.IsAlmostEqualTo(35.123418m, 35.123417m, 1e-7m);
+            var result10 = MathHelper.IsAlmostEqualTo(-0.025m, 0.025m, .049999999m);
 
-            var result11 = MathHelper.AlmostEqual(-5m, 5m);
-            var result12 = MathHelper.AlmostEqual(-.00000001m, .00000001m);
-            var result13 = MathHelper.AlmostEqual(-3.2m, -3.5m, .02m);
-            var result14 = MathHelper.AlmostEqual(-1.001m, -1.002m, .0001m);
-            var result15 = MathHelper.AlmostEqual(-2.022m, -2.013m, .008m);
-            var result16 = MathHelper.AlmostEqual(-0.00000001m, -0.00000005m);
-            var result17 = MathHelper.AlmostEqual(-5000000.0000011m, -5000000.0000012m);
-            var result18 = MathHelper.AlmostEqual(-0.000016m, -0.000015m, 1e-7m);
-            var result19 = MathHelper.AlmostEqual(-35.123418m, -35.123417m, 1e-7m);
-            var result20 = MathHelper.AlmostEqual(0.025m, -0.025m, .049999999m);
+            var result11 = MathHelper.IsAlmostEqualTo(-5m, 5m);
+            var result12 = MathHelper.IsAlmostEqualTo(-.00000001m, .00000001m);
+            var result13 = MathHelper.IsAlmostEqualTo(-3.2m, -3.5m, .02m);
+            var result14 = MathHelper.IsAlmostEqualTo(-1.001m, -1.002m, .0001m);
+            var result15 = MathHelper.IsAlmostEqualTo(-2.022m, -2.013m, .008m);
+            var result16 = MathHelper.IsAlmostEqualTo(-0.00000001m, -0.00000005m);
+            var result17 = MathHelper.IsAlmostEqualTo(-5000000.0000011m, -5000000.0000012m);
+            var result18 = MathHelper.IsAlmostEqualTo(-0.000016m, -0.000015m, 1e-7m);
+            var result19 = MathHelper.IsAlmostEqualTo(-35.123418m, -35.123417m, 1e-7m);
+            var result20 = MathHelper.IsAlmostEqualTo(0.025m, -0.025m, .049999999m);
+            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             result1.Should().BeFalse();
