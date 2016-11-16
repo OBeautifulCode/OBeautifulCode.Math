@@ -29,7 +29,6 @@ namespace OBeautifulCode.Math
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Math", "See package version number")]
 #endif
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes", Justification = "Instances of this type will neither be compared nor sorted nor used as hash table keys.")]
     internal struct HashCodeHelper
     {
         /// <summary>
