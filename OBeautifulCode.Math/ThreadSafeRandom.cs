@@ -22,7 +22,7 @@ namespace OBeautifulCode.Math
     /// <a href="http://codeblog.jonskeet.uk/2009/11/04/revisiting-randomness/"/>
     /// System.Random is not thread-safe, hence the need for this class.
     /// </remarks>
-#if !RecipesProject
+#if !OBeautifulCodeMathRecipesProject
     [System.Diagnostics.DebuggerStepThrough]
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Math", "See package version number")]
