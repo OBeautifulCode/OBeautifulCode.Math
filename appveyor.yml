@@ -21,7 +21,7 @@ after_build:
 - ps: $version = Nuget-CreatePreReleaseSupportedVersion -version $env:appveyor_build_version -branchName $env:appveyor_repo_branch; ls . -filter *.nuspec -recurse | %{nuget pack $_.FullName -Version $version }
 artifacts:
 - path: OBeautifulCode.Math.zip
-- path: 'OBeautifulCode.Math\*.nupkg'
+- path: '*.nupkg'
 - path: Nuget-Functions.ps1
 deploy:
   provider: NuGet
