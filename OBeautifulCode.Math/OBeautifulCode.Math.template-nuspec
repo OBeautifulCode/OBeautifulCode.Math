@@ -1,18 +1,13 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
     <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <authors>OBeautifulCode</authors>
+    <owners>OBeautifulCode</owners>
     <projectUrl>https://github.com/OBeautifulCode/OBeautifulCode.Math</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/OBeautifulCode/OBeautifulCode.Math/master/OBeautifulCode.Math/nuget-icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <licenseUrl>https://raw.githubusercontent.com/OBeautifulCode/OBeautifulCode.Math/master/LICENSE</licenseUrl>
-    <description>$description$</description>
-    <summary>Provides some math and numeric methods, including a thread-safe random number generator and hash code helper.</summary>
-    <copyright>Copyright 2016 OBeautifulCode</copyright>
-    <tags>math mathematics random number generator</tags>
+    <copyright>Copyright © 2016 OBeautifulCode</copyright>
   </metadata>
 </package>
