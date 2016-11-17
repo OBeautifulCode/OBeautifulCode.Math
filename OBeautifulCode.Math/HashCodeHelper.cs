@@ -12,7 +12,7 @@ namespace OBeautifulCode.Math
     using System.Collections.Generic;
 
     /// <summary>
-    /// Provides method to help with generating hash codes for structures and classes. This handles
+    /// Provides methods to help with generating hash codes for structures and classes. This handles
     /// value types, nullable type, and objects.
     /// </summary>
     /// <remarks>
