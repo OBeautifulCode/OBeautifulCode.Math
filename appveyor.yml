@@ -22,6 +22,7 @@ after_build:
 artifacts:
 - path: OBeautifulCode.Math.zip
 - path: '*.nupkg'
+- path: $nugetDir\Nuget-Functions.ps1
 deploy:
   provider: NuGet
   api_key:
