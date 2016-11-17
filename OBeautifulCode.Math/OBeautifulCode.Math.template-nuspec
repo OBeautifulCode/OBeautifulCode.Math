@@ -7,7 +7,7 @@
     <projectUrl>https://github.com/OBeautifulCode/OBeautifulCode.Math</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/OBeautifulCode/OBeautifulCode.Math/master/OBeautifulCode.Math/nuget-icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <licenseUrl>https://raw.githubusercontent.com/OBeautifulCode/OBeautifulCode.Math/master/LICENSE</licenseUrl>
+    <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
     <copyright>Copyright (c) 2016 OBeautifulCode</copyright>
   </metadata>
 </package>

@@ -2,4 +2,4 @@
 
 Math and Numeric Helpers
 ========================
-This library provides some math and numeric methods, including a thread-safe random number generator.
+This library provides some math and numeric methods, including a thread-safe random number generator and a hash code generator.
