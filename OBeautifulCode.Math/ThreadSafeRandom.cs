@@ -38,7 +38,9 @@ namespace OBeautifulCode.Math
         /// A single random number generator for the app domain,
         /// used to seed thread-specific random number generators
         /// </summary>
+        // ReSharper disable InconsistentNaming
         private static Random random = new Random();
+        // ReSharper restore InconsistentNaming
 
         /// <summary>
         /// Reseeds the random number generator.
