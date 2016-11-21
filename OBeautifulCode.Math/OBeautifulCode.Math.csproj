@@ -51,6 +51,7 @@
     <Compile Include="ThreadSafeRandom.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="OBeautifulCode.Math.MathHelper.recipe-nuspec" />
     <None Include="OBeautifulCode.Math.ThreadSafeRandom.recipe-nuspec" />
     <None Include="OBeautifulCode.Math.HashCodeHelper.recipe-nuspec" />
     <None Include="packages.config" />

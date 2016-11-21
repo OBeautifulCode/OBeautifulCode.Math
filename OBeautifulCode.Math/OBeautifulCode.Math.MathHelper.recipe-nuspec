@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>OBeautifulCode.Math.MathHelper</id>
+    <description>Supports various mathematical and numerical methods.</description>
+    <tags>math statistics</tags>
+    <developmentDependency>true</developmentDependency>
+  </metadata>
+  <files>
+    <file src="MathHelper.cs" target="content\net45\.OBeautifulCode.Recipes\OBeautifulCode.Math\MathHelper.cs" />
+  </files>
+</package>
