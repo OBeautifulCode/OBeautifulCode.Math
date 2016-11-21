@@ -17,13 +17,14 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG</DefineConstants>
+    <DefineConstants>CODE_ANALYSIS;OBeautifulCodeMathRecipesProject</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DocumentationFile>bin\Debug\OBeautifulCode.Math.XML</DocumentationFile>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\common\analyzers.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -39,17 +40,9 @@
     <CodeAnalysisRuleSet>..\common\analyzers.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Conditions, Version=2.1.0.24, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Conditions.2.1.0\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10\Conditions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HashCodeHelper.cs" />
@@ -58,8 +51,11 @@
     <Compile Include="ThreadSafeRandom.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="OBeautifulCode.Math.MathHelper.recipe-nuspec" />
+    <None Include="OBeautifulCode.Math.ThreadSafeRandom.recipe-nuspec" />
+    <None Include="OBeautifulCode.Math.HashCodeHelper.recipe-nuspec" />
     <None Include="packages.config" />
-    <None Include="OBeautifulCode.Math.nuspec">
+    <None Include="OBeautifulCode.Math.template-nuspec">
       <SubType>Designer</SubType>
     </None>
     <AdditionalFiles Include="..\common\stylecop.json">
