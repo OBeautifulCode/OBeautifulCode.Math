@@ -13,8 +13,6 @@ namespace OBeautifulCode.Math
     using System.Collections.Generic;
     using System.Linq;
 
-    using Conditions;
-
     /// <summary>
     /// Supports various mathematical and numerical methods.
     /// </summary>
@@ -38,13 +36,24 @@ namespace OBeautifulCode.Math
         /// <returns>
         /// true if the two values are almost equal, false if not.
         /// </returns>
-        /// <exception cref="ArgumentException">value1 or value2 is double.NaN</exception>
-        /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
+        /// <exception cref="ArgumentException"><paramref name="value1"/> or <paramref name="value2"/> is <see cref="double.NaN"/>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="tolerance"/> is less than 0.</exception>
         public static bool IsAlmostEqualTo(this double value1, double value2, double tolerance = 1e-8)
         {
-            double.IsNaN(value1).Requires().IsFalse("value1 is NaN");
-            double.IsNaN(value2).Requires().IsFalse("value2 is NaN");
-            tolerance.Requires(nameof(tolerance)).IsGreaterOrEqual(0);
+            if (double.IsNaN(value1))
+            {
+                throw new ArgumentException("value1 is NaN", nameof(value1));
+            }
+
+            if (double.IsNaN(value2))
+            {
+                throw new ArgumentException("value2 is NaN", nameof(value2));
+            }
+
+            if (tolerance < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(tolerance), "tolerance is less than 0");
+            }
 
             var diff = Math.Abs(value1 - value2);
             var almostEqual = diff <= tolerance;
@@ -64,10 +73,13 @@ namespace OBeautifulCode.Math
         /// <returns>
         /// true if the two values are almost equal, false if not.
         /// </returns>
-        /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="tolerance"/> is less than 0.</exception>
         public static bool IsAlmostEqualTo(this decimal value1, decimal value2, decimal tolerance = 1e-8m)
         {
-            tolerance.Requires(nameof(tolerance)).IsGreaterOrEqual(0);
+            if (tolerance < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(tolerance), "tolerance is less than 0");
+            }
 
             var diff = Math.Abs(value1 - value2);
             var almostEqual = diff <= tolerance;
@@ -87,13 +99,24 @@ namespace OBeautifulCode.Math
         /// <returns>
         /// true if the first value is greater than or almost equal to the second value, false if not.
         /// </returns>
-        /// <exception cref="ArgumentException">value1 or value2 is double.NaN</exception>
-        /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
+        /// <exception cref="ArgumentException"><paramref name="value1"/> or <paramref name="value2"/> is <see cref="double.NaN"/>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="tolerance"/> is less than 0.</exception>
         public static bool IsGreaterThanOrAlmostEqualTo(this double value1, double value2, double tolerance = 1e-8)
         {
-            double.IsNaN(value1).Requires().IsFalse("value1 is NaN");
-            double.IsNaN(value2).Requires().IsFalse("value2 is NaN");
-            tolerance.Requires(nameof(tolerance)).IsGreaterOrEqual(0);
+            if (double.IsNaN(value1))
+            {
+                throw new ArgumentException("value1 is NaN", nameof(value1));
+            }
+
+            if (double.IsNaN(value2))
+            {
+                throw new ArgumentException("value2 is NaN", nameof(value2));
+            }
+
+            if (tolerance < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(tolerance), "tolerance is less than 0");
+            }
 
             var result = (value1 > value2) || value1.IsAlmostEqualTo(value2, tolerance);
             return result;
@@ -112,11 +135,13 @@ namespace OBeautifulCode.Math
         /// <returns>
         /// true if the first value is greater than or almost equal to the second value, false if not.
         /// </returns>
-        /// <exception cref="ArgumentException">value1 or value2 is double.NaN</exception>
-        /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="tolerance"/> is less than 0.</exception>
         public static bool IsGreaterThanOrAlmostEqualTo(this decimal value1, decimal value2, decimal tolerance = 1e-8m)
         {
-            tolerance.Requires(nameof(tolerance)).IsGreaterOrEqual(0);
+            if (tolerance < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(tolerance), "tolerance is less than 0");
+            }
 
             var result = (value1 > value2) || value1.IsAlmostEqualTo(value2, tolerance);
             return result;
@@ -135,13 +160,24 @@ namespace OBeautifulCode.Math
         /// <returns>
         /// true if the first value is less than or almost equal to the second value, false if not.
         /// </returns>
-        /// <exception cref="ArgumentException">value1 or value2 is double.NaN</exception>
-        /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
+        /// <exception cref="ArgumentException"><paramref name="value1"/> or <paramref name="value2"/> is <see cref="double.NaN"/>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="tolerance"/> is less than 0.</exception>
         public static bool IsLessThanOrAlmostEqualTo(this double value1, double value2, double tolerance = 1e-8)
         {
-            double.IsNaN(value1).Requires().IsFalse("value1 is NaN");
-            double.IsNaN(value2).Requires().IsFalse("value2 is NaN");
-            tolerance.Requires(nameof(tolerance)).IsGreaterOrEqual(0);
+            if (double.IsNaN(value1))
+            {
+                throw new ArgumentException("value1 is NaN", nameof(value1));
+            }
+
+            if (double.IsNaN(value2))
+            {
+                throw new ArgumentException("value2 is NaN", nameof(value2));
+            }
+
+            if (tolerance < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(tolerance), "tolerance is less than 0");
+            }
 
             var result = (value1 < value2) || value1.IsAlmostEqualTo(value2, tolerance);
             return result;
@@ -160,11 +196,13 @@ namespace OBeautifulCode.Math
         /// <returns>
         /// true if the first value is less than or almost equal to the second value, false if not.
         /// </returns>
-        /// <exception cref="ArgumentException">value1 or value2 is double.NaN</exception>
-        /// <exception cref="ArgumentOutOfRangeException">tolerance is not &gt;= 0</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="tolerance"/> is less than 0.</exception>
         public static bool IsLessThanOrAlmostEqualTo(this decimal value1, decimal value2, decimal tolerance = 1e-8m)
         {
-            tolerance.Requires(nameof(tolerance)).IsGreaterOrEqual(0);
+            if (tolerance < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(tolerance), "tolerance is less than 0");
+            }
 
             var result = (value1 < value2) || value1.IsAlmostEqualTo(value2, tolerance);
             return result;
@@ -178,19 +216,35 @@ namespace OBeautifulCode.Math
         /// <returns>
         /// Returns the covariance of two sets of doubles.
         /// </returns>
-        /// <exception cref="ArgumentNullException">values1 or values2 is null.</exception>
-        /// <exception cref="ArgumentException">values1 or values2 is empty.</exception>
-        /// <exception cref="ArgumentException">Length of sources (values1, values2) is different.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="values1"/> or <paramref name="values2"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="values1"/> or <paramref name="values2"/> is empty.</exception>
+        /// <exception cref="ArgumentException">The sets have different lengths.</exception>
         public static double Covariance(IList<double> values1, IList<double> values2)
         {
-            // check parameters
-            values1.Requires(nameof(values1)).IsNotEmpty();
-            values2.Requires(nameof(values2)).IsNotEmpty();
+            if (values1 == null)
+            {
+                throw new ArgumentNullException(nameof(values1));
+            }
+
+            if (values1.Count == 0)
+            {
+                throw new ArgumentException("values1 is empty", nameof(values1));
+            }
+
+            if (values2 == null)
+            {
+                throw new ArgumentNullException(nameof(values2));
+            }
+
+            if (values2.Count == 0)
+            {
+                throw new ArgumentException("values2 is empty", nameof(values2));
+            }
 
             int valuesCount = values1.Count;
             if (valuesCount != values2.Count)
             {
-                throw new ArgumentException("Length of sources is different.");
+                throw new ArgumentException("The sets have different lengths");
             }
 
             // covariance of one item is always 0
@@ -220,19 +274,35 @@ namespace OBeautifulCode.Math
         /// <returns>
         /// Returns the covariance of two sets of decimals.
         /// </returns>
-        /// <exception cref="ArgumentNullException">values1 or values2 is null.</exception>
-        /// <exception cref="ArgumentException">values1 or values2 is empty.</exception>
-        /// <exception cref="ArgumentException">Length of sources (values1, values2) is different.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="values1"/> or <paramref name="values2"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="values1"/> or <paramref name="values2"/> is empty.</exception>
+        /// <exception cref="ArgumentException">The sets have different lengths.</exception>
         public static decimal Covariance(IList<decimal> values1, IList<decimal> values2)
         {
-            // check parameters
-            values1.Requires(nameof(values1)).IsNotEmpty();
-            values2.Requires(nameof(values2)).IsNotEmpty();
+            if (values1 == null)
+            {
+                throw new ArgumentNullException(nameof(values1));
+            }
+
+            if (values1.Count == 0)
+            {
+                throw new ArgumentException("values1 is empty", nameof(values1));
+            }
+
+            if (values2 == null)
+            {
+                throw new ArgumentNullException(nameof(values2));
+            }
+
+            if (values2.Count == 0)
+            {
+                throw new ArgumentException("values2 is empty", nameof(values2));
+            }
 
             int valuesCount = values1.Count;
             if (valuesCount != values2.Count)
             {
-                throw new ArgumentException("Length of sources is different.");
+                throw new ArgumentException("The sets have different lengths");
             }
 
             // covariance of one item is always 0
@@ -261,10 +331,13 @@ namespace OBeautifulCode.Math
         /// <returns>
         /// Returns the factors of a number.
         /// </returns>
-        /// <exception cref="ArgumentOutOfRangeException">x must be &gt; 0</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="toFactor"/> is less than or equal to 0.</exception>
         public static IEnumerable<int> Factors(int toFactor)
         {
-            toFactor.Requires(nameof(toFactor)).IsGreaterThan(0);
+            if (toFactor <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(toFactor), "The number to factor is less than or equal to 0");
+            }
 
             int max = toFactor / 2;
             for (int i = 1; i <= max; i++)
@@ -289,18 +362,22 @@ namespace OBeautifulCode.Math
         /// <returns>
         /// Returns the standard deviation of the set.
         /// </returns>
-        /// <exception cref="ArgumentNullException">values is null.</exception>
-        /// <exception cref="ArgumentException">values has 1 or fewer items.</exception>
-        /// <exception cref="ArgumentException">There is only one value in values.  Two or more required.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="values"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="values"/> is empty or has only one element.</exception>
+        /// <exception cref="ArgumentException">There is only one unique value in <paramref name="values"/>.  Two or more required.</exception>
         public static double StandardDeviation(IEnumerable<double> values)
         {
-            // check parameters
-            // ReSharper disable PossibleMultipleEnumeration
-            values.Requires(nameof(values)).IsLongerThan(1);
-            var valuesList = values as IList<double> ?? values.ToArray();
-            // ReSharper restore PossibleMultipleEnumeration
+            if (values == null)
+            {
+                throw new ArgumentNullException(nameof(values));
+            }
 
-            // do the math
+            var valuesList = values as IList<double> ?? values.ToArray();
+            if (valuesList.Count <= 1)
+            {
+                throw new ArgumentException("values is empty or has only one element", nameof(values));
+            }
+
             double avg = valuesList.Average();
             double sumOfSqrs = valuesList.Sum(value => Math.Pow(value - avg, 2));
             return Math.Sqrt(sumOfSqrs / Convert.ToDouble(valuesList.Count - 1));
@@ -313,15 +390,24 @@ namespace OBeautifulCode.Math
         /// <returns>
         /// Returns the standard deviation of the set.
         /// </returns>
-        /// <exception cref="ArgumentNullException">values is null.</exception>
-        /// <exception cref="ArgumentException">values is empty.</exception>
-        /// <exception cref="ArgumentException">There is only one value in values.  Two or more required.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="values"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="values"/> is empty or has only one element.</exception>
+        /// <exception cref="ArgumentException">There is only one unique value in <paramref name="values"/>.  Two or more required.</exception>
         public static decimal StandardDeviation(IEnumerable<decimal> values)
         {
-            // ReSharper disable PossibleMultipleEnumeration
-            values.Requires(nameof(values)).IsNotEmpty();
-            return Convert.ToDecimal(StandardDeviation(values.Select(Convert.ToDouble)));
-            // ReSharper restore PossibleMultipleEnumeration
+            if (values == null)
+            {
+                throw new ArgumentNullException(nameof(values));
+            }
+
+            var valuesList = values as IList<decimal> ?? values.ToArray();
+            if (valuesList.Count <= 1)
+            {
+                throw new ArgumentException("values is empty or has only one element", nameof(values));
+            }
+
+            var result = Convert.ToDecimal(StandardDeviation(valuesList.Select(Convert.ToDouble)));
+            return result;
         }
 
         /// <summary>
@@ -330,7 +416,7 @@ namespace OBeautifulCode.Math
         /// <param name="value">The decimal to truncate into an integer.</param>
         /// <returns>Integer with the truncated double.</returns>
         /// <remarks>1.49 will return 1, 1.51 will return 1, 1.99 will return 1</remarks>
-        /// <exception cref="OverflowException">value overflows the bounds of an <see cref="int"/>.</exception>
+        /// <exception cref="OverflowException"><paramref name="value"/> overflows the bounds of an <see cref="int"/>.</exception>
         public static int Truncate(decimal value)
         {
             if ((value > int.MaxValue) || (value < int.MinValue))
@@ -348,7 +434,7 @@ namespace OBeautifulCode.Math
         /// <param name="value">The double to truncate.</param>
         /// <returns>Integer with the truncated double.</returns>
         /// <remarks>1.49 will return 1, 1.51 will return 1, 1.99 will return 1</remarks>
-        /// <exception cref="OverflowException">value overflows the bounds of an <see cref="int"/>.</exception>
+        /// <exception cref="OverflowException"><paramref name="value"/> overflows the bounds of an <see cref="int"/>.</exception>
         public static int Truncate(double value)
         {
             if ((value > int.MaxValue) || (value < int.MinValue))
@@ -368,11 +454,14 @@ namespace OBeautifulCode.Math
         /// <returns>
         /// Returns the truncated decimal.
         /// </returns>
-        /// <exception cref="ArgumentOutOfRangeException">digits must be >=0</exception>
-        /// <exception cref="OverflowException">digits is too high.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="digits"/> must be less than 0.</exception>
+        /// <exception cref="OverflowException"><paramref name="digits"/> is too high.</exception>
         public static decimal TruncateSignificantDigits(decimal value, int digits)
         {
-            digits.Requires(nameof(digits)).IsGreaterOrEqual(0);
+            if (digits < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(digits), "digits is less than 0");
+            }
 
             if (digits == 0)
             {
@@ -389,23 +478,21 @@ namespace OBeautifulCode.Math
         /// <returns>
         /// Returns the variance of the set of doubles.
         /// </returns>
-        /// <exception cref="ArgumentNullException">values is null.</exception>
-        /// <exception cref="ArgumentException">values is empty.</exception>
-        /// <exception cref="ArgumentException">There is only one value in values.  Two or more required.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="values"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="values"/> is empty or has only one element.</exception>
         public static double Variance(IEnumerable<double> values)
         {
-            // check parameters
-            // ReSharper disable PossibleMultipleEnumeration
-            values.Requires(nameof(values)).IsNotEmpty();
-            var valuesList = values as IList<double> ?? values.ToArray();
-            // ReSharper restore PossibleMultipleEnumeration
-
-            if (valuesList.Count == 1)
+            if (values == null)
             {
-                throw new ArgumentException("Two values are required");
+                throw new ArgumentNullException(nameof(values));
             }
 
-            // Get average
+            var valuesList = values as IList<double> ?? values.ToArray();
+            if (valuesList.Count <= 1)
+            {
+                throw new ArgumentException("values is empty or has only one element", nameof(values));
+            }
+
             double avg = valuesList.Average();
             double sum = valuesList.Sum(value => Math.Pow(value - avg, 2));
             return sum / valuesList.Count;
@@ -418,15 +505,23 @@ namespace OBeautifulCode.Math
         /// <returns>
         /// Returns the variance of the set of decimals.
         /// </returns>
-        /// <exception cref="ArgumentNullException">values is null.</exception>
-        /// <exception cref="ArgumentException">values is empty.</exception>
-        /// <exception cref="ArgumentException">There is only one value in values.  Two or more required.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="values"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="values"/> is empty or has only one element.</exception>
         public static decimal Variance(IEnumerable<decimal> values)
         {
-            // ReSharper disable PossibleMultipleEnumeration
-            values.Requires(nameof(values)).IsNotEmpty();
-            return Convert.ToDecimal(Variance(values.Select(Convert.ToDouble)));
-            // ReSharper restore PossibleMultipleEnumeration
+            if (values == null)
+            {
+                throw new ArgumentNullException(nameof(values));
+            }
+
+            var valuesList = values as IList<decimal> ?? values.ToArray();
+            if (valuesList.Count <= 1)
+            {
+                throw new ArgumentException("values is empty or has only one element", nameof(values));
+            }
+
+            var result = Convert.ToDecimal(Variance(valuesList.Select(Convert.ToDouble)));
+            return result;
         }
     }
 }
