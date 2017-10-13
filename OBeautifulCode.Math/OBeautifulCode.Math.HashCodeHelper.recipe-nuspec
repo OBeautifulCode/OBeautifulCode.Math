@@ -7,6 +7,6 @@
     <developmentDependency>true</developmentDependency>
   </metadata>
   <files>
-    <file src="HashCodeHelper.cs" target="content\net45\.OBeautifulCode.Recipes\OBeautifulCode.Math\HashCodeHelper.cs" />
+    <file src="HashCodeHelper.cs" target="content\net45\.recipes\OBeautifulCode.Math\HashCodeHelper.cs" />
   </files>
 </package>

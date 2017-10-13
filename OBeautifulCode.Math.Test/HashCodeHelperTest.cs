@@ -11,11 +11,10 @@ namespace OBeautifulCode.Math.Test
 
     using FluentAssertions;
 
+    using OBeautifulCode.Math.Recipes;
+
     using Xunit;
 
-    /// <summary>
-    /// Tests the <see cref="HashCodeHelper"/> class.
-    /// </summary>
     public static class HashCodeHelperTest
     {
         // ReSharper disable InconsistentNaming

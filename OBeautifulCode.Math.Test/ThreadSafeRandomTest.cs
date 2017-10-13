@@ -10,11 +10,10 @@ namespace OBeautifulCode.Math.Test
 
     using FluentAssertions;
 
+    using OBeautifulCode.Math.Recipes;
+
     using Xunit;
 
-    /// <summary>
-    /// Tests the <see cref="ThreadSafeRandom"/> class.
-    /// </summary>
     public static class ThreadSafeRandomTest
     {
         // ReSharper disable InconsistentNaming
