@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>OBeautifulCode.Math.HashCodeHelper</id>
+    <id>OBeautifulCode.Math.Recipes.HashCodeHelper</id>
     <description>Provides methods to help with generating hash codes for structures and classes.</description>
     <tags>hashcode hash code iequatable</tags>
     <developmentDependency>true</developmentDependency>

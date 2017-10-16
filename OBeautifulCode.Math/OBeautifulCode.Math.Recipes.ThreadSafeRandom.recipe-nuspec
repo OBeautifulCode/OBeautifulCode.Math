@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>OBeautifulCode.Math.ThreadSafeRandom</id>
+    <id>OBeautifulCode.Math.Recipes.ThreadSafeRandom</id>
     <description>Provides a thread-safe pseudo-random number generator.</description>
     <tags>random number generator rng threadsafe</tags>
     <developmentDependency>true</developmentDependency>

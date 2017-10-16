@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>OBeautifulCode.Math.MathHelper</id>
+    <id>OBeautifulCode.Math.Recipes.MathHelper</id>
     <description>Supports various mathematical and numerical methods.</description>
     <tags>math statistics</tags>
     <developmentDependency>true</developmentDependency>
