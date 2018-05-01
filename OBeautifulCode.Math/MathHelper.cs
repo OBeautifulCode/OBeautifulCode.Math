@@ -523,5 +523,24 @@ namespace OBeautifulCode.Math.Recipes
             var result = Convert.ToDecimal(Variance(valuesList.Select(Convert.ToDouble)));
             return result;
         }
+
+        /// <summary>
+        /// Converts an int to a GUID.
+        /// </summary>
+        /// <remarks>
+        /// Adapted from <a href="https://stackoverflow.com/a/4826200/356790" />
+        /// </remarks>
+        /// <param name="value">The int to convert.</param>
+        /// <returns>
+        /// A GUID converted from an int.
+        /// </returns>
+        public static Guid ToGuid(
+            this int value)
+        {
+            var bytes = new byte[16];
+            BitConverter.GetBytes(value).CopyTo(bytes, 0);
+            var result = new Guid(bytes);
+            return result;
+        }
     }
 }

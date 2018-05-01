@@ -10,6 +10,8 @@ namespace OBeautifulCode.Math.Test
     using System.Collections.Generic;
     using System.Linq;
 
+    using FakeItEasy;
+
     using FluentAssertions;
 
     using OBeautifulCode.Math.Recipes;
@@ -1246,6 +1248,47 @@ namespace OBeautifulCode.Math.Test
             Assert.Equal(13.061224, Math.Round(MathHelper.Variance(doubles), 6));
             doubles.Add(6);
             Assert.Equal(13.4375, Math.Round(MathHelper.Variance(doubles), 6));
+        }
+
+        [Fact]
+        public static void ToGuid___Converts_two_int_of_the_same_value_to_the_same_GUID___When_called()
+        {
+            // Arrange
+            var int1 = A.Dummy<int>();
+            var int2 = int1;
+
+            // Act
+            var actual1 = int1.ToGuid();
+            var actual2 = int2.ToGuid();
+
+            // Assert
+            actual1.Should().Be(actual2);
+        }
+
+        [Fact]
+        public static void ToGuid___Converts_int_MaxValue_and_int_MinValue_to_GUIDs___When_called()
+        {
+            // Arrange
+            var int1 = int.MaxValue;
+            var int2 = int.MinValue;
+
+            // Act
+            var actual1 = int1.ToGuid();
+            var actual2 = int2.ToGuid();
+
+            // Assert
+            actual1.Should().NotBe(Guid.Empty);
+            actual2.Should().NotBe(Guid.Empty);
+        }
+
+        [Fact]
+        public static void ToGuid___Converts_0_to_empty_GUID___When_called()
+        {
+            // Arrange, Act
+            var actual = 0.ToGuid();
+
+            // Assert
+            actual.Should().Be(Guid.Empty);
         }
 
         // ReSharper restore InconsistentNaming
