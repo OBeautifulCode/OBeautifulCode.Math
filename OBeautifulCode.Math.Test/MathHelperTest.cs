@@ -20,7 +20,6 @@ namespace OBeautifulCode.Math.Test
 
     public static class MathHelperTest
     {
-        // ReSharper disable InconsistentNaming
         [Fact]
         public static void IsAlmostEqualTo_with_doubles___Should_throw_ArgumentException___When_parameters_value1_or_value2_is_NaN()
         {

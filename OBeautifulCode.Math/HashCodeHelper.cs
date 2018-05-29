@@ -48,7 +48,8 @@ namespace OBeautifulCode.Math.Recipes
         /// Initializes a new instance of the <see cref="HashCodeHelper"/> struct.
         /// </summary>
         /// <param name="value">The hash code value.</param>
-        public HashCodeHelper(int value)
+        public HashCodeHelper(
+            int value)
         {
             this.Value = value;
         }
@@ -95,7 +96,8 @@ namespace OBeautifulCode.Math.Recipes
         /// <typeparam name="T">The type of the value being hashed.</typeparam>
         /// <param name="value">The value to hash.</param>
         /// <returns>The new hash code.</returns>
-        public HashCodeHelper Hash<T>(T value)
+        public HashCodeHelper Hash<T>(
+            T value)
         {
             unchecked
             {
@@ -111,7 +113,8 @@ namespace OBeautifulCode.Math.Recipes
         /// <typeparam name="T">The type of objects to enumerate and hash.</typeparam>
         /// <param name="values">The values to hash.</param>
         /// <returns>The new hash code.</returns>
-        public HashCodeHelper HashElements<T>(IEnumerable<T> values)
+        public HashCodeHelper HashElements<T>(
+            IEnumerable<T> values)
         {
             HashCodeHelper helper = this;
             if (values == null)

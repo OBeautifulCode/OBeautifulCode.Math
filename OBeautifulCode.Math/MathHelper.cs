@@ -40,7 +40,10 @@ namespace OBeautifulCode.Math.Recipes
         /// </returns>
         /// <exception cref="ArgumentException"><paramref name="value1"/> or <paramref name="value2"/> is <see cref="double.NaN"/>.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="tolerance"/> is less than 0.</exception>
-        public static bool IsAlmostEqualTo(this double value1, double value2, double tolerance = 1e-8)
+        public static bool IsAlmostEqualTo(
+            this double value1, 
+            double value2, 
+            double tolerance = 1e-8)
         {
             if (double.IsNaN(value1))
             {
@@ -76,7 +79,10 @@ namespace OBeautifulCode.Math.Recipes
         /// true if the two values are almost equal, false if not.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="tolerance"/> is less than 0.</exception>
-        public static bool IsAlmostEqualTo(this decimal value1, decimal value2, decimal tolerance = 1e-8m)
+        public static bool IsAlmostEqualTo(
+            this decimal value1, 
+            decimal value2, 
+            decimal tolerance = 1e-8m)
         {
             if (tolerance < 0)
             {
@@ -103,7 +109,10 @@ namespace OBeautifulCode.Math.Recipes
         /// </returns>
         /// <exception cref="ArgumentException"><paramref name="value1"/> or <paramref name="value2"/> is <see cref="double.NaN"/>.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="tolerance"/> is less than 0.</exception>
-        public static bool IsGreaterThanOrAlmostEqualTo(this double value1, double value2, double tolerance = 1e-8)
+        public static bool IsGreaterThanOrAlmostEqualTo(
+            this double value1, 
+            double value2, 
+            double tolerance = 1e-8)
         {
             if (double.IsNaN(value1))
             {
@@ -138,7 +147,10 @@ namespace OBeautifulCode.Math.Recipes
         /// true if the first value is greater than or almost equal to the second value, false if not.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="tolerance"/> is less than 0.</exception>
-        public static bool IsGreaterThanOrAlmostEqualTo(this decimal value1, decimal value2, decimal tolerance = 1e-8m)
+        public static bool IsGreaterThanOrAlmostEqualTo(
+            this decimal value1, 
+            decimal value2, 
+            decimal tolerance = 1e-8m)
         {
             if (tolerance < 0)
             {
@@ -164,7 +176,10 @@ namespace OBeautifulCode.Math.Recipes
         /// </returns>
         /// <exception cref="ArgumentException"><paramref name="value1"/> or <paramref name="value2"/> is <see cref="double.NaN"/>.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="tolerance"/> is less than 0.</exception>
-        public static bool IsLessThanOrAlmostEqualTo(this double value1, double value2, double tolerance = 1e-8)
+        public static bool IsLessThanOrAlmostEqualTo(
+            this double value1, 
+            double value2, 
+            double tolerance = 1e-8)
         {
             if (double.IsNaN(value1))
             {
@@ -199,7 +214,10 @@ namespace OBeautifulCode.Math.Recipes
         /// true if the first value is less than or almost equal to the second value, false if not.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="tolerance"/> is less than 0.</exception>
-        public static bool IsLessThanOrAlmostEqualTo(this decimal value1, decimal value2, decimal tolerance = 1e-8m)
+        public static bool IsLessThanOrAlmostEqualTo(
+            this decimal value1, 
+            decimal value2, 
+            decimal tolerance = 1e-8m)
         {
             if (tolerance < 0)
             {
@@ -221,7 +239,9 @@ namespace OBeautifulCode.Math.Recipes
         /// <exception cref="ArgumentNullException"><paramref name="values1"/> or <paramref name="values2"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="values1"/> or <paramref name="values2"/> is empty.</exception>
         /// <exception cref="ArgumentException">The sets have different lengths.</exception>
-        public static double Covariance(IList<double> values1, IList<double> values2)
+        public static double Covariance(
+            IList<double> values1, 
+            IList<double> values2)
         {
             if (values1 == null)
             {
@@ -279,7 +299,9 @@ namespace OBeautifulCode.Math.Recipes
         /// <exception cref="ArgumentNullException"><paramref name="values1"/> or <paramref name="values2"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="values1"/> or <paramref name="values2"/> is empty.</exception>
         /// <exception cref="ArgumentException">The sets have different lengths.</exception>
-        public static decimal Covariance(IList<decimal> values1, IList<decimal> values2)
+        public static decimal Covariance(
+            IList<decimal> values1, 
+            IList<decimal> values2)
         {
             if (values1 == null)
             {
@@ -334,7 +356,8 @@ namespace OBeautifulCode.Math.Recipes
         /// Returns the factors of a number.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="toFactor"/> is less than or equal to 0.</exception>
-        public static IEnumerable<int> Factors(int toFactor)
+        public static IEnumerable<int> Factors(
+            int toFactor)
         {
             if (toFactor <= 0)
             {
@@ -363,7 +386,8 @@ namespace OBeautifulCode.Math.Recipes
         /// <exception cref="ArgumentNullException"><paramref name="values"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="values"/> is empty or has only one element.</exception>
         /// <exception cref="ArgumentException">There is only one unique value in <paramref name="values"/>.  Two or more required.</exception>
-        public static double StandardDeviation(IEnumerable<double> values)
+        public static double StandardDeviation(
+            IEnumerable<double> values)
         {
             if (values == null)
             {
@@ -391,7 +415,8 @@ namespace OBeautifulCode.Math.Recipes
         /// <exception cref="ArgumentNullException"><paramref name="values"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="values"/> is empty or has only one element.</exception>
         /// <exception cref="ArgumentException">There is only one unique value in <paramref name="values"/>.  Two or more required.</exception>
-        public static decimal StandardDeviation(IEnumerable<decimal> values)
+        public static decimal StandardDeviation(
+            IEnumerable<decimal> values)
         {
             if (values == null)
             {
@@ -415,7 +440,8 @@ namespace OBeautifulCode.Math.Recipes
         /// <returns>Integer with the truncated double.</returns>
         /// <remarks>1.49 will return 1, 1.51 will return 1, 1.99 will return 1.</remarks>
         /// <exception cref="OverflowException"><paramref name="value"/> overflows the bounds of an <see cref="int"/>.</exception>
-        public static int Truncate(decimal value)
+        public static int Truncate(
+            decimal value)
         {
             if ((value > int.MaxValue) || (value < int.MinValue))
             {
@@ -433,7 +459,8 @@ namespace OBeautifulCode.Math.Recipes
         /// <returns>Integer with the truncated double.</returns>
         /// <remarks>1.49 will return 1, 1.51 will return 1, 1.99 will return 1.</remarks>
         /// <exception cref="OverflowException"><paramref name="value"/> overflows the bounds of an <see cref="int"/>.</exception>
-        public static int Truncate(double value)
+        public static int Truncate(
+            double value)
         {
             if ((value > int.MaxValue) || (value < int.MinValue))
             {
@@ -454,7 +481,9 @@ namespace OBeautifulCode.Math.Recipes
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="digits"/> must be less than 0.</exception>
         /// <exception cref="OverflowException"><paramref name="digits"/> is too high.</exception>
-        public static decimal TruncateSignificantDigits(decimal value, int digits)
+        public static decimal TruncateSignificantDigits(
+            decimal value, 
+            int digits)
         {
             if (digits < 0)
             {
@@ -478,7 +507,8 @@ namespace OBeautifulCode.Math.Recipes
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="values"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="values"/> is empty or has only one element.</exception>
-        public static double Variance(IEnumerable<double> values)
+        public static double Variance(
+            IEnumerable<double> values)
         {
             if (values == null)
             {
@@ -505,7 +535,8 @@ namespace OBeautifulCode.Math.Recipes
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="values"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="values"/> is empty or has only one element.</exception>
-        public static decimal Variance(IEnumerable<decimal> values)
+        public static decimal Variance(
+            IEnumerable<decimal> values)
         {
             if (values == null)
             {

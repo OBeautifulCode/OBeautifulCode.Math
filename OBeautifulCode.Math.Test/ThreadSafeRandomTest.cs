@@ -16,7 +16,6 @@ namespace OBeautifulCode.Math.Test
 
     public static class ThreadSafeRandomTest
     {
-        // ReSharper disable InconsistentNaming
         [Fact]
         public static void Reseed___Should_result_in_identical_sequences_of_numbers___When_called_with_the_same_seed()
         {
@@ -42,7 +41,5 @@ namespace OBeautifulCode.Math.Test
             // Assert
             firstSequence.Should().Equal(secondSequence);
         }
-
-        // ReSharper restore InconsistentNaming
     }
 }

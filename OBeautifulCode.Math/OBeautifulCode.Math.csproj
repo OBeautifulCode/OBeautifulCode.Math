@@ -55,7 +55,7 @@
     <None Include="MathHelper.recipe-nuspec" />
     <None Include="ThreadSafeRandom.recipe-nuspec" />
     <None Include="HashCodeHelper.recipe-nuspec" />
-    <None Include="Math.override-nuspec">
+    <None Include="OBeautifulCode.Math.override-nuspec">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
