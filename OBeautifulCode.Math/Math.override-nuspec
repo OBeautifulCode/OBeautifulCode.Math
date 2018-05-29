@@ -1,0 +1,7 @@
+<package>
+  <metadata>
+    <description>Provides math-realted convenience/helper methods.</description>
+    <tags>math helper</tags>
+    <iconUrl>https://raw.githubusercontent.com/OBeautifulCode/OBeautifulCode.Math/master/OBeautifulCode.Math/nuget-icon.png</iconUrl>
+  </metadata>
+</package>

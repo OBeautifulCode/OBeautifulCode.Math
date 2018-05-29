@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="MathHelperTest.cs" company="OBeautifulCode">
-//   Copyright (c) OBeautifulCode. All rights reserved.
+//   Copyright (c) OBeautifulCode 2018. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -25,14 +25,12 @@ namespace OBeautifulCode.Math.Test
         public static void IsAlmostEqualTo_with_doubles___Should_throw_ArgumentException___When_parameters_value1_or_value2_is_NaN()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var ex1 = Record.Exception(() => MathHelper.IsAlmostEqualTo(double.NaN, 1));
             var ex2 = Record.Exception(() => MathHelper.IsAlmostEqualTo(double.NaN, 1, 1e-3));
             var ex3 = Record.Exception(() => MathHelper.IsAlmostEqualTo(1, double.NaN));
             var ex4 = Record.Exception(() => MathHelper.IsAlmostEqualTo(1, double.NaN, 1e-3));
             var ex5 = Record.Exception(() => MathHelper.IsAlmostEqualTo(double.NaN, double.NaN));
             var ex6 = Record.Exception(() => MathHelper.IsAlmostEqualTo(double.NaN, double.NaN, 1e-3));
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             ex1.Should().BeOfType<ArgumentException>();
@@ -47,10 +45,8 @@ namespace OBeautifulCode.Math.Test
         public static void IsAlmostEqualTo_with_doubles___Should_throw_ArgumentOutOfRangeException___When_parameter_tolerance_is_less_than_0()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var ex1 = Record.Exception(() => MathHelper.IsAlmostEqualTo(4.5, -3.2, -.0000001));
             var ex2 = Record.Exception(() => MathHelper.IsAlmostEqualTo(4.5, -3.2, double.MinValue));
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             ex1.Should().BeOfType<ArgumentOutOfRangeException>();
@@ -61,7 +57,6 @@ namespace OBeautifulCode.Math.Test
         public static void IsAlmostEqualTo_with_doubles___Should_return_true___When_two_values_are_almost_equal_within_tolerance()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var result1 = MathHelper.IsAlmostEqualTo(5d, 5d);
             var result2 = MathHelper.IsAlmostEqualTo(5d, 5d, 0d);
             var result3 = MathHelper.IsAlmostEqualTo(2.2d, 2.2d);
@@ -83,7 +78,6 @@ namespace OBeautifulCode.Math.Test
             var result18 = MathHelper.IsAlmostEqualTo(-5000000.000000001d, -5000000.000000005d);
             var result19 = MathHelper.IsAlmostEqualTo(-35.123418d, -35.123417d, 5e-3d);
             var result20 = MathHelper.IsAlmostEqualTo(.0001d, -.0001d, .0002d);
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             result1.Should().BeTrue();
@@ -113,7 +107,6 @@ namespace OBeautifulCode.Math.Test
         public static void IsAlmostEqualTo_with_doubles___Should_return_false___When_two_values_are_not_almost_equal_within_tolerance()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var result1 = MathHelper.IsAlmostEqualTo(5d, -5d);
             var result2 = MathHelper.IsAlmostEqualTo(.00000001d, -.00000001d);
             var result3 = MathHelper.IsAlmostEqualTo(3.2d, 3.5d, .02d);
@@ -135,7 +128,6 @@ namespace OBeautifulCode.Math.Test
             var result18 = MathHelper.IsAlmostEqualTo(-0.000016d, -0.000015d, 1e-7d);
             var result19 = MathHelper.IsAlmostEqualTo(-35.123418d, -35.123417d, 1e-7d);
             var result20 = MathHelper.IsAlmostEqualTo(0.025d, -0.025d, .049999999d);
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             result1.Should().BeFalse();
@@ -165,10 +157,8 @@ namespace OBeautifulCode.Math.Test
         public static void IsAlmostEqualTo_with_decimals___Should_throw_ArgumentOutOfRangeException___When_parameter_tolerance_is_less_than_0()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var ex1 = Record.Exception(() => MathHelper.IsAlmostEqualTo(4.5m, -3.2m, -.0000001m));
             var ex2 = Record.Exception(() => MathHelper.IsAlmostEqualTo(4.5m, -3.2m, decimal.MinValue));
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             ex1.Should().BeOfType<ArgumentOutOfRangeException>();
@@ -179,7 +169,6 @@ namespace OBeautifulCode.Math.Test
         public static void IsAlmostEqualTo_with_decimals___Should_return_true___When_two_values_are_almost_equal_within_tolerance()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var result1 = MathHelper.IsAlmostEqualTo(5m, 5m);
             var result2 = MathHelper.IsAlmostEqualTo(5m, 5m, 0m);
             var result3 = MathHelper.IsAlmostEqualTo(2.2m, 2.2m);
@@ -201,7 +190,6 @@ namespace OBeautifulCode.Math.Test
             var result18 = MathHelper.IsAlmostEqualTo(-5000000.000000001m, -5000000.000000005m);
             var result19 = MathHelper.IsAlmostEqualTo(-35.123418m, -35.123417m, 5e-3m);
             var result20 = MathHelper.IsAlmostEqualTo(.0001m, -.0001m, .0002m);
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             result1.Should().BeTrue();
@@ -231,7 +219,6 @@ namespace OBeautifulCode.Math.Test
         public static void IsAlmostEqualTo_with_decimals___Should_return_false___When_two_values_are_not_almost_equal_within_tolerance()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var result1 = MathHelper.IsAlmostEqualTo(5m, -5m);
             var result2 = MathHelper.IsAlmostEqualTo(.00000001m, -.00000001m);
             var result3 = MathHelper.IsAlmostEqualTo(3.2m, 3.5m, .02m);
@@ -253,7 +240,6 @@ namespace OBeautifulCode.Math.Test
             var result18 = MathHelper.IsAlmostEqualTo(-0.000016m, -0.000015m, 1e-7m);
             var result19 = MathHelper.IsAlmostEqualTo(-35.123418m, -35.123417m, 1e-7m);
             var result20 = MathHelper.IsAlmostEqualTo(0.025m, -0.025m, .049999999m);
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             result1.Should().BeFalse();
@@ -283,14 +269,12 @@ namespace OBeautifulCode.Math.Test
         public static void IsGreaterThanOrAlmostEqualTo_with_doubles___Should_throw_ArgumentException___When_parameters_value1_or_value2_is_NaN()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var ex1 = Record.Exception(() => MathHelper.IsGreaterThanOrAlmostEqualTo(double.NaN, 1));
             var ex2 = Record.Exception(() => MathHelper.IsGreaterThanOrAlmostEqualTo(double.NaN, 1, 1e-3));
             var ex3 = Record.Exception(() => MathHelper.IsGreaterThanOrAlmostEqualTo(1, double.NaN));
             var ex4 = Record.Exception(() => MathHelper.IsGreaterThanOrAlmostEqualTo(1, double.NaN, 1e-3));
             var ex5 = Record.Exception(() => MathHelper.IsGreaterThanOrAlmostEqualTo(double.NaN, double.NaN));
             var ex6 = Record.Exception(() => MathHelper.IsGreaterThanOrAlmostEqualTo(double.NaN, double.NaN, 1e-3));
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             ex1.Should().BeOfType<ArgumentException>();
@@ -305,10 +289,8 @@ namespace OBeautifulCode.Math.Test
         public static void IsGreaterThanOrAlmostEqualTo_with_doubles___Should_throw_ArgumentOutOfRangeException___When_parameter_tolerance_is_less_than_0()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var ex1 = Record.Exception(() => MathHelper.IsGreaterThanOrAlmostEqualTo(4.5, -3.2, -.0000001));
             var ex2 = Record.Exception(() => MathHelper.IsGreaterThanOrAlmostEqualTo(4.5, -3.2, double.MinValue));
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             ex1.Should().BeOfType<ArgumentOutOfRangeException>();
@@ -319,7 +301,6 @@ namespace OBeautifulCode.Math.Test
         public static void IsGreaterThanOrAlmostEqualTo_with_doubles___Should_return_true___When_two_values_are_almost_equal_within_tolerance()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var result1 = MathHelper.IsGreaterThanOrAlmostEqualTo(5d, 5d);
             var result2 = MathHelper.IsGreaterThanOrAlmostEqualTo(5d, 5d, 0d);
             var result3 = MathHelper.IsGreaterThanOrAlmostEqualTo(2.2d, 2.2d);
@@ -341,7 +322,6 @@ namespace OBeautifulCode.Math.Test
             var result18 = MathHelper.IsGreaterThanOrAlmostEqualTo(-5000000.000000001d, -5000000.000000005d);
             var result19 = MathHelper.IsGreaterThanOrAlmostEqualTo(-35.123418d, -35.123417d, 5e-3d);
             var result20 = MathHelper.IsGreaterThanOrAlmostEqualTo(.0001d, -.0001d, .0002d);
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             result1.Should().BeTrue();
@@ -371,7 +351,6 @@ namespace OBeautifulCode.Math.Test
         public static void IsGreaterThanOrAlmostEqualTo_with_doubles___Should_return_true___When_first_value_is_greater_than_second_value()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var result1 = MathHelper.IsGreaterThanOrAlmostEqualTo(5d, -5d);
             var result2 = MathHelper.IsGreaterThanOrAlmostEqualTo(.00000001d, -.00000001d);
             var result3 = MathHelper.IsGreaterThanOrAlmostEqualTo(3.5d, 3.2d, .02d);
@@ -382,7 +361,6 @@ namespace OBeautifulCode.Math.Test
             var result8 = MathHelper.IsGreaterThanOrAlmostEqualTo(0.000016d, 0.000015d, 1e-7d);
             var result9 = MathHelper.IsGreaterThanOrAlmostEqualTo(35.123418d, 35.123417d, 1e-7d);
             var result10 = MathHelper.IsGreaterThanOrAlmostEqualTo(0.025d, -0.025d, .049999999d);
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             result1.Should().BeTrue();
@@ -401,7 +379,6 @@ namespace OBeautifulCode.Math.Test
         public static void IsGreaterThanOrAlmostEqualTo_with_doubles___Should_return_false___When_first_value_is_less_than_but_not_almost_equal_to_the_second_value_within_tolerance()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var result1 = MathHelper.IsGreaterThanOrAlmostEqualTo(-5d, 5d);
             var result2 = MathHelper.IsGreaterThanOrAlmostEqualTo(-.00000001d, .00000001d);
             var result3 = MathHelper.IsGreaterThanOrAlmostEqualTo(3.2d, 3.5d, .02d);
@@ -412,7 +389,6 @@ namespace OBeautifulCode.Math.Test
             var result8 = MathHelper.IsGreaterThanOrAlmostEqualTo(0.000015d, 0.000016d, 1e-7d);
             var result9 = MathHelper.IsGreaterThanOrAlmostEqualTo(35.123417d, 35.123418d, 1e-7d);
             var result10 = MathHelper.IsGreaterThanOrAlmostEqualTo(-0.025d, 0.025d, .049999999d);
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             result1.Should().BeFalse();
@@ -431,10 +407,8 @@ namespace OBeautifulCode.Math.Test
         public static void IsGreaterThanOrAlmostEqualTo_with_decimals___Should_throw_ArgumentOutOfRangeException___When_parameter_tolerance_is_less_than_0()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var ex1 = Record.Exception(() => MathHelper.IsGreaterThanOrAlmostEqualTo(4.5m, -3.2m, -.0000001m));
             var ex2 = Record.Exception(() => MathHelper.IsGreaterThanOrAlmostEqualTo(4.5m, -3.2m, decimal.MinValue));
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             ex1.Should().BeOfType<ArgumentOutOfRangeException>();
@@ -445,7 +419,6 @@ namespace OBeautifulCode.Math.Test
         public static void IsGreaterThanOrAlmostEqualTo_with_decimals___Should_return_true___When_two_values_are_almost_equal_within_tolerance()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var result1 = MathHelper.IsGreaterThanOrAlmostEqualTo(5m, 5m);
             var result2 = MathHelper.IsGreaterThanOrAlmostEqualTo(5m, 5m, 0m);
             var result3 = MathHelper.IsGreaterThanOrAlmostEqualTo(2.2m, 2.2m);
@@ -467,7 +440,6 @@ namespace OBeautifulCode.Math.Test
             var result18 = MathHelper.IsGreaterThanOrAlmostEqualTo(-5000000.000000001m, -5000000.000000005m);
             var result19 = MathHelper.IsGreaterThanOrAlmostEqualTo(-35.123418m, -35.123417m, 5e-3m);
             var result20 = MathHelper.IsGreaterThanOrAlmostEqualTo(.0001m, -.0001m, .0002m);
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             result1.Should().BeTrue();
@@ -497,7 +469,6 @@ namespace OBeautifulCode.Math.Test
         public static void IsGreaterThanOrAlmostEqualTo_with_decimals___Should_return_true___When_first_value_is_greater_than_second_value()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var result1 = MathHelper.IsGreaterThanOrAlmostEqualTo(5m, -5m);
             var result2 = MathHelper.IsGreaterThanOrAlmostEqualTo(.00000001m, -.00000001m);
             var result3 = MathHelper.IsGreaterThanOrAlmostEqualTo(3.5m, 3.2m, .02m);
@@ -508,7 +479,6 @@ namespace OBeautifulCode.Math.Test
             var result8 = MathHelper.IsGreaterThanOrAlmostEqualTo(0.000016m, 0.000015m, 1e-7m);
             var result9 = MathHelper.IsGreaterThanOrAlmostEqualTo(35.123418m, 35.123417m, 1e-7m);
             var result10 = MathHelper.IsGreaterThanOrAlmostEqualTo(0.025m, -0.025m, .049999999m);
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             result1.Should().BeTrue();
@@ -527,7 +497,6 @@ namespace OBeautifulCode.Math.Test
         public static void IsGreaterThanOrAlmostEqualTo_with_decimals___Should_return_false___When_first_value_is_less_than_but_not_almost_equal_to_second_value_within_tolerance()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var result1 = MathHelper.IsGreaterThanOrAlmostEqualTo(-5m, 5m);
             var result2 = MathHelper.IsGreaterThanOrAlmostEqualTo(-.00000001m, .00000001m);
             var result3 = MathHelper.IsGreaterThanOrAlmostEqualTo(3.2m, 3.5m, .02m);
@@ -538,7 +507,6 @@ namespace OBeautifulCode.Math.Test
             var result8 = MathHelper.IsGreaterThanOrAlmostEqualTo(0.000015m, 0.000016m, 1e-7m);
             var result9 = MathHelper.IsGreaterThanOrAlmostEqualTo(35.123417m, 35.123418m, 1e-7m);
             var result10 = MathHelper.IsGreaterThanOrAlmostEqualTo(-0.025m, 0.025m, .049999999m);
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             result1.Should().BeFalse();
@@ -557,14 +525,12 @@ namespace OBeautifulCode.Math.Test
         public static void IsLessThanOrAlmostEqualTo_with_doubles___Should_throw_ArgumentException___When_parameters_value1_or_value2_is_NaN()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var ex1 = Record.Exception(() => MathHelper.IsLessThanOrAlmostEqualTo(double.NaN, 1));
             var ex2 = Record.Exception(() => MathHelper.IsLessThanOrAlmostEqualTo(double.NaN, 1, 1e-3));
             var ex3 = Record.Exception(() => MathHelper.IsLessThanOrAlmostEqualTo(1, double.NaN));
             var ex4 = Record.Exception(() => MathHelper.IsLessThanOrAlmostEqualTo(1, double.NaN, 1e-3));
             var ex5 = Record.Exception(() => MathHelper.IsLessThanOrAlmostEqualTo(double.NaN, double.NaN));
             var ex6 = Record.Exception(() => MathHelper.IsLessThanOrAlmostEqualTo(double.NaN, double.NaN, 1e-3));
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             ex1.Should().BeOfType<ArgumentException>();
@@ -579,10 +545,8 @@ namespace OBeautifulCode.Math.Test
         public static void IsLessThanOrAlmostEqualTo_with_doubles___Should_throw_ArgumentOutOfRangeException___When_parameter_tolerance_is_less_than_0()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var ex1 = Record.Exception(() => MathHelper.IsLessThanOrAlmostEqualTo(4.5, -3.2, -.0000001));
             var ex2 = Record.Exception(() => MathHelper.IsLessThanOrAlmostEqualTo(4.5, -3.2, double.MinValue));
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             ex1.Should().BeOfType<ArgumentOutOfRangeException>();
@@ -593,7 +557,6 @@ namespace OBeautifulCode.Math.Test
         public static void IsLessThanOrAlmostEqualTo_with_doubles___Should_return_true___When_two_values_are_almost_equal_within_tolerance()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var result1 = MathHelper.IsLessThanOrAlmostEqualTo(5d, 5d);
             var result2 = MathHelper.IsLessThanOrAlmostEqualTo(5d, 5d, 0d);
             var result3 = MathHelper.IsLessThanOrAlmostEqualTo(2.2d, 2.2d);
@@ -615,7 +578,6 @@ namespace OBeautifulCode.Math.Test
             var result18 = MathHelper.IsLessThanOrAlmostEqualTo(-5000000.000000001d, -5000000.000000005d);
             var result19 = MathHelper.IsLessThanOrAlmostEqualTo(-35.123418d, -35.123417d, 5e-3d);
             var result20 = MathHelper.IsLessThanOrAlmostEqualTo(.0001d, -.0001d, .0002d);
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             result1.Should().BeTrue();
@@ -645,7 +607,6 @@ namespace OBeautifulCode.Math.Test
         public static void IsLessThanOrAlmostEqualTo_with_doubles___Should_return_true___When_first_value_is_less_than_second_value()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var result1 = MathHelper.IsLessThanOrAlmostEqualTo(-5d, 5d);
             var result2 = MathHelper.IsLessThanOrAlmostEqualTo(-.00000001d, .00000001d);
             var result3 = MathHelper.IsLessThanOrAlmostEqualTo(3.2d, 3.5d, .02d);
@@ -656,7 +617,6 @@ namespace OBeautifulCode.Math.Test
             var result8 = MathHelper.IsLessThanOrAlmostEqualTo(0.000015d, 0.000016d, 1e-7d);
             var result9 = MathHelper.IsLessThanOrAlmostEqualTo(35.123417d, 35.123418d, 1e-7d);
             var result10 = MathHelper.IsLessThanOrAlmostEqualTo(-0.025d, 0.025d, .049999999d);
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             result1.Should().BeTrue();
@@ -675,7 +635,6 @@ namespace OBeautifulCode.Math.Test
         public static void IsLessThanOrAlmostEqualTo_with_doubles___Should_return_false___When_first_value_is_greater_than_but_not_almost_equal_to_the_second_value_within_tolerance()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var result1 = MathHelper.IsLessThanOrAlmostEqualTo(5d, -5d);
             var result2 = MathHelper.IsLessThanOrAlmostEqualTo(.00000001d, -.00000001d);
             var result3 = MathHelper.IsLessThanOrAlmostEqualTo(3.5d, 3.2d, .02d);
@@ -686,7 +645,6 @@ namespace OBeautifulCode.Math.Test
             var result8 = MathHelper.IsLessThanOrAlmostEqualTo(0.000016d, 0.000015d, 1e-7d);
             var result9 = MathHelper.IsLessThanOrAlmostEqualTo(35.123418d, 35.123417d, 1e-7d);
             var result10 = MathHelper.IsLessThanOrAlmostEqualTo(0.025d, -0.025d, .049999999d);
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             result1.Should().BeFalse();
@@ -705,10 +663,8 @@ namespace OBeautifulCode.Math.Test
         public static void IsLessThanOrAlmostEqualTo_with_decimals___Should_throw_ArgumentOutOfRangeException___When_parameter_tolerance_is_less_than_0()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var ex1 = Record.Exception(() => MathHelper.IsLessThanOrAlmostEqualTo(4.5m, -3.2m, -.0000001m));
             var ex2 = Record.Exception(() => MathHelper.IsLessThanOrAlmostEqualTo(4.5m, -3.2m, decimal.MinValue));
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             ex1.Should().BeOfType<ArgumentOutOfRangeException>();
@@ -719,7 +675,6 @@ namespace OBeautifulCode.Math.Test
         public static void IsLessThanOrAlmostEqualTo_with_decimals___Should_return_true___When_two_values_are_almost_equal_within_tolerance()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var result1 = MathHelper.IsLessThanOrAlmostEqualTo(5m, 5m);
             var result2 = MathHelper.IsLessThanOrAlmostEqualTo(5m, 5m, 0m);
             var result3 = MathHelper.IsLessThanOrAlmostEqualTo(2.2m, 2.2m);
@@ -741,7 +696,6 @@ namespace OBeautifulCode.Math.Test
             var result18 = MathHelper.IsLessThanOrAlmostEqualTo(-5000000.000000001m, -5000000.000000005m);
             var result19 = MathHelper.IsLessThanOrAlmostEqualTo(-35.123418m, -35.123417m, 5e-3m);
             var result20 = MathHelper.IsLessThanOrAlmostEqualTo(.0001m, -.0001m, .0002m);
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             result1.Should().BeTrue();
@@ -771,7 +725,6 @@ namespace OBeautifulCode.Math.Test
         public static void IsLessThanOrAlmostEqualTo_with_decimals___Should_return_true___When_first_value_is_less_than_second_value()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var result1 = MathHelper.IsLessThanOrAlmostEqualTo(-5m, 5m);
             var result2 = MathHelper.IsLessThanOrAlmostEqualTo(-.00000001m, .00000001m);
             var result3 = MathHelper.IsLessThanOrAlmostEqualTo(3.2m, 3.3m, .02m);
@@ -782,7 +735,6 @@ namespace OBeautifulCode.Math.Test
             var result8 = MathHelper.IsLessThanOrAlmostEqualTo(0.000015m, 0.000016m, 1e-7m);
             var result9 = MathHelper.IsLessThanOrAlmostEqualTo(35.123417m, 35.123418m, 1e-7m);
             var result10 = MathHelper.IsLessThanOrAlmostEqualTo(-0.025m, 0.025m, .049999999m);
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             result1.Should().BeTrue();
@@ -801,7 +753,6 @@ namespace OBeautifulCode.Math.Test
         public static void IsLessThanOrAlmostEqualTo_with_decimals___Should_return_false___When_first_value_is_greater_than_but_not_almost_equal_to_second_value_within_tolerance()
         {
             // Arrange, Act
-            // ReSharper disable InvokeAsExtensionMethod
             var result1 = MathHelper.IsLessThanOrAlmostEqualTo(5m, -5m);
             var result2 = MathHelper.IsLessThanOrAlmostEqualTo(.00000001m, -.00000001m);
             var result3 = MathHelper.IsLessThanOrAlmostEqualTo(3.5m, 3.2m, .02m);
@@ -812,7 +763,6 @@ namespace OBeautifulCode.Math.Test
             var result8 = MathHelper.IsLessThanOrAlmostEqualTo(0.000016m, 0.000015m, 1e-7m);
             var result9 = MathHelper.IsLessThanOrAlmostEqualTo(35.123418m, 35.123417m, 1e-7m);
             var result10 = MathHelper.IsLessThanOrAlmostEqualTo(0.025m, -0.025m, .049999999m);
-            // ReSharper restore InvokeAsExtensionMethod
 
             // Assert
             result1.Should().BeFalse();
@@ -834,7 +784,6 @@ namespace OBeautifulCode.Math.Test
             List<double> doubles1 = null;
             var doubles2 = new List<double> { 4.5 };
 
-            // ReSharper disable AccessToModifiedClosure
             Assert.Throws<ArgumentNullException>(() => Console.Write(MathHelper.Covariance(doubles1, doubles2)));
             Assert.Throws<ArgumentNullException>(() => Console.Write(MathHelper.Covariance(doubles2, doubles1)));
             doubles1 = new List<double>();
@@ -869,7 +818,6 @@ namespace OBeautifulCode.Math.Test
             decimals2.Add(9.3m);
             Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(decimals1, decimals2)));
             Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(decimals2, decimals1)));
-            // ReSharper restore AccessToModifiedClosure
 
             // validate that formula works
             doubles1 = new List<double>();
@@ -1014,10 +962,8 @@ namespace OBeautifulCode.Math.Test
             List<double> doubles = null;
 
             // null or empty
-            // ReSharper disable AccessToModifiedClosure
             Assert.Throws<ArgumentNullException>(() => Console.Write(MathHelper.StandardDeviation(doubles)));
             Assert.Throws<ArgumentNullException>(() => Console.Write(MathHelper.StandardDeviation(decimals)));
-            // ReSharper restore AccessToModifiedClosure
 
             decimals = new List<decimal>();
             doubles = new List<double>();
@@ -1032,19 +978,19 @@ namespace OBeautifulCode.Math.Test
 
             // two or more values
             decimals.Add(1);
-            Assert.Equal((decimal)0.707107, Math.Round(MathHelper.StandardDeviation(decimals), 6));
+            Assert.Equal(0.707107M, Math.Round(MathHelper.StandardDeviation(decimals), 6));
             decimals.Add(3);
             Assert.Equal(1, Math.Round(MathHelper.StandardDeviation(decimals), 6));
             decimals.Add(4);
-            Assert.Equal((decimal)1.290994, Math.Round(MathHelper.StandardDeviation(decimals), 6));
+            Assert.Equal(1.290994M, Math.Round(MathHelper.StandardDeviation(decimals), 6));
             decimals.Add(3);
-            Assert.Equal((decimal)1.140175, Math.Round(MathHelper.StandardDeviation(decimals), 6));
+            Assert.Equal(1.140175M, Math.Round(MathHelper.StandardDeviation(decimals), 6));
             decimals.Add(6);
-            Assert.Equal((decimal)1.722401, Math.Round(MathHelper.StandardDeviation(decimals), 6));
+            Assert.Equal(1.722401M, Math.Round(MathHelper.StandardDeviation(decimals), 6));
             decimals.Add(7);
-            Assert.Equal((decimal)2.138090, Math.Round(MathHelper.StandardDeviation(decimals), 6));
+            Assert.Equal(2.138090M, Math.Round(MathHelper.StandardDeviation(decimals), 6));
             decimals.Add(8);
-            Assert.Equal((decimal)2.492847, Math.Round(MathHelper.StandardDeviation(decimals), 6));
+            Assert.Equal(2.492847M, Math.Round(MathHelper.StandardDeviation(decimals), 6));
 
             doubles.Add(9);
             Assert.Equal(3.535534, Math.Round(MathHelper.StandardDeviation(doubles), 6));
@@ -1066,7 +1012,7 @@ namespace OBeautifulCode.Math.Test
         public static void TruncateDoubleTests()
         {
             // test decimals 1.*
-            Assert.Equal(1, MathHelper.Truncate((double)1));
+            Assert.Equal(1, MathHelper.Truncate(1D));
             Assert.Equal(1, MathHelper.Truncate(1.1));
             Assert.Equal(1, MathHelper.Truncate(1.49));
             Assert.Equal(1, MathHelper.Truncate(1.5));
@@ -1074,7 +1020,7 @@ namespace OBeautifulCode.Math.Test
             Assert.Equal(1, MathHelper.Truncate(1.99));
 
             // negative numbers
-            Assert.Equal(-1, MathHelper.Truncate((double)-1));
+            Assert.Equal(-1, MathHelper.Truncate(-1D));
             Assert.Equal(-1, MathHelper.Truncate(-1.1));
             Assert.Equal(-1, MathHelper.Truncate(-1.49));
             Assert.Equal(-1, MathHelper.Truncate(-1.5));
@@ -1082,13 +1028,13 @@ namespace OBeautifulCode.Math.Test
             Assert.Equal(-1, MathHelper.Truncate(-1.99));
 
             // zero
-            Assert.Equal(0, MathHelper.Truncate((double)0));
+            Assert.Equal(0, MathHelper.Truncate(0D));
             Assert.Equal(0, MathHelper.Truncate(0.1));
             Assert.Equal(0, MathHelper.Truncate(0.49));
             Assert.Equal(0, MathHelper.Truncate(0.5));
             Assert.Equal(0, MathHelper.Truncate(0.51));
             Assert.Equal(0, MathHelper.Truncate(0.99));
-            Assert.Equal(0, MathHelper.Truncate((double)0));
+            Assert.Equal(0, MathHelper.Truncate(0D));
             Assert.Equal(0, MathHelper.Truncate(-0.1));
             Assert.Equal(0, MathHelper.Truncate(-0.49));
             Assert.Equal(0, MathHelper.Truncate(-0.5));
@@ -1110,42 +1056,42 @@ namespace OBeautifulCode.Math.Test
         public static void TruncateDecimalTests()
         {
             // test decimals 1.*
-            Assert.Equal(1, MathHelper.Truncate((decimal)1));
-            Assert.Equal(1, MathHelper.Truncate((decimal)1.1));
-            Assert.Equal(1, MathHelper.Truncate((decimal)1.49));
-            Assert.Equal(1, MathHelper.Truncate((decimal)1.5));
-            Assert.Equal(1, MathHelper.Truncate((decimal)1.51));
-            Assert.Equal(1, MathHelper.Truncate((decimal)1.99));
+            Assert.Equal(1, MathHelper.Truncate(1M));
+            Assert.Equal(1, MathHelper.Truncate(1.1M));
+            Assert.Equal(1, MathHelper.Truncate(1.49M));
+            Assert.Equal(1, MathHelper.Truncate(1.5M));
+            Assert.Equal(1, MathHelper.Truncate(1.51M));
+            Assert.Equal(1, MathHelper.Truncate(1.99M));
 
             // negative numbers
-            Assert.Equal(-1, MathHelper.Truncate((decimal)-1));
-            Assert.Equal(-1, MathHelper.Truncate((decimal)-1.1));
-            Assert.Equal(-1, MathHelper.Truncate((decimal)-1.49));
-            Assert.Equal(-1, MathHelper.Truncate((decimal)-1.5));
-            Assert.Equal(-1, MathHelper.Truncate((decimal)-1.51));
-            Assert.Equal(-1, MathHelper.Truncate((decimal)-1.99));
+            Assert.Equal(-1, MathHelper.Truncate(-1M));
+            Assert.Equal(-1, MathHelper.Truncate(-1.1M));
+            Assert.Equal(-1, MathHelper.Truncate(-1.49M));
+            Assert.Equal(-1, MathHelper.Truncate(-1.5M));
+            Assert.Equal(-1, MathHelper.Truncate(-1.51M));
+            Assert.Equal(-1, MathHelper.Truncate(-1.99M));
 
             // zero
-            Assert.Equal(0, MathHelper.Truncate((decimal)0));
-            Assert.Equal(0, MathHelper.Truncate((decimal)0.1));
-            Assert.Equal(0, MathHelper.Truncate((decimal)0.49));
-            Assert.Equal(0, MathHelper.Truncate((decimal)0.5));
-            Assert.Equal(0, MathHelper.Truncate((decimal)0.51));
-            Assert.Equal(0, MathHelper.Truncate((decimal)0.99));
-            Assert.Equal(0, MathHelper.Truncate((decimal)0));
-            Assert.Equal(0, MathHelper.Truncate((decimal)-0.1));
-            Assert.Equal(0, MathHelper.Truncate((decimal)-0.49));
-            Assert.Equal(0, MathHelper.Truncate((decimal)-0.5));
-            Assert.Equal(0, MathHelper.Truncate((decimal)-0.51));
-            Assert.Equal(0, MathHelper.Truncate((decimal)-0.99));
+            Assert.Equal(0, MathHelper.Truncate(0M));
+            Assert.Equal(0, MathHelper.Truncate(0.1M));
+            Assert.Equal(0, MathHelper.Truncate(0.49M));
+            Assert.Equal(0, MathHelper.Truncate(0.5M));
+            Assert.Equal(0, MathHelper.Truncate(0.51M));
+            Assert.Equal(0, MathHelper.Truncate(0.99M));
+            Assert.Equal(0, MathHelper.Truncate(0M));
+            Assert.Equal(0, MathHelper.Truncate(-0.1M));
+            Assert.Equal(0, MathHelper.Truncate(-0.49M));
+            Assert.Equal(0, MathHelper.Truncate(-0.5M));
+            Assert.Equal(0, MathHelper.Truncate(-0.51M));
+            Assert.Equal(0, MathHelper.Truncate(-0.99M));
 
             // bounds
             Assert.Equal(int.MinValue, MathHelper.Truncate(Convert.ToDecimal(int.MinValue)));
             Assert.Equal(int.MaxValue, MathHelper.Truncate(Convert.ToDecimal(int.MaxValue)));
-            Assert.Equal(int.MinValue + 1, MathHelper.Truncate(Convert.ToDecimal(int.MinValue) + (decimal).1));
-            Assert.Equal(int.MaxValue - 1, MathHelper.Truncate(Convert.ToDecimal(int.MaxValue) - (decimal).1));
-            Assert.Throws<OverflowException>(() => MathHelper.Truncate(Convert.ToDecimal(int.MinValue) - (decimal).1));
-            Assert.Throws<OverflowException>(() => MathHelper.Truncate(Convert.ToDecimal(int.MaxValue) + (decimal).1));
+            Assert.Equal(int.MinValue + 1, MathHelper.Truncate(Convert.ToDecimal(int.MinValue) + .1M));
+            Assert.Equal(int.MaxValue - 1, MathHelper.Truncate(Convert.ToDecimal(int.MaxValue) - .1M));
+            Assert.Throws<OverflowException>(() => MathHelper.Truncate(Convert.ToDecimal(int.MinValue) - .1M));
+            Assert.Throws<OverflowException>(() => MathHelper.Truncate(Convert.ToDecimal(int.MaxValue) + .1M));
             Assert.Throws<OverflowException>(() => MathHelper.Truncate(decimal.MaxValue));
             Assert.Throws<OverflowException>(() => MathHelper.Truncate(decimal.MinValue));
         }
@@ -1155,17 +1101,15 @@ namespace OBeautifulCode.Math.Test
         {
             // negative digits
             decimal value = 1;
-            // ReSharper disable AccessToModifiedClosure
             Assert.Throws<ArgumentOutOfRangeException>(() => MathHelper.TruncateSignificantDigits(value, -1));
             Assert.Throws<ArgumentOutOfRangeException>(() => MathHelper.TruncateSignificantDigits(value, -2));
             Assert.Throws<ArgumentOutOfRangeException>(() => MathHelper.TruncateSignificantDigits(value, int.MinValue));
-            // ReSharper restore AccessToModifiedClosure
 
             // zero digits
             Assert.Equal(1, MathHelper.TruncateSignificantDigits(value, 0));
-            value = (decimal)1.2;
+            value = 1.2M;
             Assert.Equal(1, MathHelper.TruncateSignificantDigits(value, 0));
-            value = (decimal)-12.382;
+            value = -12.382M;
             Assert.Equal(-12, MathHelper.TruncateSignificantDigits(value, 0));
 
             // positive digits
@@ -1175,23 +1119,23 @@ namespace OBeautifulCode.Math.Test
             Assert.Equal(3, MathHelper.TruncateSignificantDigits(value, 3));
             Assert.Equal(3, MathHelper.TruncateSignificantDigits(value, 4));
 
-            value = (decimal)4.362947;
-            Assert.Equal((decimal)4.3, MathHelper.TruncateSignificantDigits(value, 1));
-            Assert.Equal((decimal)4.36, MathHelper.TruncateSignificantDigits(value, 2));
-            Assert.Equal((decimal)4.362, MathHelper.TruncateSignificantDigits(value, 3));
-            Assert.Equal((decimal)4.3629, MathHelper.TruncateSignificantDigits(value, 4));
-            Assert.Equal((decimal)4.36294, MathHelper.TruncateSignificantDigits(value, 5));
-            Assert.Equal((decimal)4.362947, MathHelper.TruncateSignificantDigits(value, 6));
-            Assert.Equal((decimal)4.362947, MathHelper.TruncateSignificantDigits(value, 7));
+            value = 4.362947M;
+            Assert.Equal(4.3M, MathHelper.TruncateSignificantDigits(value, 1));
+            Assert.Equal(4.36M, MathHelper.TruncateSignificantDigits(value, 2));
+            Assert.Equal(4.362M, MathHelper.TruncateSignificantDigits(value, 3));
+            Assert.Equal(4.3629M, MathHelper.TruncateSignificantDigits(value, 4));
+            Assert.Equal(4.36294M, MathHelper.TruncateSignificantDigits(value, 5));
+            Assert.Equal(4.362947M, MathHelper.TruncateSignificantDigits(value, 6));
+            Assert.Equal(4.362947M, MathHelper.TruncateSignificantDigits(value, 7));
 
-            value = (decimal)-4.362947;
-            Assert.Equal((decimal)-4.3, MathHelper.TruncateSignificantDigits(value, 1));
-            Assert.Equal((decimal)-4.36, MathHelper.TruncateSignificantDigits(value, 2));
-            Assert.Equal((decimal)-4.362, MathHelper.TruncateSignificantDigits(value, 3));
-            Assert.Equal((decimal)-4.3629, MathHelper.TruncateSignificantDigits(value, 4));
-            Assert.Equal((decimal)-4.36294, MathHelper.TruncateSignificantDigits(value, 5));
-            Assert.Equal((decimal)-4.362947, MathHelper.TruncateSignificantDigits(value, 6));
-            Assert.Equal((decimal)-4.362947, MathHelper.TruncateSignificantDigits(value, 7));
+            value = -4.362947M;
+            Assert.Equal(-4.3M, MathHelper.TruncateSignificantDigits(value, 1));
+            Assert.Equal(-4.36M, MathHelper.TruncateSignificantDigits(value, 2));
+            Assert.Equal(-4.362M, MathHelper.TruncateSignificantDigits(value, 3));
+            Assert.Equal(-4.3629M, MathHelper.TruncateSignificantDigits(value, 4));
+            Assert.Equal(-4.36294M, MathHelper.TruncateSignificantDigits(value, 5));
+            Assert.Equal(-4.362947M, MathHelper.TruncateSignificantDigits(value, 6));
+            Assert.Equal(-4.362947M, MathHelper.TruncateSignificantDigits(value, 7));
 
             Assert.Throws<OverflowException>(() => value = MathHelper.TruncateSignificantDigits(value, int.MaxValue));
         }
@@ -1203,14 +1147,12 @@ namespace OBeautifulCode.Math.Test
             List<double> doubles = null;
 
             // null or empty
-            // ReSharper disable AccessToModifiedClosure
             Assert.Throws<ArgumentNullException>(() => Console.Write(MathHelper.Variance(doubles)));
             Assert.Throws<ArgumentNullException>(() => Console.Write(MathHelper.Variance(decimals)));
             decimals = new List<decimal>();
             doubles = new List<double>();
             Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Variance(doubles)));
             Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Variance(decimals)));
-            // ReSharper restore AccessToModifiedClosure
 
             // one value
             decimals.Add(2);
@@ -1290,7 +1232,5 @@ namespace OBeautifulCode.Math.Test
             // Assert
             actual.Should().Be(Guid.Empty);
         }
-
-        // ReSharper restore InconsistentNaming
     }
 }

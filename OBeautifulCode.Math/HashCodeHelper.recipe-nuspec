@@ -4,9 +4,9 @@
     <id>OBeautifulCode.Math.Recipes.HashCodeHelper</id>
     <description>Provides methods to help with generating hash codes for structures and classes.</description>
     <tags>hashcode hash code iequatable</tags>
-    <developmentDependency>true</developmentDependency>
+    <iconUrl>https://raw.githubusercontent.com/OBeautifulCode/OBeautifulCode.Math/master/OBeautifulCode.Math/nuget-icon.png</iconUrl>
   </metadata>
   <files>
-    <file src="HashCodeHelper.cs" target="content\net45\.recipes\OBeautifulCode.Math\HashCodeHelper.cs" />
+    <file src="HashCodeHelper.cs" target="content\net462\.recipes\OBeautifulCode.Math\HashCodeHelper.cs" />
   </files>
 </package>

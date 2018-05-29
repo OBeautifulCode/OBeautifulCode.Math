@@ -4,9 +4,9 @@
     <id>OBeautifulCode.Math.Recipes.ThreadSafeRandom</id>
     <description>Provides a thread-safe pseudo-random number generator.</description>
     <tags>random number generator rng threadsafe</tags>
-    <developmentDependency>true</developmentDependency>
+    <iconUrl>https://raw.githubusercontent.com/OBeautifulCode/OBeautifulCode.Math/master/OBeautifulCode.Math/nuget-icon.png</iconUrl>
   </metadata>
   <files>
-    <file src="ThreadSafeRandom.cs" target="content\net45\.recipes\OBeautifulCode.Math\ThreadSafeRandom.cs" />
+    <file src="ThreadSafeRandom.cs" target="content\net462\.recipes\OBeautifulCode.Math\ThreadSafeRandom.cs" />
   </files>
 </package>
