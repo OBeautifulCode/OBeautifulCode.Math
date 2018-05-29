@@ -1,10 +1,10 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/cy79le6v05nmrph9?svg=true)](https://ci.appveyor.com/project/SurajGupta/obeautifulcode-math)
 
-![NuGet](https://img.shields.io/nuget/v/OBeautifulCode.Math.Recipes.HashCodeHelper.svg)
+![NuGet](https://img.shields.io/nuget/v/OBeautifulCode.Math.Recipes.HashCodeHelper.svg)  OBeautifulCode.Math.Recipes.HashCodeHelper
 
-![NuGet](https://img.shields.io/nuget/v/OBeautifulCode.Math.Recipes.MathHelper.svg)
+![NuGet](https://img.shields.io/nuget/v/OBeautifulCode.Math.Recipes.MathHelper.svg)  OBeautifulCode.Math.Recipes.MathHelper
 
-![NuGet](https://img.shields.io/nuget/v/OBeautifulCode.Math.Recipes.ThreadSafeRandom.svg)
+![NuGet](https://img.shields.io/nuget/v/OBeautifulCode.Math.Recipes.ThreadSafeRandom.svg)  OBeautifulCode.Math.Recipes.ThreadSafeRandom
 
 Math and Numeric Helpers
 ========================
