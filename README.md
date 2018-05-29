@@ -1,10 +1,10 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/cy79le6v05nmrph9?svg=true)](https://ci.appveyor.com/project/SurajGupta/obeautifulcode-math)
 
-![NuGet](https://img.shields.io/nuget/v/OBeautifulCode.Math.Recipes.HashCodeHelper.svg)  OBeautifulCode.Math.Recipes.HashCodeHelper
+[![Nuget status](https://img.shields.io/nuget/v/OBeautifulCode.Math.Recipes.HashCodeHelper.svg)](https://www.nuget.org/packages/OBeautifulCode.Math.Recipes.HashCodeHelper)  OBeautifulCode.Math.Recipes.HashCodeHelper
 
-![NuGet](https://img.shields.io/nuget/v/OBeautifulCode.Math.Recipes.MathHelper.svg)  OBeautifulCode.Math.Recipes.MathHelper
+[![Nuget status](https://img.shields.io/nuget/v/OBeautifulCode.Math.Recipes.MathHelper.svg)](https://www.nuget.org/packages/OBeautifulCode.Math.Recipes.MathHelper)  OBeautifulCode.Math.Recipes.MathHelper
 
-![NuGet](https://img.shields.io/nuget/v/OBeautifulCode.Math.Recipes.ThreadSafeRandom.svg)  OBeautifulCode.Math.Recipes.ThreadSafeRandom
+[![Nuget status](https://img.shields.io/nuget/v/OBeautifulCode.Math.Recipes.ThreadSafeRandom.svg)](https://www.nuget.org/packages/OBeautifulCode.Math.Recipes.ThreadSafeRandom)  OBeautifulCode.Math.Recipes.ThreadSafeRandom
 
 Math and Numeric Helpers
 ========================
