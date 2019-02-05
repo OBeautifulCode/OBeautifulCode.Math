@@ -8,8 +8,11 @@ namespace OBeautifulCode.Math.Test
 {
     using System.Collections.Generic;
     using System.Linq;
+
     using FakeItEasy;
+
     using FluentAssertions;
+
     using OBeautifulCode.AutoFakeItEasy;
     using OBeautifulCode.Math.Recipes;
 
@@ -362,6 +365,58 @@ namespace OBeautifulCode.Math.Test
 
             // Assert
             hash1.Should().Be(hash2);
+        }
+
+        [Fact]
+        public static void IsEven___Should_return_true___When_value_is_even()
+        {
+            // Arrange
+            var values = new[] { int.MinValue, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
+
+            // Act
+            var actuals = values.Select(_ => _.IsEven());
+
+            // Assert
+            actuals.Should().AllBeEquivalentTo(true);
+        }
+
+        [Fact]
+        public static void IsEven___Should_return_false___When_value_is_not_even()
+        {
+            // Arrange
+            var values = new[] { -11, -9, -7, -5, -3, -1, 1, 3, 5, 7, 9, 11, int.MaxValue };
+
+            // Act
+            var actuals = values.Select(_ => _.IsEven());
+
+            // Assert
+            actuals.Should().AllBeEquivalentTo(false);
+        }
+
+        [Fact]
+        public static void IsOdd___Should_return_true___When_value_is_odd()
+        {
+            // Arrange
+            var values = new[] { -11, -9, -7, -5, -3, -1, 1, 3, 5, 7, 9, 11, int.MaxValue };
+
+            // Act
+            var actuals = values.Select(_ => _.IsOdd());
+
+            // Assert
+            actuals.Should().AllBeEquivalentTo(true);
+        }
+
+        [Fact]
+        public static void IsOdd___Should_return_false___When_value_is_not_odd()
+        {
+            // Arrange
+            var values = new[] { int.MinValue, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
+
+            // Act
+            var actuals = values.Select(_ => _.IsOdd());
+
+            // Assert
+            actuals.Should().AllBeEquivalentTo(false);
         }
     }
 }
