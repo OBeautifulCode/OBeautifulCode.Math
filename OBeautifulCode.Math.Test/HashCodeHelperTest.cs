@@ -7,6 +7,7 @@
 namespace OBeautifulCode.Math.Test
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
 
     using FakeItEasy;
@@ -199,6 +200,48 @@ namespace OBeautifulCode.Math.Test
             systemUnderTest3a.Value.Should().NotBe(systemUnderTest3b.Value);
             systemUnderTest4a.Value.Should().NotBe(systemUnderTest4b.Value);
             systemUnderTest5a.Value.Should().NotBe(systemUnderTest5b.Value);
+        }
+
+        [Fact]
+        public static void HashDictionary___Should_return_different_values___When_one_dictionary_is_empty_and_null()
+        {
+            // Arrange
+            var nullDictionary = (IReadOnlyDictionary<string, string>)null;
+            var emptyDictionary = new Dictionary<string, string>();
+
+            // Act
+            var actual1 = HashCodeHelper.Initialize().HashDictionary(nullDictionary).Value;
+            var actual2 = HashCodeHelper.Initialize().HashDictionary(emptyDictionary).Value;
+
+            // Assert
+            actual1.Should().NotBe(actual2);
+        }
+
+        [Fact]
+        public static void HashDictionary___Should_return_the_same_value___When_the_elements_are_the_same()
+        {
+            // Arrange
+            var dictionary1 = new Dictionary<string, string> { { "abc", "abc" } };
+            var dictionary2 = new Dictionary<string, string> { { "abc", "abc" } };
+            var dictionary3 = A.Dummy<Dictionary<string, string>>();
+            var dictionary4 = new Dictionary<string, string>();
+            var dictionary5 = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>());
+            var dictionary6 = A.Dummy<Dictionary<string, string>>();
+
+            // Act
+            var actual1 = HashCodeHelper.Initialize().HashDictionary(dictionary1).Value;
+            var actual2 = HashCodeHelper.Initialize().HashDictionary(dictionary2).Value;
+            var actual3 = HashCodeHelper.Initialize().HashDictionary(dictionary3).Value;
+            var actual4 = HashCodeHelper.Initialize().HashDictionary(dictionary4).Value;
+            var actual5 = HashCodeHelper.Initialize().HashDictionary(dictionary5).Value;
+            var actual6 = HashCodeHelper.Initialize().HashDictionary(dictionary6).Value;
+
+            // Assert
+            actual1.Should().Be(actual2);
+            actual2.Should().NotBe(actual3);
+            actual3.Should().NotBe(actual2);
+            actual4.Should().Be(actual5);
+            actual5.Should().NotBe(actual6);
         }
 
         [Fact]
