@@ -92,6 +92,13 @@ namespace OBeautifulCode.Math.Recipes
         public static HashCodeHelper Initialize() => new HashCodeHelper(HashCodeInitializer);
 
         /// <summary>
+        /// Returns the initial value for a hash code.
+        /// </summary>
+        /// <param name="seedValue">Seed value to initialize with (often the hash code from a base class using it's base properties).</param>
+        /// <returns>The initial integer wrapped in a <see cref="HashCodeHelper"/> value.</returns>
+        public static HashCodeHelper Initialize(int seedValue) => new HashCodeHelper(seedValue);
+
+        /// <summary>
         /// Adds the hash value for the given value to the current hash and returns the new value.
         /// </summary>
         /// <typeparam name="T">The type of the value being hashed.</typeparam>
@@ -137,7 +144,7 @@ namespace OBeautifulCode.Math.Recipes
         /// Adds the hash value for all elements of the specified <see cref="IEnumerable{T}"/> to the current hash and returns the new value.
         /// </summary>
         /// <typeparam name="T">The type of objects to enumerate and hash.</typeparam>
-        /// <param name="values">The dictionary to hash.</param>
+        /// <param name="values">The enumerable to hash.</param>
         /// <returns>The new hash code.</returns>
         public HashCodeHelper HashElements<T>(
             IEnumerable<T> values)

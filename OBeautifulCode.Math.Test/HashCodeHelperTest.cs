@@ -35,6 +35,24 @@ namespace OBeautifulCode.Math.Test
         private static readonly object ObjectThatIsNotTheSameTypeAsObjectForEquatableTests = A.Dummy<object>();
 
         [Fact]
+        public static void Hash___Should_return_the_same_hash_code_than___When_the_when_a_component_is_seeded_or_hashed()
+        {
+            // Arrange
+            var item1 = A.Dummy<string>();
+            var item2 = A.Dummy<string>();
+            var item3 = A.Dummy<string>();
+
+            var baseHash = HashCodeHelper.Initialize().Hash(item1).Value;
+            var expectedHash = HashCodeHelper.Initialize().Hash(item1).Hash(item2).Hash(item3).Value;
+
+            // Act
+            var actualHash = HashCodeHelper.Initialize(baseHash).Hash(item2).Hash(item3).Value;
+
+            // Assert
+            actualHash.Should().Be(expectedHash);
+        }
+
+        [Fact]
         public static void Hash___Should_return_different_hash_code_than_Initialize___When_the_value_parameter_is_null()
         {
             // Arrange
