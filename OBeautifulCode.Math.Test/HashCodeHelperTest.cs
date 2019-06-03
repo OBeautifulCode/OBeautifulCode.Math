@@ -263,7 +263,7 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void HashDictionary___Should_return_same_hash_code___When_both_dictionaries_contain_the_same_elements_using_default_and_specified_keyComparer()
+        public static void HashDictionary___Should_return_same_hash_code___When_both_dictionaries_contain_the_same_elements()
         {
             // Arrange
             var dictionary1a = new Dictionary<string, string>();
@@ -283,20 +283,6 @@ namespace OBeautifulCode.Math.Test
                 { "b", 9 },
             };
 
-            var dictionary3a = new Dictionary<string, int>
-            {
-                { "a", 5 },
-                { "b", 9 },
-                { "c", 3 },
-            };
-
-            var dictionary3b = new Dictionary<string, int>
-            {
-                { "c", 3 },
-                { "a", 5 },
-                { "b", 9 },
-            };
-
             // Act
             var systemUnderTest1a = HashCodeHelper.Initialize().HashDictionary(dictionary1a);
             var systemUnderTest1b = HashCodeHelper.Initialize().HashDictionary(dictionary1b);
@@ -304,17 +290,13 @@ namespace OBeautifulCode.Math.Test
             var systemUnderTest2a = HashCodeHelper.Initialize().HashDictionary(dictionary2a);
             var systemUnderTest2b = HashCodeHelper.Initialize().HashDictionary(dictionary2b);
 
-            var systemUnderTest3a = HashCodeHelper.Initialize().HashDictionary(dictionary3a, StringComparer.OrdinalIgnoreCase);
-            var systemUnderTest3b = HashCodeHelper.Initialize().HashDictionary(dictionary3b, StringComparer.OrdinalIgnoreCase);
-
             // Assert
             systemUnderTest1a.Value.Should().Be(systemUnderTest1b.Value);
             systemUnderTest2a.Value.Should().Be(systemUnderTest2b.Value);
-            systemUnderTest3a.Value.Should().Be(systemUnderTest3b.Value);
         }
 
         [Fact]
-        public static void HashDictionary___Should_return_different_hash_code___When_dictionaries_contain_different_set_using_default_and_specified_keyComparer()
+        public static void HashDictionary___Should_return_different_hash_code___When_dictionaries_contain_different_set()
         {
             // Arrange
             var dictionary1a = new Dictionary<string, int>
@@ -435,7 +417,7 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void HashDictionaryHavingEnumerableValuesForSequenceEqualsValueEquality___Should_return_same_hash_code___When_both_dictionaries_contain_the_same_keys_and_the_corresponding_values_are_sequence_equal_using_default_and_specified_keyComparer()
+        public static void HashDictionaryHavingEnumerableValuesForSequenceEqualsValueEquality___Should_return_same_hash_code___When_both_dictionaries_contain_the_same_keys_and_the_corresponding_values_are_sequence_equal()
         {
             // Arrange
             var dictionary1a = new Dictionary<string, string[]>();
@@ -455,20 +437,6 @@ namespace OBeautifulCode.Math.Test
                 { "b", new[] { 9, 2 } },
             };
 
-            var dictionary3a = new Dictionary<string, int[]>
-            {
-                { "a", new[] { 5, 4 } },
-                { "b", new[] { 9, 2 } },
-                { "c", new[] { 3, 0 } },
-            };
-
-            var dictionary3b = new Dictionary<string, int[]>
-            {
-                { "c", new[] { 3, 0 } },
-                { "a", new[] { 5, 4 } },
-                { "b", new[] { 9, 2 } },
-            };
-
             // Act
             var systemUnderTest1a = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSequenceEqualsValueEquality(dictionary1a);
             var systemUnderTest1b = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSequenceEqualsValueEquality(dictionary1b);
@@ -476,17 +444,13 @@ namespace OBeautifulCode.Math.Test
             var systemUnderTest2a = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSequenceEqualsValueEquality(dictionary2a);
             var systemUnderTest2b = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSequenceEqualsValueEquality(dictionary2b);
 
-            var systemUnderTest3a = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSequenceEqualsValueEquality(dictionary3a, StringComparer.OrdinalIgnoreCase);
-            var systemUnderTest3b = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSequenceEqualsValueEquality(dictionary3b, StringComparer.OrdinalIgnoreCase);
-
             // Assert
             systemUnderTest1a.Value.Should().Be(systemUnderTest1b.Value);
             systemUnderTest2a.Value.Should().Be(systemUnderTest2b.Value);
-            systemUnderTest3a.Value.Should().Be(systemUnderTest3b.Value);
         }
 
         [Fact]
-        public static void HashDictionaryHavingEnumerableValuesForSequenceEqualsValueEquality___Should_return_different_hash_code___When_dictionaries_contain_different_keys_or_the_values_of_corresponding_keys_are_not_sequence_equal_using_default_and_specified_keyComparer()
+        public static void HashDictionaryHavingEnumerableValuesForSequenceEqualsValueEquality___Should_return_different_hash_code___When_dictionaries_contain_different_keys_or_the_values_of_corresponding_keys_are_not_sequence_equal()
         {
             // Arrange
             var dictionary1a = new Dictionary<string, int[]>
@@ -625,7 +589,7 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality___Should_return_same_hash_code___When_both_dictionaries_contain_the_same_keys_and_the_corresponding_values_have_no_symmetric_difference_using_default_and_specified_keyComparer()
+        public static void HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality___Should_return_same_hash_code___When_both_dictionaries_contain_the_same_keys_and_the_corresponding_values_have_no_symmetric_difference()
         {
             // Arrange
             var dictionary1a = new Dictionary<string, string[]>();
@@ -648,25 +612,11 @@ namespace OBeautifulCode.Math.Test
             var dictionary3a = new Dictionary<string, int[]>
             {
                 { "a", new[] { 5, 4 } },
-                { "b", new[] { 9, 2 } },
-                { "c", new[] { 3, 0 } },
-            };
-
-            var dictionary3b = new Dictionary<string, int[]>
-            {
-                { "c", new[] { 3, 0 } },
-                { "a", new[] { 5, 4 } },
-                { "b", new[] { 9, 2 } },
-            };
-
-            var dictionary4a = new Dictionary<string, int[]>
-            {
-                { "a", new[] { 5, 4 } },
                 { "b", new[] { 2, 9 } },
                 { "c", new[] { 3, 0 } },
             };
 
-            var dictionary4b = new Dictionary<string, int[]>
+            var dictionary3b = new Dictionary<string, int[]>
             {
                 { "c", new[] { 0, 0, 3 } },
                 { "a", new[] { 5, 4, 4, 4 } },
@@ -680,21 +630,17 @@ namespace OBeautifulCode.Math.Test
             var systemUnderTest2a = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary2a);
             var systemUnderTest2b = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary2b);
 
-            var systemUnderTest3a = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary3a, StringComparer.OrdinalIgnoreCase);
-            var systemUnderTest3b = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary3b, StringComparer.OrdinalIgnoreCase);
-
-            var systemUnderTest4a = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary4a, StringComparer.OrdinalIgnoreCase);
-            var systemUnderTest4b = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary4b, StringComparer.OrdinalIgnoreCase);
+            var systemUnderTest3a = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary3a);
+            var systemUnderTest3b = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary3b);
 
             // Assert
             systemUnderTest1a.Value.Should().Be(systemUnderTest1b.Value);
             systemUnderTest2a.Value.Should().Be(systemUnderTest2b.Value);
             systemUnderTest3a.Value.Should().Be(systemUnderTest3b.Value);
-            systemUnderTest4a.Value.Should().Be(systemUnderTest4b.Value);
         }
 
         [Fact]
-        public static void HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality___Should_return_different_hash_code___When_dictionaries_contain_different_keys_or_the_values_of_corresponding_keys_have_symmetric_differences_using_default_and_specified_keyComparer()
+        public static void HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality___Should_return_different_hash_code___When_dictionaries_contain_different_keys_or_the_values_of_corresponding_keys_have_symmetric_differences()
         {
             // Arrange
             var dictionary1a = new Dictionary<string, int[]>
