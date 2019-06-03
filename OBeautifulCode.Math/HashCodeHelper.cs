@@ -118,23 +118,36 @@ namespace OBeautifulCode.Math.Recipes
         /// <summary>
         /// Adds the hash value for all elements of the specified <see cref="IReadOnlyDictionary{TKey, TValue}"/> to the current hash and returns the new value.
         /// </summary>
-        /// <typeparam name="TKey">The type of key objects to enumerate and hash.</typeparam>
-        /// <typeparam name="TValue">The type of value objects to enumerate and hash.</typeparam>
+        /// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
         /// <param name="dictionary">The dictionary to hash.</param>
+        /// <param name="keyComparer">Optional dictionary key comparer that determines the order in which the elements of the dictionary are hashed.  Default is to use <see cref="Comparer{TKey}.Default"/>.</param>
         /// <returns>The new hash code.</returns>
         public HashCodeHelper HashDictionary<TKey, TValue>(
-            IReadOnlyDictionary<TKey, TValue> dictionary)
+            IReadOnlyDictionary<TKey, TValue> dictionary,
+            IComparer<TKey> keyComparer = null)
         {
+            if (keyComparer == null)
+            {
+                keyComparer = Comparer<TKey>.Default;
+            }
+
             HashCodeHelper helper = this;
             if (dictionary == null)
             {
-                helper = helper.Hash((IReadOnlyDictionary<TKey, TValue>)null);
+                helper = helper.Hash(null);
             }
             else
             {
+                var keysInOrder = dictionary.OrderBy(_ => _.Key, keyComparer).Select(_ => _.Key).ToList();
+
                 helper = helper
-                    .HashElements(dictionary.OrderBy(_ => _.Key).Select(_ => _.Key))
-                    .HashElements(dictionary.OrderBy(_ => _.Key).Select(_ => _.Value));
+                    .HashElements(keysInOrder)
+                    .HashElements(keysInOrder.Select(_ => dictionary[_]));
+            }
+
+            return helper;
+        }
             }
 
             return helper;

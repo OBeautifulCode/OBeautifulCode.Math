@@ -6,8 +6,8 @@
 
 namespace OBeautifulCode.Math.Test
 {
+    using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.Linq;
 
     using FakeItEasy;
@@ -221,7 +221,34 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void HashDictionary___Should_return_different_values___When_one_dictionary_is_empty_and_null()
+        public static void HashDictionary___Should_return_different_hash_code_than_Initialize___When_the_dictionary_parameter_is_null()
+        {
+            // Arrange
+            var initialize = HashCodeHelper.Initialize();
+            IReadOnlyDictionary<string, string> dictionary = null;
+
+            // Act
+            var systemUnderTest = HashCodeHelper.Initialize().HashDictionary(dictionary);
+
+            // Assert
+            systemUnderTest.Value.Should().NotBe(initialize.Value);
+        }
+
+        [Fact]
+        public static void HashDictionary___Should_return_nonzero_hash_code___When_the_dictionary_parameter_is_null()
+        {
+            // Arrange
+            IReadOnlyDictionary<string, string> dictionary = null;
+
+            // Act
+            var systemUnderTest = HashCodeHelper.Initialize().HashElements(dictionary);
+
+            // Assert
+            systemUnderTest.Value.Should().NotBe(0);
+        }
+
+        [Fact]
+        public static void HashDictionary___Should_return_different_hash_codes___When_one_dictionary_is_empty_and_the_other_is_null()
         {
             // Arrange
             var nullDictionary = (IReadOnlyDictionary<string, string>)null;
@@ -236,30 +263,133 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void HashDictionary___Should_return_the_same_value___When_the_elements_are_the_same()
+        public static void HashDictionary___Should_return_same_hash_code___When_both_dictionaries_contain_the_same_elements_using_default_and_specified_keyComparer()
         {
             // Arrange
-            var dictionary1 = new Dictionary<string, string> { { "abc", "abc" } };
-            var dictionary2 = new Dictionary<string, string> { { "abc", "abc" } };
-            var dictionary3 = A.Dummy<Dictionary<string, string>>();
-            var dictionary4 = new Dictionary<string, string>();
-            var dictionary5 = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>());
-            var dictionary6 = A.Dummy<Dictionary<string, string>>();
+            var dictionary1a = new Dictionary<string, string>();
+            var dictionary1b = new Dictionary<string, string>();
+
+            var dictionary2a = new Dictionary<string, int>
+            {
+                { "a", 5 },
+                { "b", 9 },
+                { "c", 3 },
+            };
+
+            var dictionary2b = new Dictionary<string, int>
+            {
+                { "c", 3 },
+                { "a", 5 },
+                { "b", 9 },
+            };
+
+            var dictionary3a = new Dictionary<string, int>
+            {
+                { "a", 5 },
+                { "b", 9 },
+                { "c", 3 },
+            };
+
+            var dictionary3b = new Dictionary<string, int>
+            {
+                { "c", 3 },
+                { "a", 5 },
+                { "b", 9 },
+            };
 
             // Act
-            var actual1 = HashCodeHelper.Initialize().HashDictionary(dictionary1).Value;
-            var actual2 = HashCodeHelper.Initialize().HashDictionary(dictionary2).Value;
-            var actual3 = HashCodeHelper.Initialize().HashDictionary(dictionary3).Value;
-            var actual4 = HashCodeHelper.Initialize().HashDictionary(dictionary4).Value;
-            var actual5 = HashCodeHelper.Initialize().HashDictionary(dictionary5).Value;
-            var actual6 = HashCodeHelper.Initialize().HashDictionary(dictionary6).Value;
+            var systemUnderTest1a = HashCodeHelper.Initialize().HashDictionary(dictionary1a);
+            var systemUnderTest1b = HashCodeHelper.Initialize().HashDictionary(dictionary1b);
+
+            var systemUnderTest2a = HashCodeHelper.Initialize().HashDictionary(dictionary2a);
+            var systemUnderTest2b = HashCodeHelper.Initialize().HashDictionary(dictionary2b);
+
+            var systemUnderTest3a = HashCodeHelper.Initialize().HashDictionary(dictionary3a, StringComparer.OrdinalIgnoreCase);
+            var systemUnderTest3b = HashCodeHelper.Initialize().HashDictionary(dictionary3b, StringComparer.OrdinalIgnoreCase);
 
             // Assert
-            actual1.Should().Be(actual2);
-            actual2.Should().NotBe(actual3);
-            actual3.Should().NotBe(actual2);
-            actual4.Should().Be(actual5);
-            actual5.Should().NotBe(actual6);
+            systemUnderTest1a.Value.Should().Be(systemUnderTest1b.Value);
+            systemUnderTest2a.Value.Should().Be(systemUnderTest2b.Value);
+            systemUnderTest3a.Value.Should().Be(systemUnderTest3b.Value);
+        }
+
+        [Fact]
+        public static void HashDictionary___Should_return_different_hash_code___When_dictionaries_contain_different_set__using_default_and_specified_keyComparer()
+        {
+            // Arrange
+            var dictionary1a = new Dictionary<string, int>
+            {
+                { "a", 5 },
+                { "b", 9 },
+                { "c", 3 },
+            };
+
+            var dictionary1b = new Dictionary<string, int>
+            {
+                { "a", 5 },
+                { "b", 9 },
+                { "c", 4 },
+            };
+
+            var dictionary2a = new Dictionary<string, int>
+            {
+                { "a", 5 },
+                { "b", 9 },
+            };
+
+            var dictionary2b = new Dictionary<string, int>
+            {
+                { "a", 5 },
+                { "b", 9 },
+                { "c", 3 },
+            };
+
+            var dictionary3a = new Dictionary<string, int>
+            {
+                { "a", 5 },
+                { "b", 9 },
+                { "c", 3 },
+            };
+
+            var dictionary3b = new Dictionary<string, int>
+            {
+                { "a", 5 },
+                { "d", 9 },
+                { "c", 3 },
+            };
+
+            var dictionary4a = new Dictionary<string, int>
+            {
+                { "a", 5 },
+                { "b", 9 },
+                { "c", 3 },
+            };
+
+            var dictionary4b = new Dictionary<string, int>
+            {
+                { "A", 5 },
+                { "B", 9 },
+                { "C", 3 },
+            };
+
+            // Act
+            var systemUnderTest1a = HashCodeHelper.Initialize().HashDictionary(dictionary1a);
+            var systemUnderTest1b = HashCodeHelper.Initialize().HashDictionary(dictionary1b);
+
+            var systemUnderTest2a = HashCodeHelper.Initialize().HashDictionary(dictionary2a);
+            var systemUnderTest2b = HashCodeHelper.Initialize().HashDictionary(dictionary2b);
+
+            var systemUnderTest3a = HashCodeHelper.Initialize().HashDictionary(dictionary3a);
+            var systemUnderTest3b = HashCodeHelper.Initialize().HashDictionary(dictionary3b);
+
+            var systemUnderTest4a = HashCodeHelper.Initialize().HashDictionary(dictionary4a);
+            var systemUnderTest4b = HashCodeHelper.Initialize().HashDictionary(dictionary4b);
+
+            // Assert
+            systemUnderTest1a.Value.Should().NotBe(systemUnderTest1b.Value);
+            systemUnderTest2a.Value.Should().NotBe(systemUnderTest2b.Value);
+            systemUnderTest3a.Value.Should().NotBe(systemUnderTest3b.Value);
+            systemUnderTest4a.Value.Should().NotBe(systemUnderTest4b.Value);
         }
 
         [Fact]
