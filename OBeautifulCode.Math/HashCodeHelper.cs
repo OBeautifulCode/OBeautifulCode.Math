@@ -10,6 +10,7 @@
 namespace OBeautifulCode.Math.Recipes
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -101,11 +102,10 @@ namespace OBeautifulCode.Math.Recipes
         /// <summary>
         /// Adds the hash value for the given value to the current hash and returns the new value.
         /// </summary>
-        /// <typeparam name="T">The type of the value being hashed.</typeparam>
         /// <param name="value">The value to hash.</param>
         /// <returns>The new hash code.</returns>
-        public HashCodeHelper Hash<T>(
-            T value)
+        public HashCodeHelper Hash(
+            object value)
         {
             unchecked
             {
@@ -141,18 +141,17 @@ namespace OBeautifulCode.Math.Recipes
         }
 
         /// <summary>
-        /// Adds the hash value for all elements of the specified <see cref="IEnumerable{T}"/> to the current hash and returns the new value.
+        /// Adds the hash value for all elements of the specified <see cref="IEnumerable"/> to the current hash and returns the new value.
         /// </summary>
-        /// <typeparam name="T">The type of objects to enumerate and hash.</typeparam>
         /// <param name="values">The enumerable to hash.</param>
         /// <returns>The new hash code.</returns>
-        public HashCodeHelper HashElements<T>(
-            IEnumerable<T> values)
+        public HashCodeHelper HashElements(
+            IEnumerable values)
         {
             HashCodeHelper helper = this;
             if (values == null)
             {
-                helper = helper.Hash((IEnumerable<T>)null);
+                helper = helper.Hash(null);
             }
             else
             {
@@ -181,7 +180,7 @@ namespace OBeautifulCode.Math.Recipes
             HashCodeHelper helper = this;
             if (values == null)
             {
-                helper = helper.Hash((IEnumerable<T>)null);
+                helper = helper.Hash(null);
             }
             else
             {
