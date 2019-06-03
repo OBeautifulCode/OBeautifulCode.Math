@@ -20,7 +20,7 @@ namespace OBeautifulCode.Math.Recipes
     /// </summary>
     /// <remarks>
     /// Adapted from NodaTime: <a href="https://github.com/nodatime/nodatime/blob/master/src/NodaTime/Utility/HashCodeHelper.cs"/>.
-    /// The basic usage pattern is:
+    /// The basic usage pattern is as follows.
     /// <example>
     /// <code>
     ///  public override int GetHashCode() => HashCodeHelper.Initialize().Hash(Field1).Hash(Field2).Hash(Field3).Value;
@@ -211,7 +211,7 @@ namespace OBeautifulCode.Math.Recipes
             IEqualityComparer<TElementValue> elementValueEqualityComparer = null,
             IComparer<TElementValue> elementValueComparer = null)
         {
-            var result = HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality<TKey, TElementValue[], TElementValue>(dictionary, keyComparer, elementValueEqualityComparer, elementValueComparer);
+            var result = this.HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality<TKey, TElementValue[], TElementValue>(dictionary, keyComparer, elementValueEqualityComparer, elementValueComparer);
 
             return result;
         }
@@ -235,7 +235,7 @@ namespace OBeautifulCode.Math.Recipes
             IEqualityComparer<TElementValue> elementValueEqualityComparer = null,
             IComparer<TElementValue> elementValueComparer = null)
         {
-            var result = HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality<TKey, IEnumerable<TElementValue>, TElementValue>(dictionary, keyComparer, elementValueEqualityComparer, elementValueComparer);
+            var result = this.HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality<TKey, IEnumerable<TElementValue>, TElementValue>(dictionary, keyComparer, elementValueEqualityComparer, elementValueComparer);
 
             return result;
         }
@@ -259,7 +259,7 @@ namespace OBeautifulCode.Math.Recipes
             IEqualityComparer<TElementValue> elementValueEqualityComparer = null,
             IComparer<TElementValue> elementValueComparer = null)
         {
-            var result = HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality<TKey, ICollection<TElementValue>, TElementValue>(dictionary, keyComparer, elementValueEqualityComparer, elementValueComparer);
+            var result = this.HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality<TKey, ICollection<TElementValue>, TElementValue>(dictionary, keyComparer, elementValueEqualityComparer, elementValueComparer);
 
             return result;
         }
@@ -283,7 +283,7 @@ namespace OBeautifulCode.Math.Recipes
             IEqualityComparer<TElementValue> elementValueEqualityComparer = null,
             IComparer<TElementValue> elementValueComparer = null)
         {
-            var result = HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality<TKey, IReadOnlyCollection<TElementValue>, TElementValue>(dictionary, keyComparer, elementValueEqualityComparer, elementValueComparer);
+            var result = this.HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality<TKey, IReadOnlyCollection<TElementValue>, TElementValue>(dictionary, keyComparer, elementValueEqualityComparer, elementValueComparer);
 
             return result;
         }
@@ -307,7 +307,7 @@ namespace OBeautifulCode.Math.Recipes
             IEqualityComparer<TElementValue> elementValueEqualityComparer = null,
             IComparer<TElementValue> elementValueComparer = null)
         {
-            var result = HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality<TKey, List<TElementValue>, TElementValue>(dictionary, keyComparer, elementValueEqualityComparer, elementValueComparer);
+            var result = this.HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality<TKey, List<TElementValue>, TElementValue>(dictionary, keyComparer, elementValueEqualityComparer, elementValueComparer);
 
             return result;
         }
@@ -331,7 +331,7 @@ namespace OBeautifulCode.Math.Recipes
             IEqualityComparer<TElementValue> elementValueEqualityComparer = null,
             IComparer<TElementValue> elementValueComparer = null)
         {
-            var result = HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality<TKey, IList<TElementValue>, TElementValue>(dictionary, keyComparer, elementValueEqualityComparer, elementValueComparer);
+            var result = this.HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality<TKey, IList<TElementValue>, TElementValue>(dictionary, keyComparer, elementValueEqualityComparer, elementValueComparer);
 
             return result;
         }
@@ -355,7 +355,7 @@ namespace OBeautifulCode.Math.Recipes
             IEqualityComparer<TElementValue> elementValueEqualityComparer = null,
             IComparer<TElementValue> elementValueComparer = null)
         {
-            var result = HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality<TKey, IReadOnlyList<TElementValue>, TElementValue>(dictionary, keyComparer, elementValueEqualityComparer, elementValueComparer);
+            var result = this.HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality<TKey, IReadOnlyList<TElementValue>, TElementValue>(dictionary, keyComparer, elementValueEqualityComparer, elementValueComparer);
 
             return result;
         }
