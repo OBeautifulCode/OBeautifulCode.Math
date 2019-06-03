@@ -116,7 +116,8 @@ namespace OBeautifulCode.Math.Recipes
         }
 
         /// <summary>
-        /// Adds the hash value for all elements of the specified <see cref="IReadOnlyDictionary{TKey, TValue}"/> to the current hash and returns the new value.
+        /// Adds the hash value for all elements of the specified <see cref="IReadOnlyDictionary{TKey, TValue}"/>
+        /// to the current hash and returns the new value.
         /// </summary>
         /// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
         /// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
@@ -144,6 +145,48 @@ namespace OBeautifulCode.Math.Recipes
                 helper = helper
                     .HashElements(keysInOrder)
                     .HashElements(keysInOrder.Select(_ => dictionary[_]));
+            }
+
+            return helper;
+        }
+
+        /// <summary>
+        /// Adds the hash value for all elements of the specified <see cref="IReadOnlyDictionary{TKey, TValue}"/>,
+        /// to the current hash and returns the new value.
+        /// This method should be used when the dictionary's values are enumerable and where another dictionary
+        /// with the same keys results in the same hash code when the corresponding values are sequence equal.
+        /// </summary>
+        /// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
+        /// <typeparam name="TValue">The type of <see cref="IEnumerable"/> values in the dictionary.</typeparam>
+        /// <param name="dictionary">The dictionary to hash.</param>
+        /// <param name="keyComparer">Optional dictionary key comparer that determines the order in which the elements of the dictionary are hashed.  Default is to use <see cref="Comparer{TKey}.Default"/>.</param>
+        /// <returns>The new hash code.</returns>
+        public HashCodeHelper HashDictionaryHavingEnumerableValuesForSequenceEqualsValueEquality<TKey, TValue>(
+            IReadOnlyDictionary<TKey, TValue> dictionary,
+            IComparer<TKey> keyComparer = null)
+        {
+            if (keyComparer == null)
+            {
+                keyComparer = Comparer<TKey>.Default;
+            }
+
+            HashCodeHelper helper = this;
+            if (dictionary == null)
+            {
+                helper = helper.Hash(null);
+            }
+            else
+            {
+                var keysInOrder = dictionary.OrderBy(_ => _.Key, keyComparer).Select(_ => _.Key).ToList();
+
+                helper = helper.HashElements(keysInOrder);
+
+                foreach (var key in keysInOrder)
+                {
+                    var values = dictionary[key];
+
+                    helper = helper.HashElements((IEnumerable)values);
+                }
             }
 
             return helper;
