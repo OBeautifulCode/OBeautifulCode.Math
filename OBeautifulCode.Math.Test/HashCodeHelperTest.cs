@@ -241,7 +241,7 @@ namespace OBeautifulCode.Math.Test
             IReadOnlyDictionary<string, string> dictionary = null;
 
             // Act
-            var systemUnderTest = HashCodeHelper.Initialize().HashElements(dictionary);
+            var systemUnderTest = HashCodeHelper.Initialize().HashDictionary(dictionary);
 
             // Assert
             systemUnderTest.Value.Should().NotBe(0);
@@ -413,7 +413,7 @@ namespace OBeautifulCode.Math.Test
             IReadOnlyDictionary<string, string[]> dictionary = null;
 
             // Act
-            var systemUnderTest = HashCodeHelper.Initialize().HashElements(dictionary);
+            var systemUnderTest = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSequenceEqualsValueEquality(dictionary);
 
             // Assert
             systemUnderTest.Value.Should().NotBe(0);
@@ -486,7 +486,7 @@ namespace OBeautifulCode.Math.Test
         }
 
         [Fact]
-        public static void HashDictionaryHavingEnumerableValuesForSequenceEqualsValueEquality___Should_return_different_hash_code___When_dictionaries_contain_different_set_using_default_and_specified_keyComparer()
+        public static void HashDictionaryHavingEnumerableValuesForSequenceEqualsValueEquality___Should_return_different_hash_code___When_dictionaries_contain_different_keys_or_the_values_of_corresponding_keys_are_not_sequence_equal_using_default_and_specified_keyComparer()
         {
             // Arrange
             var dictionary1a = new Dictionary<string, int[]>
@@ -573,6 +573,214 @@ namespace OBeautifulCode.Math.Test
 
             var systemUnderTest5a = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSequenceEqualsValueEquality(dictionary5a);
             var systemUnderTest5b = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSequenceEqualsValueEquality(dictionary5b);
+
+            // Assert
+            systemUnderTest1a.Value.Should().NotBe(systemUnderTest1b.Value);
+            systemUnderTest2a.Value.Should().NotBe(systemUnderTest2b.Value);
+            systemUnderTest3a.Value.Should().NotBe(systemUnderTest3b.Value);
+            systemUnderTest4a.Value.Should().NotBe(systemUnderTest4b.Value);
+            systemUnderTest5a.Value.Should().NotBe(systemUnderTest5b.Value);
+        }
+
+        [Fact]
+        public static void HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality___Should_return_different_hash_code_than_Initialize___When_the_dictionary_parameter_is_null()
+        {
+            // Arrange
+            var initialize = HashCodeHelper.Initialize();
+            IReadOnlyDictionary<string, string[]> dictionary = null;
+
+            // Act
+            var systemUnderTest = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary);
+
+            // Assert
+            systemUnderTest.Value.Should().NotBe(initialize.Value);
+        }
+
+        [Fact]
+        public static void HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality___Should_return_nonzero_hash_code___When_the_dictionary_parameter_is_null()
+        {
+            // Arrange
+            IReadOnlyDictionary<string, string[]> dictionary = null;
+
+            // Act
+            var systemUnderTest = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary);
+
+            // Assert
+            systemUnderTest.Value.Should().NotBe(0);
+        }
+
+        [Fact]
+        public static void HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality___Should_return_different_hash_codes___When_one_dictionary_is_empty_and_the_other_is_null()
+        {
+            // Arrange
+            var nullDictionary = (IReadOnlyDictionary<string, string[]>)null;
+            var emptyDictionary = new Dictionary<string, string[]>();
+
+            // Act
+            var actual1 = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(nullDictionary).Value;
+            var actual2 = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(emptyDictionary).Value;
+
+            // Assert
+            actual1.Should().NotBe(actual2);
+        }
+
+        [Fact]
+        public static void HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality___Should_return_same_hash_code___When_both_dictionaries_contain_the_same_keys_and_the_corresponding_values_have_no_symmetric_difference_using_default_and_specified_keyComparer()
+        {
+            // Arrange
+            var dictionary1a = new Dictionary<string, string[]>();
+            var dictionary1b = new Dictionary<string, string[]>();
+
+            var dictionary2a = new Dictionary<string, int[]>
+            {
+                { "a", new[] { 5, 4 } },
+                { "b", new[] { 9, 2 } },
+                { "c", new[] { 3, 0 } },
+            };
+
+            var dictionary2b = new Dictionary<string, int[]>
+            {
+                { "c", new[] { 3, 0 } },
+                { "a", new[] { 5, 4 } },
+                { "b", new[] { 9, 2 } },
+            };
+
+            var dictionary3a = new Dictionary<string, int[]>
+            {
+                { "a", new[] { 5, 4 } },
+                { "b", new[] { 9, 2 } },
+                { "c", new[] { 3, 0 } },
+            };
+
+            var dictionary3b = new Dictionary<string, int[]>
+            {
+                { "c", new[] { 3, 0 } },
+                { "a", new[] { 5, 4 } },
+                { "b", new[] { 9, 2 } },
+            };
+
+            var dictionary4a = new Dictionary<string, int[]>
+            {
+                { "a", new[] { 5, 4 } },
+                { "b", new[] { 2, 9 } },
+                { "c", new[] { 3, 0 } },
+            };
+
+            var dictionary4b = new Dictionary<string, int[]>
+            {
+                { "c", new[] { 0, 0, 3 } },
+                { "a", new[] { 5, 4, 4, 4 } },
+                { "b", new[] { 9, 2 } },
+            };
+
+            // Act
+            var systemUnderTest1a = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary1a);
+            var systemUnderTest1b = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary1b);
+
+            var systemUnderTest2a = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary2a);
+            var systemUnderTest2b = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary2b);
+
+            var systemUnderTest3a = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary3a, StringComparer.OrdinalIgnoreCase);
+            var systemUnderTest3b = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary3b, StringComparer.OrdinalIgnoreCase);
+
+            var systemUnderTest4a = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary4a, StringComparer.OrdinalIgnoreCase);
+            var systemUnderTest4b = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary4b, StringComparer.OrdinalIgnoreCase);
+
+            // Assert
+            systemUnderTest1a.Value.Should().Be(systemUnderTest1b.Value);
+            systemUnderTest2a.Value.Should().Be(systemUnderTest2b.Value);
+            systemUnderTest3a.Value.Should().Be(systemUnderTest3b.Value);
+            systemUnderTest4a.Value.Should().Be(systemUnderTest4b.Value);
+        }
+
+        [Fact]
+        public static void HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality___Should_return_different_hash_code___When_dictionaries_contain_different_keys_or_the_values_of_corresponding_keys_have_symmetric_differences_using_default_and_specified_keyComparer()
+        {
+            // Arrange
+            var dictionary1a = new Dictionary<string, int[]>
+            {
+                { "a", new[] { 5 } },
+                { "b", new[] { 9 } },
+                { "c", new[] { 3 } },
+            };
+
+            var dictionary1b = new Dictionary<string, int[]>
+            {
+                { "a", new[] { 5 } },
+                { "b", new[] { 9 } },
+                { "c", new[] { 4 } },
+            };
+
+            var dictionary2a = new Dictionary<string, int[]>
+            {
+                { "a", new[] { 5 } },
+                { "b", new[] { 9 } },
+            };
+
+            var dictionary2b = new Dictionary<string, int[]>
+            {
+                { "a", new[] { 5 } },
+                { "b", new[] { 9 } },
+                { "c", new[] { 3 } },
+            };
+
+            var dictionary3a = new Dictionary<string, int[]>
+            {
+                { "a", new[] { 5 } },
+                { "b", new[] { 9 } },
+                { "c", new[] { 3 } },
+            };
+
+            var dictionary3b = new Dictionary<string, int[]>
+            {
+                { "a", new[] { 5 } },
+                { "d", new[] { 9 } },
+                { "c", new[] { 3 } },
+            };
+
+            var dictionary4a = new Dictionary<string, int[]>
+            {
+                { "a", new[] { 5 } },
+                { "b", new[] { 9 } },
+                { "c", new[] { 3 } },
+            };
+
+            var dictionary4b = new Dictionary<string, int[]>
+            {
+                { "A", new[] { 5 } },
+                { "B", new[] { 9 } },
+                { "C", new[] { 3 } },
+            };
+
+            var dictionary5a = new Dictionary<string, int[]>
+            {
+                { "a", new[] { 5, 2 } },
+                { "b", new[] { 9, 6 } },
+                { "c", new[] { 8, 3, 9 } },
+            };
+
+            var dictionary5b = new Dictionary<string, int[]>
+            {
+                { "a", new[] { 5, 2 } },
+                { "b", new[] { 9, 6 } },
+                { "c", new[] { 8, 3, 5 } },
+            };
+
+            // Act
+            var systemUnderTest1a = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary1a);
+            var systemUnderTest1b = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary1b);
+
+            var systemUnderTest2a = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary2a);
+            var systemUnderTest2b = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary2b);
+
+            var systemUnderTest3a = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary3a);
+            var systemUnderTest3b = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary3b);
+
+            var systemUnderTest4a = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary4a);
+            var systemUnderTest4b = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary4b);
+
+            var systemUnderTest5a = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary5a);
+            var systemUnderTest5b = HashCodeHelper.Initialize().HashDictionaryHavingEnumerableValuesForSymmetricDifferenceValueEquality(dictionary5b);
 
             // Assert
             systemUnderTest1a.Value.Should().NotBe(systemUnderTest1b.Value);
