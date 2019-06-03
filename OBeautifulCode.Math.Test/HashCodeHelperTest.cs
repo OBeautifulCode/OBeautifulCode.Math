@@ -6,7 +6,6 @@
 
 namespace OBeautifulCode.Math.Test
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -614,10 +613,12 @@ namespace OBeautifulCode.Math.Test
                 { "a", new[] { 5, 4 } },
                 { "b", new[] { 2, 9 } },
                 { "c", new[] { 3, 0 } },
+                { "d", null },
             };
 
             var dictionary3b = new Dictionary<string, int[]>
             {
+                { "d", null },
                 { "c", new[] { 0, 0, 3 } },
                 { "a", new[] { 5, 4, 4, 4 } },
                 { "b", new[] { 9, 2 } },
@@ -689,6 +690,7 @@ namespace OBeautifulCode.Math.Test
                 { "a", new[] { 5 } },
                 { "b", new[] { 9 } },
                 { "c", new[] { 3 } },
+                { "d", null },
             };
 
             var dictionary4b = new Dictionary<string, int[]>
@@ -696,6 +698,7 @@ namespace OBeautifulCode.Math.Test
                 { "A", new[] { 5 } },
                 { "B", new[] { 9 } },
                 { "C", new[] { 3 } },
+                { "D", null },
             };
 
             var dictionary5a = new Dictionary<string, int[]>
