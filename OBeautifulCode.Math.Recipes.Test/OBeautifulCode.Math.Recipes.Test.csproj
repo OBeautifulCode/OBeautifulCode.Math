@@ -8,8 +8,8 @@
     <ProjectGuid>{48ED9025-9A2C-4BA9-8112-C804E7A9A3F2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OBeautifulCode.Math.Test</RootNamespace>
-    <AssemblyName>OBeautifulCode.Math.Test</AssemblyName>
+    <RootNamespace>OBeautifulCode.Math.Recipes.Test</RootNamespace>
+    <AssemblyName>OBeautifulCode.Math.Recipes.Test</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -84,9 +84,9 @@
     <Compile Include="ThreadSafeRandomTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OBeautifulCode.Math\OBeautifulCode.Math.csproj">
+    <ProjectReference Include="..\OBeautifulCode.Math.Recipes\OBeautifulCode.Math.Recipes.csproj">
       <Project>{4b9ada2b-3a0e-438c-8916-26bd5de09174}</Project>
-      <Name>OBeautifulCode.Math</Name>
+      <Name>OBeautifulCode.Math.Recipes</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -11,11 +11,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OBeautifulCode.Math.Test")]
-[assembly: AssemblyDescription("OBeautifulCode.Math.Test")]
+[assembly: AssemblyTitle("OBeautifulCode.Math.Recipes.Test")]
+[assembly: AssemblyDescription("OBeautifulCode.Math.Recipes.Test")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("OBeautifulCode")]
-[assembly: AssemblyProduct("OBeautifulCode.Math.Test")]
+[assembly: AssemblyProduct("OBeautifulCode.Math.Recipes.Test")]
 [assembly: AssemblyCopyright("Copyright (c) 2018 OBeautifulCode")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

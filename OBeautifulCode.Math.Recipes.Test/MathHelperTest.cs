@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OBeautifulCode.Math.Test
+namespace OBeautifulCode.Math.Recipes.Test
 {
     using System;
     using System.Collections.Generic;
@@ -13,8 +13,6 @@ namespace OBeautifulCode.Math.Test
     using FakeItEasy;
 
     using FluentAssertions;
-
-    using OBeautifulCode.Math.Recipes;
 
     using Xunit;
 
