@@ -79,7 +79,6 @@
   <ItemGroup>
     <Compile Include=".recipes\OBeautifulCode.AutoFakeItEasy\AutoFakeItEasyBootstrapper.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="HashCodeHelperTest.cs" />
     <Compile Include="MathHelperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThreadSafeRandomTest.cs" />
