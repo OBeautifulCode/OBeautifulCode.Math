@@ -5,9 +5,11 @@
     <description>Supports various mathematical and numerical methods.</description>
     <tags>math statistics</tags>
     <iconUrl>https://raw.githubusercontent.com/OBeautifulCode/OBeautifulCode.Math/master/OBeautifulCode.Math.Recipes/nuget-icon.png</iconUrl>
+    <dependencies>
+      <dependency id="OBeautifulCode.CodeAnalysis.Recipes.SuppressBecause" version="1.0.6" />
+    </dependencies>
   </metadata>
   <files>
-    <file src=".analyzers\SuppressBecause.cs" target="content\net462\.recipes\OBeautifulCode.Math\SuppressBecause.cs" />
     <file src="MathHelper.cs" target="content\net462\.recipes\OBeautifulCode.Math\MathHelper.cs" />
   </files>
 </package>
