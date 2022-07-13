@@ -1006,6 +1006,14 @@ namespace OBeautifulCode.Math.Recipes.Test
         }
 
         [Fact]
+        public static void RoundDecimalTests()
+        {
+            Assert.Null(((decimal?)null).Round(2));
+            Assert.Equal(1.01m, 1.011m.Round(2));
+            Assert.Equal(1.02m, 1.019m.Round(2));
+        }
+
+        [Fact]
         public static void TruncateDoubleTests()
         {
             // test decimals 1.*

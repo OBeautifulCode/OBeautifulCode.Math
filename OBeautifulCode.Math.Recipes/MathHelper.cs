@@ -434,6 +434,40 @@ namespace OBeautifulCode.Math.Recipes
         }
 
         /// <summary>
+        /// Rounds a decimal to a given number of digits.
+        /// </summary>
+        /// <param name="value">The value to round.</param>
+        /// <param name="digits">The number of digits to round to.</param>
+        /// <returns>
+        /// Returns the rounded decimal.
+        /// </returns>
+        public static decimal Round(
+            this decimal value,
+            int digits)
+        {
+            var result = decimal.Round(value, digits);
+            return result;
+        }
+
+        /// <summary>
+        /// Rounds a decimal to a given number of digits if not null.
+        /// </summary>
+        /// <param name="value">The value to round.</param>
+        /// <param name="digits">The number of digits to round to.</param>
+        /// <returns>
+        /// Returns the rounded decimal if not null; otherwise null.
+        /// </returns>
+        public static decimal? Round(
+            this decimal? value,
+            int digits)
+        {
+            var result = value == null
+                ? null
+                : (decimal?)decimal.Round((decimal)value, digits);
+            return result;
+        }
+
+        /// <summary>
         /// Truncates everything after the decimal point of a decimal and returns the resulting integer number.
         /// </summary>
         /// <param name="value">The decimal to truncate into an integer.</param>
