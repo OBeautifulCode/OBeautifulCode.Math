@@ -445,7 +445,7 @@ namespace OBeautifulCode.Math.Recipes
             this decimal value,
             int digits)
         {
-            var result = decimal.Round(value, digits);
+            var result = Math.Round(value, digits, MidpointRounding.AwayFromZero);
             return result;
         }
 
@@ -461,9 +461,7 @@ namespace OBeautifulCode.Math.Recipes
             this decimal? value,
             int digits)
         {
-            var result = value == null
-                ? null
-                : (decimal?)decimal.Round((decimal)value, digits);
+            var result = value?.Round(digits);
             return result;
         }
 

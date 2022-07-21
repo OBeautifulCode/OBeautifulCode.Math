@@ -1011,6 +1011,8 @@ namespace OBeautifulCode.Math.Recipes.Test
             Assert.Null(((decimal?)null).Round(2));
             Assert.Equal(1.01m, 1.011m.Round(2));
             Assert.Equal(1.02m, 1.019m.Round(2));
+            Assert.Equal(1.1m, 1.05m.Round(1));
+            Assert.Equal(1.1m, ((decimal?)1.05m).Round(1));
         }
 
         [Fact]
