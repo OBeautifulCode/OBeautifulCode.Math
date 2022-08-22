@@ -9,11 +9,9 @@ namespace OBeautifulCode.Math.Recipes.Test
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
     using FakeItEasy;
-
     using FluentAssertions;
-
+    using OBeautifulCode.Assertion.Recipes;
     using Xunit;
 
     public static class MathHelperTest
@@ -1006,13 +1004,24 @@ namespace OBeautifulCode.Math.Recipes.Test
         }
 
         [Fact]
-        public static void RoundDecimalTests()
+        public static void Round___Should_round_value_to_digits_using_specified_strategy___When_called()
         {
-            Assert.Null(((decimal?)null).Round(2));
-            Assert.Equal(1.01m, 1.011m.Round(2));
-            Assert.Equal(1.02m, 1.019m.Round(2));
-            Assert.Equal(1.1m, 1.05m.Round(1));
-            Assert.Equal(1.1m, ((decimal?)1.05m).Round(1));
+            // Arrange
+            var tests = new[]
+            {
+                new { Value = (decimal?)null, Digits = 2, Strategy = MidpointRounding.AwayFromZero, Expected = (decimal?)null },
+                new { Value = (decimal?)1.011m, Digits = 2, Strategy = MidpointRounding.AwayFromZero, Expected = (decimal?)1.01m },
+                new { Value = (decimal?)1.019m, Digits = 2, Strategy = MidpointRounding.AwayFromZero, Expected = (decimal?)1.02m },
+                new { Value = (decimal?)1.05m, Digits = 1, Strategy = MidpointRounding.AwayFromZero, Expected = (decimal?)1.1m },
+                new { Value = (decimal?)1.05m, Digits = 1, Strategy = MidpointRounding.ToEven, Expected = (decimal?)1.0m },
+                new { Value = (decimal?)1.15m, Digits = 1, Strategy = MidpointRounding.ToEven, Expected = (decimal?)1.2m },
+            };
+
+            // Act
+            var actual = tests.Select(_ => _.Value.Round(_.Digits, _.Strategy)).ToList();
+
+            // Assert
+            actual.AsTest().Must().BeEqualTo(tests.Select(_ => _.Expected).ToList());
         }
 
         [Fact]
