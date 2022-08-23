@@ -12,6 +12,7 @@ namespace OBeautifulCode.Math.Recipes.Test
     using FakeItEasy;
     using FluentAssertions;
     using OBeautifulCode.Assertion.Recipes;
+    using OBeautifulCode.AutoFakeItEasy;
     using Xunit;
 
     public static class MathHelperTest
@@ -119,6 +120,122 @@ namespace OBeautifulCode.Math.Recipes.Test
             decimals2.Add(6);
             Assert.Equal(-2.3125, Math.Round(MathHelper.Covariance(doubles1, doubles2), 6));
             Assert.Equal(-2.3125m, Math.Round(MathHelper.Covariance(decimals1, decimals2), 6));
+        }
+
+        [Fact]
+        public static void GenerateTruthTable___Should_throw_ArgumentOutOfRangeException___When_parameter_numberOfInputs_is_less_than_0()
+        {
+            // Arrange, Act
+            var actual = Record.Exception(() => MathHelper.GenerateTruthTable(A.Dummy<NegativeInteger>()));
+
+            // Assert
+            actual.AsTest().Must().BeOfType<ArgumentOutOfRangeException>();
+        }
+
+        [Fact]
+        public static void GenerateTruthTable___Should_return_expected_truth_table___When_parameter_resultsInBigEndian_is_true()
+        {
+            // Arrange
+            var numberOfInputsAndExpected = new[]
+            {
+                new { NumberOfInputs = 0, Expected = new List<List<bool>>() },
+                new
+                {
+                    NumberOfInputs = 1,
+                    Expected = new List<List<bool>>
+                    {
+                        new List<bool> { false },
+                        new List<bool> { true },
+                    },
+                },
+                new
+                {
+                    NumberOfInputs = 2,
+                    Expected = new List<List<bool>>
+                    {
+                        new List<bool> { false, false },
+                        new List<bool> { false, true },
+                        new List<bool> { true, false },
+                        new List<bool> { true, true },
+                    },
+                },
+                new
+                {
+                    NumberOfInputs = 3,
+                    Expected = new List<List<bool>>
+                    {
+                        new List<bool> { false, false, false },
+                        new List<bool> { false, false, true },
+                        new List<bool> { false, true, false },
+                        new List<bool> { false, true, true },
+                        new List<bool> { true, false, false },
+                        new List<bool> { true, false, true },
+                        new List<bool> { true, true, false },
+                        new List<bool> { true, true, true },
+                    },
+                },
+            };
+
+            var expected = numberOfInputsAndExpected.Select(_ => _.Expected).ToList();
+
+            // Act
+            var actual = numberOfInputsAndExpected.Select(_ => MathHelper.GenerateTruthTable(_.NumberOfInputs, resultInBigEndian: true).Select(i => i.ToList()).ToList()).ToList();
+
+            // Assert
+            actual.AsTest().Must().BeEqualTo(expected);
+        }
+
+        [Fact]
+        public static void GenerateTruthTable___Should_return_expected_truth_table___When_parameter_resultsInBigEndian_is_false()
+        {
+            // Arrange
+            var numberOfInputsAndExpected = new[]
+            {
+                new { NumberOfInputs = 0, Expected = new List<List<bool>>() },
+                new
+                {
+                    NumberOfInputs = 1,
+                    Expected = new List<List<bool>>
+                    {
+                        new List<bool> { false },
+                        new List<bool> { true },
+                    },
+                },
+                new
+                {
+                    NumberOfInputs = 2,
+                    Expected = new List<List<bool>>
+                    {
+                        new List<bool> { false, false },
+                        new List<bool> { true, false },
+                        new List<bool> { false, true },
+                        new List<bool> { true, true },
+                    },
+                },
+                new
+                {
+                    NumberOfInputs = 3,
+                    Expected = new List<List<bool>>
+                    {
+                        new List<bool> { false, false, false },
+                        new List<bool> { true, false, false },
+                        new List<bool> { false, true, false },
+                        new List<bool> { true, true, false },
+                        new List<bool> { false, false, true },
+                        new List<bool> { true, false, true },
+                        new List<bool> { false, true, true },
+                        new List<bool> { true, true, true },
+                    },
+                },
+            };
+
+            var expected = numberOfInputsAndExpected.Select(_ => _.Expected).ToList();
+
+            // Act
+            var actual = numberOfInputsAndExpected.Select(_ => MathHelper.GenerateTruthTable(_.NumberOfInputs, resultInBigEndian: false).Select(i => i.ToList()).ToList()).ToList();
+
+            // Assert
+            actual.AsTest().Must().BeEqualTo(expected);
         }
 
         [Fact]
