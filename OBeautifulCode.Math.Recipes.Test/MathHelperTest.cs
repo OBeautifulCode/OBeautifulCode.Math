@@ -17,6 +17,111 @@ namespace OBeautifulCode.Math.Recipes.Test
     public static class MathHelperTest
     {
         [Fact]
+        public static void CovarianceTest()
+        {
+            // null or empty source
+            List<double> doubles1 = null;
+            var doubles2 = new List<double> { 4.5 };
+
+            Assert.Throws<ArgumentNullException>(() => Console.Write(MathHelper.Covariance(doubles1, doubles2)));
+            Assert.Throws<ArgumentNullException>(() => Console.Write(MathHelper.Covariance(doubles2, doubles1)));
+            doubles1 = new List<double>();
+            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(doubles1, doubles2)));
+            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(doubles2, doubles1)));
+
+            List<decimal> decimals1 = null;
+            var decimals2 = new List<decimal> { 4.5m };
+            Assert.Throws<ArgumentNullException>(() => Console.Write(MathHelper.Covariance(decimals1, decimals2)));
+            Assert.Throws<ArgumentNullException>(() => Console.Write(MathHelper.Covariance(decimals2, decimals1)));
+            decimals1 = new List<decimal>();
+            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(decimals1, decimals2)));
+            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(decimals2, decimals1)));
+
+            // source lenghts aren't equal
+            doubles1.Add(3.4);
+            doubles2.Add(8.0);
+            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(doubles1, doubles2)));
+            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(doubles2, doubles1)));
+            doubles1.Add(4.3);
+            doubles2.Add(9.2);
+            doubles2.Add(9.3);
+            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(doubles1, doubles2)));
+            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(doubles2, doubles1)));
+
+            decimals1.Add(3.4m);
+            decimals2.Add(8.0m);
+            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(decimals1, decimals2)));
+            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(decimals2, decimals1)));
+            decimals1.Add(4.3m);
+            decimals2.Add(9.2m);
+            decimals2.Add(9.3m);
+            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(decimals1, decimals2)));
+            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(decimals2, decimals1)));
+
+            // validate that formula works
+            doubles1 = new List<double>();
+            doubles2 = new List<double>();
+            decimals1 = new List<decimal>();
+            decimals2 = new List<decimal>();
+
+            doubles1.Add(2);
+            doubles2.Add(4);
+            decimals1.Add(2);
+            decimals2.Add(4);
+            Assert.Equal(0, Math.Round(MathHelper.Covariance(doubles1, doubles2), 6));
+            Assert.Equal(0, Math.Round(MathHelper.Covariance(decimals1, decimals2), 6));
+
+            doubles1.Add(1);
+            doubles2.Add(9);
+            decimals1.Add(1);
+            decimals2.Add(9);
+            Assert.Equal(-1.25, Math.Round(MathHelper.Covariance(doubles1, doubles2), 6));
+            Assert.Equal(-1.25m, Math.Round(MathHelper.Covariance(decimals1, decimals2), 6));
+
+            doubles1.Add(3);
+            doubles2.Add(-2);
+            decimals1.Add(3);
+            decimals2.Add(-2);
+            Assert.Equal(-3.666667, Math.Round(MathHelper.Covariance(doubles1, doubles2), 6));
+            Assert.Equal(-3.666667m, Math.Round(MathHelper.Covariance(decimals1, decimals2), 6));
+
+            doubles1.Add(4);
+            doubles2.Add(3);
+            decimals1.Add(4);
+            decimals2.Add(3);
+            Assert.Equal(-3, Math.Round(MathHelper.Covariance(doubles1, doubles2), 6));
+            Assert.Equal(-3, Math.Round(MathHelper.Covariance(decimals1, decimals2), 6));
+
+            doubles1.Add(3);
+            doubles2.Add(0);
+            decimals1.Add(3);
+            decimals2.Add(0);
+            Assert.Equal(-2.68, Math.Round(MathHelper.Covariance(doubles1, doubles2), 6));
+            Assert.Equal(-2.68m, Math.Round(MathHelper.Covariance(decimals1, decimals2), 6));
+
+            doubles1.Add(6);
+            doubles2.Add(-1);
+            decimals1.Add(6);
+            decimals2.Add(-1);
+            Assert.Equal(-4.027778, Math.Round(MathHelper.Covariance(doubles1, doubles2), 6));
+            Assert.Equal(-4.027778m, Math.Round(MathHelper.Covariance(decimals1, decimals2), 6));
+
+            doubles1.Add(7);
+            doubles2.Add(-1);
+            decimals1.Add(7);
+            decimals2.Add(-1);
+            Assert.Equal(-4.938776, Math.Round(MathHelper.Covariance(doubles1, doubles2), 6));
+            Assert.Equal(-4.938776m, Math.Round(MathHelper.Covariance(decimals1, decimals2), 6));
+
+            doubles1.Add(8);
+            doubles2.Add(6);
+            decimals1.Add(8);
+            decimals2.Add(6);
+            Assert.Equal(-2.3125, Math.Round(MathHelper.Covariance(doubles1, doubles2), 6));
+            Assert.Equal(-2.3125m, Math.Round(MathHelper.Covariance(decimals1, decimals2), 6));
+        }
+
+        [Fact]
         public static void IsAlmostEqualTo_with_doubles___Should_throw_ArgumentException___When_parameters_value1_or_value2_is_NaN()
         {
             // Arrange, Act
@@ -773,111 +878,6 @@ namespace OBeautifulCode.Math.Recipes.Test
         }
 
         [Fact]
-        public static void CovarianceTest()
-        {
-            // null or empty source
-            List<double> doubles1 = null;
-            var doubles2 = new List<double> { 4.5 };
-
-            Assert.Throws<ArgumentNullException>(() => Console.Write(MathHelper.Covariance(doubles1, doubles2)));
-            Assert.Throws<ArgumentNullException>(() => Console.Write(MathHelper.Covariance(doubles2, doubles1)));
-            doubles1 = new List<double>();
-            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(doubles1, doubles2)));
-            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(doubles2, doubles1)));
-
-            List<decimal> decimals1 = null;
-            var decimals2 = new List<decimal> { 4.5m };
-            Assert.Throws<ArgumentNullException>(() => Console.Write(MathHelper.Covariance(decimals1, decimals2)));
-            Assert.Throws<ArgumentNullException>(() => Console.Write(MathHelper.Covariance(decimals2, decimals1)));
-            decimals1 = new List<decimal>();
-            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(decimals1, decimals2)));
-            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(decimals2, decimals1)));
-
-            // source lenghts aren't equal
-            doubles1.Add(3.4);
-            doubles2.Add(8.0);
-            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(doubles1, doubles2)));
-            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(doubles2, doubles1)));
-            doubles1.Add(4.3);
-            doubles2.Add(9.2);
-            doubles2.Add(9.3);
-            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(doubles1, doubles2)));
-            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(doubles2, doubles1)));
-
-            decimals1.Add(3.4m);
-            decimals2.Add(8.0m);
-            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(decimals1, decimals2)));
-            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(decimals2, decimals1)));
-            decimals1.Add(4.3m);
-            decimals2.Add(9.2m);
-            decimals2.Add(9.3m);
-            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(decimals1, decimals2)));
-            Assert.Throws<ArgumentException>(() => Console.Write(MathHelper.Covariance(decimals2, decimals1)));
-
-            // validate that formula works
-            doubles1 = new List<double>();
-            doubles2 = new List<double>();
-            decimals1 = new List<decimal>();
-            decimals2 = new List<decimal>();
-
-            doubles1.Add(2);
-            doubles2.Add(4);
-            decimals1.Add(2);
-            decimals2.Add(4);
-            Assert.Equal(0, Math.Round(MathHelper.Covariance(doubles1, doubles2), 6));
-            Assert.Equal(0, Math.Round(MathHelper.Covariance(decimals1, decimals2), 6));
-
-            doubles1.Add(1);
-            doubles2.Add(9);
-            decimals1.Add(1);
-            decimals2.Add(9);
-            Assert.Equal(-1.25, Math.Round(MathHelper.Covariance(doubles1, doubles2), 6));
-            Assert.Equal(-1.25m, Math.Round(MathHelper.Covariance(decimals1, decimals2), 6));
-
-            doubles1.Add(3);
-            doubles2.Add(-2);
-            decimals1.Add(3);
-            decimals2.Add(-2);
-            Assert.Equal(-3.666667, Math.Round(MathHelper.Covariance(doubles1, doubles2), 6));
-            Assert.Equal(-3.666667m, Math.Round(MathHelper.Covariance(decimals1, decimals2), 6));
-
-            doubles1.Add(4);
-            doubles2.Add(3);
-            decimals1.Add(4);
-            decimals2.Add(3);
-            Assert.Equal(-3, Math.Round(MathHelper.Covariance(doubles1, doubles2), 6));
-            Assert.Equal(-3, Math.Round(MathHelper.Covariance(decimals1, decimals2), 6));
-
-            doubles1.Add(3);
-            doubles2.Add(0);
-            decimals1.Add(3);
-            decimals2.Add(0);
-            Assert.Equal(-2.68, Math.Round(MathHelper.Covariance(doubles1, doubles2), 6));
-            Assert.Equal(-2.68m, Math.Round(MathHelper.Covariance(decimals1, decimals2), 6));
-
-            doubles1.Add(6);
-            doubles2.Add(-1);
-            decimals1.Add(6);
-            decimals2.Add(-1);
-            Assert.Equal(-4.027778, Math.Round(MathHelper.Covariance(doubles1, doubles2), 6));
-            Assert.Equal(-4.027778m, Math.Round(MathHelper.Covariance(decimals1, decimals2), 6));
-
-            doubles1.Add(7);
-            doubles2.Add(-1);
-            decimals1.Add(7);
-            decimals2.Add(-1);
-            Assert.Equal(-4.938776, Math.Round(MathHelper.Covariance(doubles1, doubles2), 6));
-            Assert.Equal(-4.938776m, Math.Round(MathHelper.Covariance(decimals1, decimals2), 6));
-
-            doubles1.Add(8);
-            doubles2.Add(6);
-            decimals1.Add(8);
-            decimals2.Add(6);
-            Assert.Equal(-2.3125, Math.Round(MathHelper.Covariance(doubles1, doubles2), 6));
-            Assert.Equal(-2.3125m, Math.Round(MathHelper.Covariance(decimals1, decimals2), 6));
-        }
-
-        [Fact]
         public static void Factors_NumberToFactorNotPositive_ThrowsArgumentOutOfRangeException()
         {
             // Arrange, Act
@@ -951,6 +951,79 @@ namespace OBeautifulCode.Math.Recipes.Test
         }
 
         [Fact]
+        public static void IsEven___Should_return_true___When_value_is_even()
+        {
+            // Arrange
+            var values = new[] { int.MinValue, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
+
+            // Act
+            var actuals = values.Select(_ => _.IsEven());
+
+            // Assert
+            actuals.Should().AllBeEquivalentTo(true);
+        }
+
+        [Fact]
+        public static void IsEven___Should_return_false___When_value_is_not_even()
+        {
+            // Arrange
+            var values = new[] { -11, -9, -7, -5, -3, -1, 1, 3, 5, 7, 9, 11, int.MaxValue };
+
+            // Act
+            var actuals = values.Select(_ => _.IsEven());
+
+            // Assert
+            actuals.Should().AllBeEquivalentTo(false);
+        }
+
+        [Fact]
+        public static void IsOdd___Should_return_true___When_value_is_odd()
+        {
+            // Arrange
+            var values = new[] { -11, -9, -7, -5, -3, -1, 1, 3, 5, 7, 9, 11, int.MaxValue };
+
+            // Act
+            var actuals = values.Select(_ => _.IsOdd());
+
+            // Assert
+            actuals.Should().AllBeEquivalentTo(true);
+        }
+
+        [Fact]
+        public static void IsOdd___Should_return_false___When_value_is_not_odd()
+        {
+            // Arrange
+            var values = new[] { int.MinValue, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
+
+            // Act
+            var actuals = values.Select(_ => _.IsOdd());
+
+            // Assert
+            actuals.Should().AllBeEquivalentTo(false);
+        }
+
+        [Fact]
+        public static void Round___Should_round_value_to_digits_using_specified_strategy___When_called()
+        {
+            // Arrange
+            var tests = new[]
+            {
+                new { Value = (decimal?)null, Digits = 2, Strategy = MidpointRounding.AwayFromZero, Expected = (decimal?)null },
+                new { Value = (decimal?)1.011m, Digits = 2, Strategy = MidpointRounding.AwayFromZero, Expected = (decimal?)1.01m },
+                new { Value = (decimal?)1.019m, Digits = 2, Strategy = MidpointRounding.AwayFromZero, Expected = (decimal?)1.02m },
+                new { Value = (decimal?)1.05m, Digits = 1, Strategy = MidpointRounding.AwayFromZero, Expected = (decimal?)1.1m },
+                new { Value = (decimal?)1.05m, Digits = 1, Strategy = MidpointRounding.ToEven, Expected = (decimal?)1.0m },
+                new { Value = (decimal?)1.15m, Digits = 1, Strategy = MidpointRounding.ToEven, Expected = (decimal?)1.2m },
+            };
+
+            // Act
+            var actual = tests.Select(_ => _.Value.Round(_.Digits, _.Strategy)).ToList();
+
+            // Assert
+            actual.AsTest().Must().BeEqualTo(tests.Select(_ => _.Expected).ToList());
+        }
+
+        [Fact]
         public static void StandardDeviationTest()
         {
             List<decimal> decimals = null;
@@ -1004,68 +1077,44 @@ namespace OBeautifulCode.Math.Recipes.Test
         }
 
         [Fact]
-        public static void Round___Should_round_value_to_digits_using_specified_strategy___When_called()
+        public static void ToGuid___Converts_two_int_of_the_same_value_to_the_same_GUID___When_called()
         {
             // Arrange
-            var tests = new[]
-            {
-                new { Value = (decimal?)null, Digits = 2, Strategy = MidpointRounding.AwayFromZero, Expected = (decimal?)null },
-                new { Value = (decimal?)1.011m, Digits = 2, Strategy = MidpointRounding.AwayFromZero, Expected = (decimal?)1.01m },
-                new { Value = (decimal?)1.019m, Digits = 2, Strategy = MidpointRounding.AwayFromZero, Expected = (decimal?)1.02m },
-                new { Value = (decimal?)1.05m, Digits = 1, Strategy = MidpointRounding.AwayFromZero, Expected = (decimal?)1.1m },
-                new { Value = (decimal?)1.05m, Digits = 1, Strategy = MidpointRounding.ToEven, Expected = (decimal?)1.0m },
-                new { Value = (decimal?)1.15m, Digits = 1, Strategy = MidpointRounding.ToEven, Expected = (decimal?)1.2m },
-            };
+            var int1 = A.Dummy<int>();
+            var int2 = int1;
 
             // Act
-            var actual = tests.Select(_ => _.Value.Round(_.Digits, _.Strategy)).ToList();
+            var actual1 = int1.ToGuid();
+            var actual2 = int2.ToGuid();
 
             // Assert
-            actual.AsTest().Must().BeEqualTo(tests.Select(_ => _.Expected).ToList());
+            actual1.Should().Be(actual2);
         }
 
         [Fact]
-        public static void TruncateDoubleTests()
+        public static void ToGuid___Converts_int_MaxValue_and_int_MinValue_to_GUIDs___When_called()
         {
-            // test decimals 1.*
-            Assert.Equal(1, MathHelper.Truncate(1D));
-            Assert.Equal(1, MathHelper.Truncate(1.1));
-            Assert.Equal(1, MathHelper.Truncate(1.49));
-            Assert.Equal(1, MathHelper.Truncate(1.5));
-            Assert.Equal(1, MathHelper.Truncate(1.51));
-            Assert.Equal(1, MathHelper.Truncate(1.99));
+            // Arrange
+            var int1 = int.MaxValue;
+            var int2 = int.MinValue;
 
-            // negative numbers
-            Assert.Equal(-1, MathHelper.Truncate(-1D));
-            Assert.Equal(-1, MathHelper.Truncate(-1.1));
-            Assert.Equal(-1, MathHelper.Truncate(-1.49));
-            Assert.Equal(-1, MathHelper.Truncate(-1.5));
-            Assert.Equal(-1, MathHelper.Truncate(-1.51));
-            Assert.Equal(-1, MathHelper.Truncate(-1.99));
+            // Act
+            var actual1 = int1.ToGuid();
+            var actual2 = int2.ToGuid();
 
-            // zero
-            Assert.Equal(0, MathHelper.Truncate(0D));
-            Assert.Equal(0, MathHelper.Truncate(0.1));
-            Assert.Equal(0, MathHelper.Truncate(0.49));
-            Assert.Equal(0, MathHelper.Truncate(0.5));
-            Assert.Equal(0, MathHelper.Truncate(0.51));
-            Assert.Equal(0, MathHelper.Truncate(0.99));
-            Assert.Equal(0, MathHelper.Truncate(0D));
-            Assert.Equal(0, MathHelper.Truncate(-0.1));
-            Assert.Equal(0, MathHelper.Truncate(-0.49));
-            Assert.Equal(0, MathHelper.Truncate(-0.5));
-            Assert.Equal(0, MathHelper.Truncate(-0.51));
-            Assert.Equal(0, MathHelper.Truncate(-0.99));
+            // Assert
+            actual1.Should().NotBe(Guid.Empty);
+            actual2.Should().NotBe(Guid.Empty);
+        }
 
-            // bounds
-            Assert.Equal(int.MinValue, MathHelper.Truncate(Convert.ToDouble(int.MinValue)));
-            Assert.Equal(int.MaxValue, MathHelper.Truncate(Convert.ToDouble(int.MaxValue)));
-            Assert.Equal(int.MinValue + 1, MathHelper.Truncate(Convert.ToDouble(int.MinValue) + .1));
-            Assert.Equal(int.MaxValue - 1, MathHelper.Truncate(Convert.ToDouble(int.MaxValue) - .1));
-            Assert.Throws<OverflowException>(() => MathHelper.Truncate(Convert.ToDouble(int.MinValue) - .1));
-            Assert.Throws<OverflowException>(() => MathHelper.Truncate(Convert.ToDouble(int.MaxValue) + .1));
-            Assert.Throws<OverflowException>(() => MathHelper.Truncate(double.MaxValue));
-            Assert.Throws<OverflowException>(() => MathHelper.Truncate(double.MinValue));
+        [Fact]
+        public static void ToGuid___Converts_0_to_empty_GUID___When_called()
+        {
+            // Arrange, Act
+            var actual = 0.ToGuid();
+
+            // Assert
+            actual.Should().Be(Guid.Empty);
         }
 
         [Fact]
@@ -1110,6 +1159,50 @@ namespace OBeautifulCode.Math.Recipes.Test
             Assert.Throws<OverflowException>(() => MathHelper.Truncate(Convert.ToDecimal(int.MaxValue) + .1M));
             Assert.Throws<OverflowException>(() => MathHelper.Truncate(decimal.MaxValue));
             Assert.Throws<OverflowException>(() => MathHelper.Truncate(decimal.MinValue));
+        }
+
+        [Fact]
+        public static void TruncateDoubleTests()
+        {
+            // test decimals 1.*
+            Assert.Equal(1, MathHelper.Truncate(1D));
+            Assert.Equal(1, MathHelper.Truncate(1.1));
+            Assert.Equal(1, MathHelper.Truncate(1.49));
+            Assert.Equal(1, MathHelper.Truncate(1.5));
+            Assert.Equal(1, MathHelper.Truncate(1.51));
+            Assert.Equal(1, MathHelper.Truncate(1.99));
+
+            // negative numbers
+            Assert.Equal(-1, MathHelper.Truncate(-1D));
+            Assert.Equal(-1, MathHelper.Truncate(-1.1));
+            Assert.Equal(-1, MathHelper.Truncate(-1.49));
+            Assert.Equal(-1, MathHelper.Truncate(-1.5));
+            Assert.Equal(-1, MathHelper.Truncate(-1.51));
+            Assert.Equal(-1, MathHelper.Truncate(-1.99));
+
+            // zero
+            Assert.Equal(0, MathHelper.Truncate(0D));
+            Assert.Equal(0, MathHelper.Truncate(0.1));
+            Assert.Equal(0, MathHelper.Truncate(0.49));
+            Assert.Equal(0, MathHelper.Truncate(0.5));
+            Assert.Equal(0, MathHelper.Truncate(0.51));
+            Assert.Equal(0, MathHelper.Truncate(0.99));
+            Assert.Equal(0, MathHelper.Truncate(0D));
+            Assert.Equal(0, MathHelper.Truncate(-0.1));
+            Assert.Equal(0, MathHelper.Truncate(-0.49));
+            Assert.Equal(0, MathHelper.Truncate(-0.5));
+            Assert.Equal(0, MathHelper.Truncate(-0.51));
+            Assert.Equal(0, MathHelper.Truncate(-0.99));
+
+            // bounds
+            Assert.Equal(int.MinValue, MathHelper.Truncate(Convert.ToDouble(int.MinValue)));
+            Assert.Equal(int.MaxValue, MathHelper.Truncate(Convert.ToDouble(int.MaxValue)));
+            Assert.Equal(int.MinValue + 1, MathHelper.Truncate(Convert.ToDouble(int.MinValue) + .1));
+            Assert.Equal(int.MaxValue - 1, MathHelper.Truncate(Convert.ToDouble(int.MaxValue) - .1));
+            Assert.Throws<OverflowException>(() => MathHelper.Truncate(Convert.ToDouble(int.MinValue) - .1));
+            Assert.Throws<OverflowException>(() => MathHelper.Truncate(Convert.ToDouble(int.MaxValue) + .1));
+            Assert.Throws<OverflowException>(() => MathHelper.Truncate(double.MaxValue));
+            Assert.Throws<OverflowException>(() => MathHelper.Truncate(double.MinValue));
         }
 
         [Fact]
@@ -1206,99 +1299,6 @@ namespace OBeautifulCode.Math.Recipes.Test
             Assert.Equal(13.061224, Math.Round(MathHelper.Variance(doubles), 6));
             doubles.Add(6);
             Assert.Equal(13.4375, Math.Round(MathHelper.Variance(doubles), 6));
-        }
-
-        [Fact]
-        public static void ToGuid___Converts_two_int_of_the_same_value_to_the_same_GUID___When_called()
-        {
-            // Arrange
-            var int1 = A.Dummy<int>();
-            var int2 = int1;
-
-            // Act
-            var actual1 = int1.ToGuid();
-            var actual2 = int2.ToGuid();
-
-            // Assert
-            actual1.Should().Be(actual2);
-        }
-
-        [Fact]
-        public static void ToGuid___Converts_int_MaxValue_and_int_MinValue_to_GUIDs___When_called()
-        {
-            // Arrange
-            var int1 = int.MaxValue;
-            var int2 = int.MinValue;
-
-            // Act
-            var actual1 = int1.ToGuid();
-            var actual2 = int2.ToGuid();
-
-            // Assert
-            actual1.Should().NotBe(Guid.Empty);
-            actual2.Should().NotBe(Guid.Empty);
-        }
-
-        [Fact]
-        public static void ToGuid___Converts_0_to_empty_GUID___When_called()
-        {
-            // Arrange, Act
-            var actual = 0.ToGuid();
-
-            // Assert
-            actual.Should().Be(Guid.Empty);
-        }
-
-        [Fact]
-        public static void IsEven___Should_return_true___When_value_is_even()
-        {
-            // Arrange
-            var values = new[] { int.MinValue, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
-
-            // Act
-            var actuals = values.Select(_ => _.IsEven());
-
-            // Assert
-            actuals.Should().AllBeEquivalentTo(true);
-        }
-
-        [Fact]
-        public static void IsEven___Should_return_false___When_value_is_not_even()
-        {
-            // Arrange
-            var values = new[] { -11, -9, -7, -5, -3, -1, 1, 3, 5, 7, 9, 11, int.MaxValue };
-
-            // Act
-            var actuals = values.Select(_ => _.IsEven());
-
-            // Assert
-            actuals.Should().AllBeEquivalentTo(false);
-        }
-
-        [Fact]
-        public static void IsOdd___Should_return_true___When_value_is_odd()
-        {
-            // Arrange
-            var values = new[] { -11, -9, -7, -5, -3, -1, 1, 3, 5, 7, 9, 11, int.MaxValue };
-
-            // Act
-            var actuals = values.Select(_ => _.IsOdd());
-
-            // Assert
-            actuals.Should().AllBeEquivalentTo(true);
-        }
-
-        [Fact]
-        public static void IsOdd___Should_return_false___When_value_is_not_odd()
-        {
-            // Arrange
-            var values = new[] { int.MinValue, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10 };
-
-            // Act
-            var actuals = values.Select(_ => _.IsOdd());
-
-            // Assert
-            actuals.Should().AllBeEquivalentTo(false);
         }
     }
 }
